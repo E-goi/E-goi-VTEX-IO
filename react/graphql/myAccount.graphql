@@ -1,0 +1,8 @@
+query myAccount($apikey: String) {
+  myAccount(apikey: $apikey) {
+    general_info{
+      name
+      client_id
+    }
+  }
+}

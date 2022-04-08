@@ -1,0 +1,10 @@
+mutation goidiniInstall(
+  $domain: String
+  $listId: Int
+  ) {
+  goidiniInstall (input:{domain: $domain, listId: $listId}){
+    response
+    status
+    message
+  }
+}

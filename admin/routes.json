@@ -1,0 +1,22 @@
+{
+  "admin.app.egoi": {
+    "component": "settingsTab",
+    "path": "/admin/app/e-goi"
+  },
+  "admin.app.egoiaccount": {
+    "component": "settingsTab",
+    "path": "/admin/app/e-goi/account"
+  },
+  "admin.app.egoisynccontacts": {
+    "component": "syncContactsTab",
+    "path": "/admin/app/e-goi/synccontacts"
+  },
+  "admin.app.egoisyncproducts": {
+    "component": "settingsTab",
+    "path": "/admin/app/e-goi/syncproducts"
+  },
+  "admin.app.connectedsites": {
+    "component": "connectedSitesTab",
+    "path": "/admin/app/e-goi/connectedsites"
+  }
+}

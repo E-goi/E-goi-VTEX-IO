@@ -1,0 +1,27 @@
+mutation saveAppSettings(
+  $appKey: String
+  $appToken: String
+  $apikey: String
+  $pixelActive: Boolean
+  $clientId: Int
+  $domain: String
+  $listId: Int
+  $connectedSites: Boolean
+  $vtex: [String]
+  $egoi: [String]
+  ){
+    saveAppSettings(
+    input: {
+      appKey: $appKey
+      appToken: $appToken
+      apikey: $apikey
+      pixelActive: $pixelActive
+      clientId: $clientId
+      domain: $domain
+      listId: $listId
+      connectedSites: $connectedSites
+      vtex: $vtex
+      egoi: $egoi
+    }
+    )
+}

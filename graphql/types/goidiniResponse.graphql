@@ -1,0 +1,5 @@
+type GoidiniResponse {
+  response: String
+  status: Int
+  message: String
+}

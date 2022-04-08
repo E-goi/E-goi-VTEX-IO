@@ -1,0 +1,18 @@
+type VtexClient {
+  acronym: String
+  name: String
+  primaryKeyType: String
+  allowGetAll: Boolean
+  fields: [VtexClientFields]
+}
+
+type VtexClientFields {
+  name: String
+  type: String
+  displayName: String
+  isNullable: String
+  isSearchable: String
+  isFilter: String
+  isInternal: String
+}
+

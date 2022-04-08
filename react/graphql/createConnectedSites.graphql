@@ -1,0 +1,7 @@
+mutation createConnectedSites{
+    createConnectedSites{
+      response
+      status
+      message
+    }
+}

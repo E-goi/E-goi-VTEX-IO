@@ -1,0 +1,14 @@
+query getAppSettings{
+  getAppSettings{
+    appKey
+    appToken
+    apikey
+    pixelActive
+    clientId
+    domain
+    listId
+    connectedSites
+    vtex
+    egoi
+  }
+}

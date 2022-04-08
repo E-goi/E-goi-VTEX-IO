@@ -1,0 +1,20 @@
+
+{
+  "section": "other",
+  "titleId": "admin-egoi.navigation.label",
+  "path": "/admin/e-goi",
+  "subSectionItems": [
+    {
+      "labelId": "admin-egoi.navigation.account",
+      "path": "admin/e-goi/account"
+    },
+    {
+      "labelId": "admin-egoi.navigation.synccontacts",
+      "path": "admin/e-goi/synccontacts"
+    },
+    {
+      "labelId": "admin-egoi.navigation.connectedsites",
+      "path": "admin/e-goi/connectedsites"
+    }
+  ]
+}

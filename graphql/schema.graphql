@@ -1,0 +1,40 @@
+type Query {
+  getAppSettings: GetAppSettings
+  myAccount(apikey: String): MyAccount
+  getLists(apikey: String): GetLists
+  hostName: String
+  getEgoiFields: [EgoiFields]
+  getVtexClientFields: VtexClient
+}
+
+type Mutation {
+  saveAppSettings(input: AppSettings): Boolean
+  createConnectedSites: GoidiniResponse
+  goidiniSync(input: GoidiniSync): GoidiniResponse
+  goidiniInstall(input: GoidiniInstall): GoidiniResponse
+}
+
+input GoidiniInstall {
+  domain: String
+  listId: Int
+}
+
+input GoidiniSync {
+  vtex: [String]
+  egoi: [String]
+}
+
+input AppSettings {
+  appKey: String
+  appToken: String
+  apikey: String
+  pixelActive: Boolean
+  clientId: Int
+  domain: String
+  listId: Int
+  connectedSites: Boolean
+  vtex: [String]
+  egoi: [String]
+}
+
+

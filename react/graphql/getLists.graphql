@@ -1,0 +1,11 @@
+query getLists($apikey: String) {
+  getLists(apikey: $apikey) {
+    total_items,
+    items {
+      list_id
+      public_name
+      status
+    }
+  }
+}
+

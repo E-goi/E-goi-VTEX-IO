@@ -1,0 +1,32 @@
+{
+  "name": "admin.app.example",
+  "version": "0.0.1",
+  "scripts": {
+    "test": "vtex-test-tools test"
+  },
+  "dependencies": {
+    "@vtex/admin-formik": "^0.3.2",
+    "@vtex/admin-ui": "^0.116.1",
+    "apollo-client": "^2.6.8",
+    "formik": "^2.2.9",
+    "react": "^16.12.0",
+    "react-apollo": "^3.1.3",
+    "react-dom": "^16.12.0",
+    "react-intl": "^3.12.0"
+  },
+  "devDependencies": {
+    "@apollo/react-testing": "^3.1.3",
+    "@types/jest": "^25.1.4",
+    "@types/node": "^12.12.21",
+    "@types/react": "^16.9.31",
+    "@vtex/test-tools": "^3.3.2",
+    "@vtex/tsconfig": "^0.4.4",
+    "react": "^16.8.6",
+    "apollo-cache-inmemory": "^1.6.5",
+    "apollo-client": "^2.4.7",
+    "graphql": "^14.6.0",
+    "react-dom": "^16.8.6",
+    "react-intl": "^2.7.2",
+    "typescript": "3.9.7"
+  }
+}

@@ -1,0 +1,13 @@
+type GetAppSettings {
+  appKey: String
+  appToken: String
+  apikey: String
+  pixelActive: Boolean
+  clientId: Int
+  domain: String
+  listId: Int
+  connectedSites: Boolean
+  vtex: [String]
+  egoi: [String]
+}
+

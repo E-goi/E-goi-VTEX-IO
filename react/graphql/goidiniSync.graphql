@@ -1,0 +1,10 @@
+mutation goidiniSync(
+  $vtex: [String]
+  $egoi: [String]
+  ){
+    goidiniSync(input:{vtex: $vtex, egoi: $egoi}){
+      response
+      status
+      message
+    }
+}
