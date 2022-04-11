@@ -1,5 +1,5 @@
 {
-  "name": "admin.app.example",
+  "name": "egoi-admin",
   "version": "0.0.1",
   "scripts": {
     "test": "vtex-test-tools test"
