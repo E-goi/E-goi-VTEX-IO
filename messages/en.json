@@ -32,12 +32,16 @@
   "admin/egoi-admin.csErrorCreate": "Error creating connected sites! ",
   "admin/egoi-admin.csErrorActivate": "Error activating connected sites. ",
 
-  "admin/egoi-admin.lists": "Lists ",
+  "admin/egoi-admin.lists": "E-goi List ",
   "admin/egoi-admin.insertApikey": "Insert E-goi Apikey",
   "admin/egoi-admin.insertAppToken": "Insert VTEX appToken",
   "admin/egoi-admin.insertAppKey": "Insert VTEX appKey",
   "admin/egoi-admin.egoiSettings": "Add your E-goi Settings",
   "admin/egoi-admin.settingsSuccess": "All integration setting saved successfully!",
   "admin/egoi-admin.settingsError": "Error saving all integration settings! ",
-  "admin/egoi-admin.errorApikey": "Invalid Apikey"
+  "admin/egoi-admin.errorApikey": "Invalid Apikey",
+  "admin/egoi-admin.apiKeyText": "To activate the integration you need to choose the list where you want to sync and save the data.",
+  "admin/egoi-admin.legacy1": "Attention! If you have activated the ",
+  "admin/egoi-admin.legacy2": "legacy integration",
+  "admin/egoi-admin.legacy3": " with vtex, this integration will replace the existing one."
 }

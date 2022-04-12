@@ -33,12 +33,16 @@
   "admin/egoi-admin.csErrorActivate": "¡Error al activar connected sites! ",
 
 
-  "admin/egoi-admin.lists": "Listas ",
+  "admin/egoi-admin.lists": "Lista E-goi ",
   "admin/egoi-admin.insertApikey": "Inserte el E-goi Apikey",
   "admin/egoi-admin.insertAppToken": "Inserte el appToken VTEX",
   "admin/egoi-admin.insertAppKey": "Inserte el appKey VTEX",
   "admin/egoi-admin.egoiSettings": "Añade la configuración de tu E-goi",
   "admin/egoi-admin.settingsSuccess": "¡Todas las configuraciones se han guardado con éxito!",
   "admin/egoi-admin.settingsError": "¡Error al guardar la configuración! ",
-  "admin/egoi-admin.errorApikey": "¡Apikey de E-goi no válido!"
+  "admin/egoi-admin.errorApikey": "¡Apikey de E-goi no válido!",
+  "admin/egoi-admin.apiKeyText": "Para activar la integración es necesario elegir la lista donde desea sincronizar y guardar los datos.",
+  "admin/egoi-admin.legacy1": "To activate the integration you need to choose the list where you want to sync and save the data.",
+  "admin/egoi-admin.legacy2": "To activate the integration you need to choose the list where you want to sync and save the data.",
+  "admin/egoi-admin.legacy3": "To activate the integration you need to choose the list where you want to sync and save the data."
 }

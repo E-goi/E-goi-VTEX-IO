@@ -32,6 +32,7 @@ const SyncContactsTab = () => {
   const [errorMessage, setErrorMessage] = useState('Error')
   const [successMessage, setSuccessMessage] = useState('Success')
 
+  const [saveLoading, setSaveLoading] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [egoiFields, setEgoiFields] = useState<Array<Fields>>([])
   const [egoiFieldSelected, setEgoiFieldSelected] = useState<Fields>({ value: '', label: '' })
@@ -127,7 +128,10 @@ const SyncContactsTab = () => {
 
   const [goidiniSync] = useMutation(GOIDINI_SYNC, {
     variables: {},
-    onError: (e) => { showError(intl.formatMessage({ id: 'admin/egoi-admin.errorMapping' }) + e.message) },
+    onError: (e) => { 
+      setSaveLoading(false)
+      showError(intl.formatMessage({ id: 'admin/egoi-admin.errorMapping' }) + e.message) 
+    },
     onCompleted: () => {
       let resp = saveAppSettings({
         variables: {
@@ -135,7 +139,7 @@ const SyncContactsTab = () => {
           egoi: egoiFieldsMapped ? egoiFieldsMapped.map(x => x.value) : appSettings.getAppSettings.egoi
         }
       });
-
+      setSaveLoading(false)
       resp ? showSuccess(intl.formatMessage({ id: 'admin/egoi-admin.syncSuccess' })) : showError(intl.formatMessage({ id: 'admin/egoi-admin.syncError' }))
     }
   })
@@ -162,6 +166,7 @@ const SyncContactsTab = () => {
   }
 
   const saveFields = () => {
+    setSaveLoading(true)
     goidiniSync({
       variables: {
         vtex: vtexFieldsMapped.map(x => x.value),
@@ -244,7 +249,7 @@ const SyncContactsTab = () => {
                           }
                         }}
                       />
-                      {egoiFieldsMapped.map(field => <p className="pa3 br2 bg-muted-5 hover-bg-muted-5 active-bg-muted-5 c-on-muted-5 hover-c-on-muted-5 active-c-on-muted-5 mr3" style={{ 'minHeight': '2rem', 'display': 'table' }}>{field.value}</p>)}
+                      {egoiFieldsMapped.map(field => <p className="pa3 br2 bg-muted-5 hover-bg-muted-5 active-bg-muted-5 c-on-muted-5 hover-c-on-muted-5 active-c-on-muted-5 mr3" style={{ 'minHeight': '2rem', 'display': 'table' }}>{field.label}</p>)}
                     </div>
                     <div style={{ height: "10%", margin: "43px 0px 0px 0px" }}>
                       <ButtonWithIcon icon={<IconPlusLines />} variation="secondary" onClick={addFields} disabled={(egoiFields.length == 0 || vtexFields.length == 0)} />
@@ -268,7 +273,7 @@ const SyncContactsTab = () => {
                   <span style={{ display: 'flex', justifyContent: 'flex-end', columnGap: '20px' }}>
                     <Button variation="secondary"
                       onClick={saveFields}
-                      isLoading={isLoading}> <FormattedMessage id="admin/egoi-admin.save" /></Button>
+                      isLoading={saveLoading}> <FormattedMessage id="admin/egoi-admin.save" /></Button>
                   </span>
                 </div>
               </div>

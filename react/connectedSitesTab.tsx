@@ -13,7 +13,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 const ConnectedSitesTab = () => {
   const intl = useIntl()
   const [connectedSites, setConnectedSites] = useState(false)
-
+ 
   const [errorMessage, setErrorMessage] = useState('Error')
   const [successMessage, setSuccessMessage] = useState('Success')
   const [showErrorAlert, setShowErrorAlert] = useState(false)
@@ -67,13 +67,13 @@ const ConnectedSitesTab = () => {
             connectedSites: appSettings.getAppSettings.connectedSites
           }
         });
-
+    
         showSuccess(intl.formatMessage({id: 'admin/egoi-admin.csSuccess'}))
       }
-    } catch (error) {
-      showError(intl.formatMessage({id: 'admin/egoi-admin.csErrorActivate'}) + error)
-    } finally {
       setIsLoading(false)
+    } catch (error) {
+      setIsLoading(false)
+      showError(intl.formatMessage({id: 'admin/egoi-admin.csErrorActivate'}) + error)
     }
 
   }

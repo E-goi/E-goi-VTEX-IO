@@ -26,6 +26,7 @@ const SettingsTab = () => {
   const [appKeyValue, setAppKeyValue] = useState('')
   const [apikeyValue, setApikeyValue] = useState('')
   const [apikeyIsLoading, setApikeyIsLoading] = useState(false)
+  const [saveSettingsLoading, setSaveSettingsLoading] = useState(false)
   const [listsOptions, setListsOptions] = useState([{}])
   const [listSelected, setListSelected] = useState(0)
 
@@ -78,11 +79,11 @@ const SettingsTab = () => {
             egoi: appSettings.getAppSettings.egoi ?? []
           }
         });
-
         resp ? showSuccess(intl.formatMessage({id: 'admin/egoi-admin.settingsSuccess'})) : showError(intl.formatMessage({id: 'admin/egoi-admin.settingsError'}))
       } else {
         showError(intl.formatMessage({id: 'admin/egoi-admin.settingsError'}) + e.goidiniInstall.message)
       }
+      setSaveSettingsLoading(false)
     },
   })
 
@@ -174,17 +175,20 @@ const SettingsTab = () => {
     if (resp) {
       setShowSuccessAlert(true)
       setDisableConfigs(true)
-      setApikeyIsLoading(false)
     } else {
       setShowErrorAlert(true)
-      setApikeyIsLoading(false)
     }
+
+    setApikeyIsLoading(false)
   }
 
   const saveListConfigs = async () => {
 
+    setSaveSettingsLoading(true)
+
     if (listSelected == 0) {
       setShowErrorAlert(true)
+      setSaveSettingsLoading(false)
       return
     }
 
@@ -259,14 +263,15 @@ const SettingsTab = () => {
                     onChange={
                       (e: any) => handleChangeApiKeyValue(e)
                     }
-                    isLoading={apikeyIsLoading}
                     disabled={disableConfigs}
                   />
                 </div>
                 <span className="mb4" style={{ display: 'flex', justifyContent: 'flex-end', columnGap: '20px' }} >
                   <Button variation="secondary"
                     onClick={saveSettings}
-                    disabled={disableConfigs}><FormattedMessage id="admin/egoi-admin.save"/></Button>
+                    disabled={disableConfigs}
+                    isLoading={apikeyIsLoading}><FormattedMessage id="admin/egoi-admin.save"
+                    /></Button>
                   <Button variation="secondary"
                     onClick={() => setDisableConfigs(false)}><FormattedMessage id="admin/egoi-admin.edit"/></Button>
                 </span>
@@ -277,22 +282,26 @@ const SettingsTab = () => {
         <PageBlock
           variation="full"
         >
-          <div className="mb5">
+          <p><FormattedMessage id="admin/egoi-admin.apiKeyText"/></p>
+          <div style={{ padding: '20px', color: '#8a6d3b', background: '#fcf8e3' }}>
+            <p><FormattedMessage id="admin/egoi-admin.legacy1"/><a target="_blank" href="https://goidini.e-goi.com/vtex"><FormattedMessage id="admin/egoi-admin.legacy2"/></a><FormattedMessage id="admin/egoi-admin.legacy3"/></p>
+           </div>
+          <div className="mt5 mb5">
             <Dropdown
               disabled={dropdown}
               label={<FormattedMessage id="admin/egoi-admin.lists"/>}
               options={listsOptions}
               value={listSelected}
-              isLoading={apikeyIsLoading}
               onChange={(e: any) => {
                 setListSelected(parseInt(e.target.value))
               }}
             />
           </div>
-          <span className="mb4" style={{ display: 'flex', justifyContent: 'flex-end', columnGap: '20px' }}>
+          <span className="mt4 mb4" style={{ display: 'flex', justifyContent: 'flex-end', columnGap: '20px' }}>
             <Button variation="secondary"
               onClick={saveListConfigs}
-              disabled={dropdown}><FormattedMessage id="admin/egoi-admin.save"/></Button>
+              disabled={dropdown}
+              isLoading={saveSettingsLoading}><FormattedMessage id="admin/egoi-admin.save"/></Button>
           </span>
         </PageBlock>
 
