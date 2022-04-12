@@ -20,7 +20,7 @@
     "store": "0.x"
   },
   "scripts": {
-    "prereleasy": "bash lint.sh"
+    "postreleasy": "vtex publish"
   },
   "credentialType": "absolute",
   "policies": [
