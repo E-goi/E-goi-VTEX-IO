@@ -1,6 +1,6 @@
 //react/adminExample.tsx
 import React, { useState } from 'react'
-import { useQuery, useMutation } from 'react-apollo';
+import { useQuery, useMutation, useLazyQuery } from 'react-apollo';
 import {
   Layout,
   PageHeader,
@@ -25,7 +25,7 @@ const SettingsTab = () => {
   const [appTokenValue, setAppTokenValue] = useState('')
   const [appKeyValue, setAppKeyValue] = useState('')
   const [apikeyValue, setApikeyValue] = useState('')
-  const [apikeyIsLoading, setApikeyIsLoading] = useState(false)
+  //const [apikeyIsLoading, setApikeyIsLoading] = useState(false)
   const [saveSettingsLoading, setSaveSettingsLoading] = useState(false)
   const [listsOptions, setListsOptions] = useState([{}])
   const [listSelected, setListSelected] = useState(0)
@@ -57,13 +57,32 @@ const SettingsTab = () => {
       })
     })
 
-  const { data: myAccountData, refetch: refetchMyAccount } = useQuery(GET_MY_ACCOUNT, {
-    variables: { apikey: apikeyValue }
+  const [myaccount, { data: myAccountData }] = useLazyQuery( GET_MY_ACCOUNT, {
+    onCompleted: () => {
+      if(myAccountData){
+        if (myAccountData.myAccount.general_info.client_id) {
+          refetchGetLists()
+        }
+      }
+    },
+    onError: (e) => {
+      console.log('boas  '+ e.message)
+      showError(intl.formatMessage({id: 'admin/egoi-admin.errorApikey'}))
+      appSettings.getAppSettings.apikey ? setApikeyValue(appSettings.getAppSettings.apikey) : setApikeyValue('')
+      listsOptions ? setListsOptions(listsOptions) : setListsOptions([{}])
+      appSettings.getAppSettings.listId ? setListSelected(appSettings.getAppSettings.listId) : setListSelected(0)
+      setSaveSettingsLoading(false)
+      setDisableConfigs(false)
+    }
   })
 
   const [goidiniInstall] = useMutation(GOIDINI_INSTALL, {
     variables: {},
-    onError: (e) => { showError(intl.formatMessage({id: 'admin/egoi-admin.settingsError'})) + e.message },
+    onError: (e) => { console.log('asdasdasd')
+    showError(intl.formatMessage({id: 'admin/egoi-admin.settingsError'})) + e.message
+    setSaveSettingsLoading(false)
+    setDisableConfigs(false)
+   },
     onCompleted: (e) => {
       if (e.goidiniInstall.status == 201) {
 
@@ -71,6 +90,10 @@ const SettingsTab = () => {
 
         let resp = saveAppSettings({
           variables: {
+            appKey: appKeyValue,
+            appToken: appTokenValue,
+            apikey: apikeyValue,
+            clientId: myAccountData.myAccount.general_info.client_id ? parseInt(myAccountData.myAccount.general_info.client_id) : 0,
             pixelActive: pixelActive,
             domain: appSettings.getAppSettings.domain ?? (hostName ? hostName.hostName : null),
             listId: listSelected,
@@ -84,6 +107,7 @@ const SettingsTab = () => {
         showError(intl.formatMessage({id: 'admin/egoi-admin.settingsError'}) + e.goidiniInstall.message)
       }
       setSaveSettingsLoading(false)
+      setDisableConfigs(false)
     },
   })
 
@@ -92,11 +116,17 @@ const SettingsTab = () => {
     onError: (e) => { console.log(e) }
   })
 
-  const handleChangeApiKeyValue = (e: any) => {
+  const handleChangeApiKeyValue = async (e: any) => {
     setApikeyValue(e.target.value)
+
+    if(e.target.value.length == 40) {
+      setSaveSettingsLoading(true)
+      setDisableConfigs(true)
+      myaccount({variables: { apikey: e.target.value }})
+    }
   }
 
-  const mapListsDropdown = async () => {
+  const mapListsDropdown = async () => {    
     try {
       if (getLists.getLists.total_items == 0) {
         //exception
@@ -110,7 +140,9 @@ const SettingsTab = () => {
     } catch (error) {
       console.log(error)
     } {
+      setSaveSettingsLoading(false)
       setDropdown(false)
+      setDisableConfigs(false)
     }
   }
 
@@ -129,71 +161,24 @@ const SettingsTab = () => {
     setShowErrorAlert(true)
   }
 
-  const submitApikey = async () => {
-    try {
-
-      await refetchMyAccount()
-
-      if (myAccountData.myAccount.general_info.client_id) {
-        await refetchGetLists()
-      }
-    } catch (err) {
-      return false
-    }
-
-    return true
-  }
-
-
   const saveSettings = async () => {
-
-    setApikeyIsLoading(true)
-    let submit = await submitApikey()
-
-    if (!submit) {
-      showError(intl.formatMessage({id: 'admin/egoi-admin.errorApikey'}))
-      appSettings.getAppSettings.apikey ? setApikeyValue(appSettings.getAppSettings.apikey) : setApikeyValue('')
-      listsOptions ? setListsOptions(listsOptions) : setListsOptions([{}])
-      appSettings.getAppSettings.listId ? setListSelected(appSettings.getAppSettings.listId) : setListSelected(0)
-      setDisableConfigs(true) // se houver gravadas appSettings
-      setApikeyIsLoading(false)
-      return
-    }
-
-
-    //chamar pedido para validar key e token
-
-    let resp = saveAppSettings({
-      variables: {
-        appKey: appKeyValue,
-        appToken: appTokenValue,
-        apikey: apikeyValue,
-        clientId: myAccountData.myAccount.general_info.client_id ? parseInt(myAccountData.myAccount.general_info.client_id) : 0,
-      }
-    });
-
-    if (resp) {
-      setShowSuccessAlert(true)
-      setDisableConfigs(true)
-    } else {
-      setShowErrorAlert(true)
-    }
-
-    setApikeyIsLoading(false)
-  }
-
-  const saveListConfigs = async () => {
-
+    setDisableConfigs(true)
     setSaveSettingsLoading(true)
 
-    if (listSelected == 0) {
-      setShowErrorAlert(true)
-      setSaveSettingsLoading(false)
-      return
-    }
+    if(apikeyValue == ''
+      && appKeyValue == ''
+      && appTokenValue == ''
+      && listSelected == 0) {
+        setShowErrorAlert(true)
+        setSaveSettingsLoading(false)
+        return
+      }
 
     goidiniInstall({
       variables: {
+        apikey: apikeyValue,
+        appkey: appKeyValue,
+        apptoken: appTokenValue,
         domain: appSettings.getAppSettings.domain ?? (hostName ? hostName.hostName : null),
         listId: listSelected
       }
@@ -228,9 +213,9 @@ const SettingsTab = () => {
               <div>
                 <div className="mb5">
                   <Input
-                    placeholder={<FormattedMessage id="admin/egoi-admin.insertAppKey"/>}
+                    label={<FormattedMessage id="admin/egoi-admin.insertAppKey"/>}
                     size="regular"
-                    label="AppKey"
+                    placeholder="AppKey"
                     value={appKeyValue}
                     onChange={
                       (e: any) => {
@@ -242,9 +227,9 @@ const SettingsTab = () => {
                 </div>
                 <div className="mb5">
                   <Input
-                    placeholder={<FormattedMessage id="admin/egoi-admin.insertAppToken"/>}
+                    label={<FormattedMessage id="admin/egoi-admin.insertAppToken"/>}
                     size="regular"
-                    label="AppToken"
+                    placeholder="AppToken"
                     value={appTokenValue}
                     onChange={
                       (e: any) => {
@@ -256,9 +241,9 @@ const SettingsTab = () => {
                 </div>
                 <div className="mb5">
                   <Input
-                    placeholder={<FormattedMessage id="admin/egoi-admin.insertApikey"/>}
+                    label={<FormattedMessage id="admin/egoi-admin.insertApikey"/>}
                     size="regular"
-                    label="Apikey"
+                    placeholder="Apikey"
                     value={apikeyValue}
                     onChange={
                       (e: any) => handleChangeApiKeyValue(e)
@@ -266,45 +251,32 @@ const SettingsTab = () => {
                     disabled={disableConfigs}
                   />
                 </div>
-                <span className="mb4" style={{ display: 'flex', justifyContent: 'flex-end', columnGap: '20px' }} >
+
+                <div className="mt5 mb5">
+                  <Dropdown
+                    disabled={dropdown}
+                    label={<FormattedMessage id="admin/egoi-admin.lists"/>}
+                    options={listsOptions}
+                    value={listSelected}
+                    onChange={(e: any) => {
+                      setListSelected(parseInt(e.target.value))
+                    }}
+                  />
+                </div>
+
+                <div style={{ padding: '20px', color: '#8a6d3b', background: '#fcf8e3' }}>
+                  <p><FormattedMessage id="admin/egoi-admin.legacy1"/><a target="_blank" href="https://goidini.e-goi.com/vtex"><FormattedMessage id="admin/egoi-admin.legacy2"/></a><FormattedMessage id="admin/egoi-admin.legacy3"/></p>
+                </div>
+
+                <span className="mt4 mb4" style={{ display: 'flex', justifyContent: 'flex-end', columnGap: '20px' }} >
                   <Button variation="secondary"
                     onClick={saveSettings}
-                    disabled={disableConfigs}
-                    isLoading={apikeyIsLoading}><FormattedMessage id="admin/egoi-admin.save"
+                    isLoading={saveSettingsLoading}><FormattedMessage id="admin/egoi-admin.save"
                     /></Button>
-                  <Button variation="secondary"
-                    onClick={() => setDisableConfigs(false)}><FormattedMessage id="admin/egoi-admin.edit"/></Button>
                 </span>
               </div>
           }
         </PageBlock>
-
-        <PageBlock
-          variation="full"
-        >
-          <p><FormattedMessage id="admin/egoi-admin.apiKeyText"/></p>
-          <div style={{ padding: '20px', color: '#8a6d3b', background: '#fcf8e3' }}>
-            <p><FormattedMessage id="admin/egoi-admin.legacy1"/><a target="_blank" href="https://goidini.e-goi.com/vtex"><FormattedMessage id="admin/egoi-admin.legacy2"/></a><FormattedMessage id="admin/egoi-admin.legacy3"/></p>
-           </div>
-          <div className="mt5 mb5">
-            <Dropdown
-              disabled={dropdown}
-              label={<FormattedMessage id="admin/egoi-admin.lists"/>}
-              options={listsOptions}
-              value={listSelected}
-              onChange={(e: any) => {
-                setListSelected(parseInt(e.target.value))
-              }}
-            />
-          </div>
-          <span className="mt4 mb4" style={{ display: 'flex', justifyContent: 'flex-end', columnGap: '20px' }}>
-            <Button variation="secondary"
-              onClick={saveListConfigs}
-              disabled={dropdown}
-              isLoading={saveSettingsLoading}><FormattedMessage id="admin/egoi-admin.save"/></Button>
-          </span>
-        </PageBlock>
-
       </Layout>
     </>
   )

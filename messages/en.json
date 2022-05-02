@@ -43,5 +43,8 @@
   "admin/egoi-admin.apiKeyText": "To activate the integration you need to choose the list where you want to sync and save the data.",
   "admin/egoi-admin.legacy1": "Attention! If you have activated the ",
   "admin/egoi-admin.legacy2": "legacy integration",
-  "admin/egoi-admin.legacy3": " with vtex, this integration will replace the existing one."
+  "admin/egoi-admin.legacy3": " with vtex, this integration will replace the existing one.",
+
+
+  "admin/egoi-admin.configNeed": "Need to configure integration in Account tab!"
 }

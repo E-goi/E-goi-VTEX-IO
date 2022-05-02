@@ -1,8 +1,11 @@
 mutation goidiniInstall(
+  $apikey: String 
+  $appkey: String 
+  $apptoken: String
   $domain: String
   $listId: Int
   ) {
-  goidiniInstall (input:{domain: $domain, listId: $listId}){
+  goidiniInstall (input:{apikey: $apikey, appkey: $appkey, apptoken: $apptoken, domain: $domain, listId: $listId}){
     response
     status
     message

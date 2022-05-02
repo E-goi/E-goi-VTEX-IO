@@ -2,13 +2,19 @@
   "extends": "@vtex/tsconfig",
   "compilerOptions": {
     "jsx": "preserve",
-    "lib": ["es2017", "dom"],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "module": "esnext",
     "strict": true,
     "moduleResolution": "node",
     "target": "es2017"
   },
-  "include": ["./**/*"],
-  "exclude": ["node_modules"]
+  "include": [
+    "./**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
-

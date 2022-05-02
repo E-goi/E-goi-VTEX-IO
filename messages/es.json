@@ -42,7 +42,9 @@
   "admin/egoi-admin.settingsError": "¡Error al guardar la configuración! ",
   "admin/egoi-admin.errorApikey": "¡Apikey de E-goi no válido!",
   "admin/egoi-admin.apiKeyText": "Para activar la integración es necesario elegir la lista donde desea sincronizar y guardar los datos.",
-  "admin/egoi-admin.legacy1": "To activate the integration you need to choose the list where you want to sync and save the data.",
-  "admin/egoi-admin.legacy2": "To activate the integration you need to choose the list where you want to sync and save the data.",
-  "admin/egoi-admin.legacy3": "To activate the integration you need to choose the list where you want to sync and save the data."
+  "admin/egoi-admin.legacy1": "¡Atención! Si tiene activa la ",
+  "admin/egoi-admin.legacy2": "integración legacy",
+  "admin/egoi-admin.legacy3": " con vtex, la configuración de esta integración reemplazará la existente.",
+
+  "admin/egoi-admin.configNeed": "¡Necesita configurar la integración en la pestaña Cuenta!"
 }

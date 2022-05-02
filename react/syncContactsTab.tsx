@@ -33,6 +33,7 @@ const SyncContactsTab = () => {
   const [successMessage, setSuccessMessage] = useState('Success')
 
   const [saveLoading, setSaveLoading] = useState(false)
+  const [active, setActive] = useState(true)
   const [isLoading, setIsLoading] = useState(true)
   const [egoiFields, setEgoiFields] = useState<Array<Fields>>([])
   const [egoiFieldSelected, setEgoiFieldSelected] = useState<Fields>({ value: '', label: '' })
@@ -84,11 +85,17 @@ const SyncContactsTab = () => {
   }
 
   const { data: getEgoiFields } = useQuery(GET_EGOI_FIELDS, {
-    onCompleted: mapEgoiFieldsDropdown
+    onCompleted: mapEgoiFieldsDropdown,
+    onError: () => {
+      setActive(false)
+      setIsLoading(false)}
   })
 
   const { data: getVtexClientFields } = useQuery(GET_VTEX_FIELDS, {
-    onCompleted: mapVtexClientFieldsDropdown
+    onCompleted: mapVtexClientFieldsDropdown,
+    onError: () => {
+      setActive(false)
+      setIsLoading(false)}
   })
 
   const [appSettingsQuery, { data: appSettings }] = useLazyQuery(GET_APP_SETTINGS,
@@ -102,7 +109,7 @@ const SyncContactsTab = () => {
             (value, idx) => {
               let objVtex = vtexFields.find(x => x.value === value) ?? { value: '', label: '' }
               let objEgoi = egoiFields.find(x => x.value === egoi[idx]) ?? { value: '', label: '' }
-              console.log(egoi[idx])
+
               if (objVtex.value != '') {
                 setEgoiFieldsMapped([...egoiFieldsMapped, objEgoi])
                 setVtexFieldsMapped([...vtexFieldsMapped, objVtex])
@@ -112,14 +119,18 @@ const SyncContactsTab = () => {
               }
             })
         }
+        setIsLoading(false)
       }),
-      onError: (e) => console.log(e)
+      onError: () => {
+        setIsLoading(false)
+      }
     })
 
   useEffect(() => {
     if (egoiFields.length != 0) {
       appSettingsQuery()
     }
+
   }, [egoiFields])
 
   const [saveAppSettings] = useMutation(SAVE_APP_SETTINGS, {
@@ -210,6 +221,7 @@ const SyncContactsTab = () => {
             isLoading ?
               <Spinner color="currentColor" size={20} />
               :
+              active ?
               <div>
                 <div>
                   <div>
@@ -277,7 +289,10 @@ const SyncContactsTab = () => {
                   </span>
                 </div>
               </div>
-
+              :
+              <div>
+                <p><FormattedMessage id="admin/egoi-admin.configNeed" /></p>
+              </div>
           }
 
         </PageBlock>

@@ -13,7 +13,8 @@ import { FormattedMessage, useIntl } from 'react-intl';
 const ConnectedSitesTab = () => {
   const intl = useIntl()
   const [connectedSites, setConnectedSites] = useState(false)
- 
+  const [active, setActive] = useState(true)
+  
   const [errorMessage, setErrorMessage] = useState('Error')
   const [successMessage, setSuccessMessage] = useState('Success')
   const [showErrorAlert, setShowErrorAlert] = useState(false)
@@ -28,7 +29,16 @@ const ConnectedSitesTab = () => {
       }
     })
 
-  const { data: appSettings, loading: appSettingsLoading } = useQuery(GET_APP_SETTINGS)
+  const { data: appSettings, loading: appSettingsLoading } = useQuery(GET_APP_SETTINGS, {
+    onCompleted: () => {
+      if(!appSettings.getAppSettings.apikey){
+        setActive(false)
+      }else{
+        setConnectedSites(appSettings.getAppSettings.connectedSites)
+      }
+    },
+    onError: () => setActive(false)
+  })
 
   const [saveAppSettings] = useMutation(SAVE_APP_SETTINGS, {
     variables: {},
@@ -112,7 +122,9 @@ const ConnectedSitesTab = () => {
           variation="full">
           {
             appSettingsLoading ? <Spinner color="currentColor" size={20} />
-              : <div>
+              :
+              active ? 
+              <div>
                 <p><FormattedMessage id="admin/egoi-admin.csText1"/></p>
                 <p><FormattedMessage id="admin/egoi-admin.csText2"/></p>
 
@@ -147,7 +159,11 @@ const ConnectedSitesTab = () => {
                   </span>
                 </div>
               </div>
-          }
+                :
+                <div>
+                  <p><FormattedMessage id="admin/egoi-admin.configNeed" /></p>
+               </div>
+        }
         </PageBlock>
       </Layout>
     </>

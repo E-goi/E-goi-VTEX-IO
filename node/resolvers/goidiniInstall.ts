@@ -2,7 +2,6 @@ import type { GoidiniInstall } from '../typings/goidiniInstall'
 
 import type { Clients } from '../clients'
 import { ServiceContext } from "@vtex/api";
-import { AppSettings } from '../typings/appSettings';
 
 export async function goidiniInstall(
   _: unknown,
@@ -13,7 +12,6 @@ export async function goidiniInstall(
   const {
     clients: {
       goidiniInstall,
-      apps,
       stores
     }
   } = context
@@ -29,12 +27,9 @@ export async function goidiniInstall(
     throw new Error('No appId defined')
   }
 
-  const appSettings = ((await apps.getAppSettings(
-    appId
-  )) ?? {}) as AppSettings
 
   try {
-    return goidiniInstall.saveGoidiniInstall(appSettings.apikey, appSettings.appKey, appSettings.appToken, args.input.listId, args.input.domain, name)
+    return goidiniInstall.saveGoidiniInstall(args.input.apikey, args.input.appkey, args.input.apptoken, args.input.listId, args.input.domain, name)
   } catch (error) {
     throw new Error(error.message)
   }

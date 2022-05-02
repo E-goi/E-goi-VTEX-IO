@@ -15,6 +15,9 @@ type Mutation {
 }
 
 input GoidiniInstall {
+  apikey: String 
+  appkey: String 
+  apptoken: String
   domain: String
   listId: Int
 }

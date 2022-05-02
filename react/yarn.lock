@@ -2682,6 +2682,10 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
+"egoipartnerpt.egoi-admin@https://egoiadmin--egoipartnerpt.myvtex.com/_v/private/typings/linked/v1/egoipartnerpt.egoi-admin@0.3.0-beta.0+build1649760334/public/@types/egoipartnerpt.egoi-admin":
+  version "0.3.0-beta.0"
+  resolved "https://egoiadmin--egoipartnerpt.myvtex.com/_v/private/typings/linked/v1/egoipartnerpt.egoi-admin@0.3.0-beta.0+build1649760334/public/@types/egoipartnerpt.egoi-admin#101b4261c006b19613a4a38de2133d3cabbe2d15"
+
 electron-to-chromium@^1.4.76:
   version "1.4.82"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.82.tgz#51e123ca434b1eba8c434ece2b54f095b304a651"
@@ -5616,6 +5620,14 @@ verror@1.10.0:
     assert-plus "^1.0.0"
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
+
+"vtex.pixel-interfaces@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.pixel-interfaces@1.1.1/public/_types/react":
+  version "0.0.0"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.pixel-interfaces@1.1.1/public/_types/react#fa7a0347e046eab3dd768998fc9252b2c0dd5aef"
+
+"vtex.styleguide@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.146.1/public/@types/vtex.styleguide":
+  version "9.146.1"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.146.1/public/@types/vtex.styleguide#66db40ca1b78ad77ce4beedabecee320e1ef2ead"
 
 w3c-hr-time@^1.0.1:
   version "1.0.2"
