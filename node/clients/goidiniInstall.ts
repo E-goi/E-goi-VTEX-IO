@@ -5,7 +5,7 @@ import type { GoidiniInstall } from '../typings/goidiniInstall'
 
 const routes = {
   getGoidiniInstallData: () =>
-    `https://dev-goidini.e-goi.com/vtex-io/install`, //CHANGE DEV TO PROD
+    `https://goidini.e-goi.com/vtex-io/install`, //CHANGE DEV TO PROD
 }
 
 class GoidiniInstallClient extends ExternalClient {

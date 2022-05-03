@@ -5,7 +5,7 @@ import type { GoidiniSync } from '../typings/goidiniSync'
 
 const routes = {
   getGoidiniSyncData: () =>
-    `https://dev-goidini.e-goi.com/vtex-io/sync`, //CHANGE DEV TO PROD
+    `https://goidini.e-goi.com/vtex-io/sync`, //CHANGE DEV TO PROD
 }
 
 class GoidiniSyncClient extends ExternalClient {

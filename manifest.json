@@ -48,7 +48,7 @@
     {
       "name": "outbound-access",
       "attrs": {
-        "host": "dev-goidini.e-goi.com",
+        "host": "goidini.e-goi.com",
         "path": "/vtex-io/*"
       }
     },

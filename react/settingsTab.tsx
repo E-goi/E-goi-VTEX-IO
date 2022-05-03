@@ -265,7 +265,7 @@ const SettingsTab = () => {
                 </div>
 
                 <div style={{ padding: '20px', color: '#8a6d3b', background: '#fcf8e3' }}>
-                  <p><FormattedMessage id="admin/egoi-admin.legacy1"/><a target="_blank" href="https://goidini.e-goi.com/vtex"><FormattedMessage id="admin/egoi-admin.legacy2"/></a><FormattedMessage id="admin/egoi-admin.legacy3"/></p>
+                  <p><FormattedMessage id="admin/egoi-admin.legacy1"/><a target="_blank" href="https://www.e-goi.com/pt/vtex"><FormattedMessage id="admin/egoi-admin.legacy2"/></a><FormattedMessage id="admin/egoi-admin.legacy3"/></p>
                 </div>
 
                 <span className="mt4 mb4" style={{ display: 'flex', justifyContent: 'flex-end', columnGap: '20px' }} >
