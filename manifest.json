@@ -19,6 +19,10 @@
     "messages": "1.x",
     "store": "0.x"
   },
+  "billingOptions": {
+    "type": "free",
+    "availableCountries": ["*"]
+  },
   "scripts": {
     "postreleasy": "vtex publish"
   },
