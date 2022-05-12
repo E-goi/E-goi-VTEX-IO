@@ -7,7 +7,6 @@ const routes = {
   getEgoiFieldsData: (listId: Number) =>
     `https://api.egoiapp.com/lists/` + listId + `/fields`,
 }
-
 class GetEgoiFieldsClient extends ExternalClient {
   constructor(context: IOContext, options?: InstanceOptions) {
     super('', context, options)

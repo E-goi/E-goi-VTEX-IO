@@ -7,7 +7,6 @@ const routes = {
   getConnectedSitesData: () =>
     `https://goidini.e-goi.com/vtex-io/connected-sites`,
 }
-
 class ConnectedSitesClient extends ExternalClient {
   constructor(context: IOContext, options?: InstanceOptions) {
     super('', context, options)

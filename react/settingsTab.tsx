@@ -39,6 +39,16 @@ const SettingsTab = () => {
   const [showErrorAlert, setShowErrorAlert] = useState(false)
   const [showSuccessAlert, setShowSuccessAlert] = useState(false)
 
+  const showSuccess = (message: string) => {
+    setSuccessMessage(message)
+    setShowSuccessAlert(true)
+  }
+
+  const showError = (message: string) => {
+    setErrorMessage(message)
+    setShowErrorAlert(true)
+  }
+  
   const { data: hostName } = useQuery(GET_HOST, { ssr: false })
 
   const { data: appSettings } = useQuery(GET_APP_SETTINGS,
@@ -84,7 +94,7 @@ const SettingsTab = () => {
     setDisableConfigs(false)
    },
     onCompleted: (e) => {
-      if (e.goidiniInstall.status == 201) {
+      if (e.goidiniInstall.status === 201) {
 
         let pixelActive = e.goidiniInstall.message ? false : true
 
@@ -119,7 +129,7 @@ const SettingsTab = () => {
   const handleChangeApiKeyValue = async (e: any) => {
     setApikeyValue(e.target.value)
 
-    if(e.target.value.length == 40) {
+    if(e.target.value.length === 40) {
       setSaveSettingsLoading(true)
       setDisableConfigs(true)
       myaccount({variables: { apikey: e.target.value }})
@@ -128,7 +138,7 @@ const SettingsTab = () => {
 
   const mapListsDropdown = async () => {    
     try {
-      if (getLists.getLists.total_items == 0) {
+      if (getLists.getLists.total_items === 0) {
         //exception
       } else {
 
@@ -151,24 +161,14 @@ const SettingsTab = () => {
     onCompleted: mapListsDropdown
   })
 
-  const showSuccess = (message: string) => {
-    setSuccessMessage(message)
-    setShowSuccessAlert(true)
-  }
-
-  const showError = (message: string) => {
-    setErrorMessage(message)
-    setShowErrorAlert(true)
-  }
-
   const saveSettings = async () => {
     setDisableConfigs(true)
     setSaveSettingsLoading(true)
 
-    if(apikeyValue == ''
-      && appKeyValue == ''
-      && appTokenValue == ''
-      && listSelected == 0) {
+    if(apikeyValue === ''
+      && appKeyValue === ''
+      && appTokenValue === ''
+      && listSelected === 0) {
         setShowErrorAlert(true)
         setSaveSettingsLoading(false)
         return

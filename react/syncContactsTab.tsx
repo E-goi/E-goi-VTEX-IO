@@ -45,11 +45,11 @@ const SyncContactsTab = () => {
 
   const mapEgoiFieldsDropdown = async () => {
     try {
-      if (getEgoiFields.getEgoiFields.length == 0) {
+      if (getEgoiFields.getEgoiFields.length === 0) {
         //exception
       } else {
 
-        let egoiFieldsFilter = getEgoiFields.getEgoiFields.filter((obj: any) => { return obj.type == 'extra' })
+        let egoiFieldsFilter = getEgoiFields.getEgoiFields.filter((obj: any) => { return obj.type === 'extra' })
 
         let egoiFields = egoiFieldsFilter.length > 0 ?
           egoiFieldsFilter.map((obj: { name: string; field_id: string; type: string }) => (
@@ -67,7 +67,7 @@ const SyncContactsTab = () => {
 
   const mapVtexClientFieldsDropdown = () => {
     try {
-      if (getVtexClientFields.getVtexClientFields.fields == 0) {
+      if (getVtexClientFields.getVtexClientFields.fields === 0) {
         //exception
       } else {
 
@@ -101,7 +101,7 @@ const SyncContactsTab = () => {
   const [appSettingsQuery, { data: appSettings }] = useLazyQuery(GET_APP_SETTINGS,
     {
       onCompleted: (() => {
-        if (egoiFields.length != 0 && vtexFields.length != 0 && appSettings.getAppSettings.vtex && appSettings.getAppSettings.egoi) {
+        if (egoiFields.length !== 0 && vtexFields.length !== 0 && appSettings.getAppSettings.vtex && appSettings.getAppSettings.egoi) {
           let vtex: [string] = appSettings.getAppSettings.vtex
           let egoi: [string] = appSettings.getAppSettings.egoi
 
@@ -110,12 +110,12 @@ const SyncContactsTab = () => {
               let objVtex = vtexFields.find(x => x.value === value) ?? { value: '', label: '' }
               let objEgoi = egoiFields.find(x => x.value === egoi[idx]) ?? { value: '', label: '' }
 
-              if (objVtex.value != '') {
+              if (objVtex.value !== '') {
                 setEgoiFieldsMapped([...egoiFieldsMapped, objEgoi])
                 setVtexFieldsMapped([...vtexFieldsMapped, objVtex])
 
-                setEgoiFields(egoiFields.filter(field => field.value != objEgoi.value))
-                setVtexFields(vtexFields.filter(field => field.value != objVtex.value))
+                setEgoiFields(egoiFields.filter(field => field.value !== objEgoi.value))
+                setVtexFields(vtexFields.filter(field => field.value !== objVtex.value))
               }
             })
         }
@@ -127,7 +127,7 @@ const SyncContactsTab = () => {
     })
 
   useEffect(() => {
-    if (egoiFields.length != 0) {
+    if (egoiFields.length !== 0) {
       appSettingsQuery()
     }
 
@@ -159,8 +159,8 @@ const SyncContactsTab = () => {
     setEgoiFieldsMapped([...egoiFieldsMapped, egoiFieldSelected])
     setVtexFieldsMapped([...vtexFieldsMapped, vtexFieldsSelected])
 
-    setEgoiFields(egoiFields.filter(field => field.value != egoiFieldSelected.value))
-    setVtexFields(vtexFields.filter(field => field.value != vtexFieldsSelected.value))
+    setEgoiFields(egoiFields.filter(field => field.value !== egoiFieldSelected.value))
+    setVtexFields(vtexFields.filter(field => field.value !== vtexFieldsSelected.value))
 
     setEgoiFieldSelected({ value: '', label: '' })
     setVtexFieldsSelected({ value: '', label: '' })
@@ -187,8 +187,8 @@ const SyncContactsTab = () => {
   }
 
   const removeFields = (idx: any) => {
-    setEgoiFieldsMapped(egoiFieldsMapped.filter(field => field.value != egoiFieldsMapped[idx].value))
-    setVtexFieldsMapped(vtexFieldsMapped.filter(field => field.value != vtexFieldsMapped[idx].value))
+    setEgoiFieldsMapped(egoiFieldsMapped.filter(field => field.value !== egoiFieldsMapped[idx].value))
+    setVtexFieldsMapped(vtexFieldsMapped.filter(field => field.value !== vtexFieldsMapped[idx].value))
 
     setEgoiFields([...egoiFields, egoiFieldsMapped[idx]])
     setVtexFields([...vtexFields, vtexFieldsMapped[idx]])
@@ -239,7 +239,7 @@ const SyncContactsTab = () => {
                         value={vtexFieldsSelected.value}
                         onChange={(e: any) => {
                           let obj = vtexFields.find(x => x.value === e.target.value)
-                          if (obj != undefined) {
+                          if (obj !== undefined) {
                             setVtexFieldsSelected(obj)
                           }
                         }}

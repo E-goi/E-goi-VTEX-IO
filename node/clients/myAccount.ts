@@ -7,7 +7,6 @@ const routes = {
   getMyAccountData: () =>
     `https://api.egoiapp.com/my-account`,
 }
-
 class MyAccountClient extends ExternalClient {
   constructor(context: IOContext, options?: InstanceOptions) {
     super('', context, options)

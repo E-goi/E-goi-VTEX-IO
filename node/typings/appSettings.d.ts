@@ -10,7 +10,6 @@ export interface AppSettings {
   vtex: string[]
   egoi: string[]
 }
-
 export interface GetAppSettings {
   appKey: string
   appToken: string

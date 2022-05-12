@@ -16,4 +16,3 @@ export interface VtexClientFields {
   isFilter: String
   isInternal: String
 }
-

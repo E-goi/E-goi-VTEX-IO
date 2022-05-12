@@ -21,6 +21,16 @@ const ConnectedSitesTab = () => {
   const [showSuccessAlert, setShowSuccessAlert] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
+  const showSuccess = (message: string) => {
+    setSuccessMessage(message)
+    setShowSuccessAlert(true)
+  }
+
+  const showError = (message: string) => {
+    setErrorMessage(message)
+    setShowErrorAlert(true)
+  }
+
   const { data: hostName } = useQuery(GET_HOST,
     {
       ssr: false,
@@ -50,7 +60,7 @@ const ConnectedSitesTab = () => {
   const [createConnectedSites] = useMutation(CREATE_CONNECTED_SITES, {
     onError: (e) => showError(intl.formatMessage({id: 'admin/egoi-admin.csErrorCreate'}) + e.message),
     onCompleted: (e) => {
-      if (e.createConnectedSites.status == 200) {
+      if (e.createConnectedSites.status === 200) {
         showSuccess(intl.formatMessage({id: 'admin/egoi-admin.csSuccess'}))
         saveAppSettings({
           variables: {
@@ -86,16 +96,6 @@ const ConnectedSitesTab = () => {
       showError(intl.formatMessage({id: 'admin/egoi-admin.csErrorActivate'}) + error)
     }
 
-  }
-
-  const showSuccess = (message: string) => {
-    setSuccessMessage(message)
-    setShowSuccessAlert(true)
-  }
-
-  const showError = (message: string) => {
-    setErrorMessage(message)
-    setShowErrorAlert(true)
   }
 
   return (

@@ -7,7 +7,6 @@ const routes = {
   getGoidiniSyncData: () =>
     `https://goidini.e-goi.com/vtex-io/sync`, //CHANGE DEV TO PROD
 }
-
 class GoidiniSyncClient extends ExternalClient {
   constructor(context: IOContext, options?: InstanceOptions) {
     super('', context, options)

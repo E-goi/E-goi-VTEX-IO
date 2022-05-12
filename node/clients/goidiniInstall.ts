@@ -7,7 +7,6 @@ const routes = {
   getGoidiniInstallData: () =>
     `https://goidini.e-goi.com/vtex-io/install`, //CHANGE DEV TO PROD
 }
-
 class GoidiniInstallClient extends ExternalClient {
   constructor(context: IOContext, options?: InstanceOptions) {
     super('', context, options)

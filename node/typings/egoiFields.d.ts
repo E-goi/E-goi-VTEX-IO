@@ -8,4 +8,3 @@ export interface EgoiFields {
   type: String
   options: String[]
 }
-

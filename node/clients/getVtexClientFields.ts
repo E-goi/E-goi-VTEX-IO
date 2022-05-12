@@ -7,7 +7,6 @@ const routes = {
   getVtexClientFieldsData: () =>
     `https://api.vtex.com/egoipartnerpt/dataentities/CL/`,
 }
-
 class GetListsClient extends ExternalClient {
   constructor(context: IOContext, options?: InstanceOptions) {
     super('', context, options)
