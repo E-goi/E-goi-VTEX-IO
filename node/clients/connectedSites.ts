@@ -15,7 +15,7 @@ class ConnectedSitesClient extends ExternalClient {
 
   public async createConnectedSites(
     apikey: string,
-    appKey: string,
+    appName: string,
     domain: string,
     listId: number
   ): Promise<GoidiniResponse> {
@@ -25,7 +25,7 @@ class ConnectedSitesClient extends ExternalClient {
       'Content-Type': 'application/json',
       'X-Vtex-Use-Https': 'true',
       Apikey: apikey,
-      'x-vtex-api-appKey': appKey,
+      'vtex-appName': appName,
     }
 
     return this.http.post(

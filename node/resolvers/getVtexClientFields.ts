@@ -2,7 +2,6 @@ import type { ServiceContext } from '@vtex/api'
 
 import type { VtexClient } from '../typings/vtexClientFields'
 import type { Clients } from '../clients'
-import type { AppSettings } from '../typings/appSettings'
 
 export async function getVtexClientFields(
   _: unknown,
@@ -10,7 +9,7 @@ export async function getVtexClientFields(
   context: ServiceContext<Clients>
 ): Promise<VtexClient> {
   const {
-    clients: { getVtexClientFields, apps, stores },
+    clients: { getVtexClientFields, stores },
   } = context
 
   const appId = process.env.VTEX_APP_ID
@@ -24,15 +23,8 @@ export async function getVtexClientFields(
     throw new Error('No appId defined')
   }
 
-  const appSettings = ((await apps.getAppSettings(appId)) ?? {}) as AppSettings
-
   try {
-    return getVtexClientFields.getVtexClientFields(
-      appSettings.apikey,
-      appSettings.appKey,
-      appSettings.appToken,
-      name
-    )
+    return getVtexClientFields.getVtexClientFields(name)
   } catch (error) {
     throw new Error(error.message)
   }

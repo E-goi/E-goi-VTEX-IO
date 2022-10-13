@@ -19,22 +19,7 @@ class GetListsClient extends JanusClient {
     })
   }
 
-  public async getVtexClientFields(
-    apikey: string,
-    appKey: string,
-    appToken: string,
-    name: string
-  ): Promise<VtexClient> {
-    const newOptions = { ...(this.options as InstanceOptions) }
-
-    newOptions.headers = {
-      'Content-Type': 'application/json',
-      'X-Vtex-Use-Https': 'true',
-      Apikey: apikey,
-      'x-vtex-api-appKey': appKey,
-      'x-vtex-api-appToken': appToken,
-    }
-
+  public async getVtexClientFields(name: string): Promise<VtexClient> {
     return this.http.get(routes.getVtexClientFieldsData(name), this.options)
   }
 }
