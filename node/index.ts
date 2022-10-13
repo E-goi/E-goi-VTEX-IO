@@ -1,7 +1,7 @@
 import type { ClientsConfig, ServiceContext, RecorderState } from '@vtex/api'
 import { LRUCache, Service } from '@vtex/api'
 
-import { myAccount  } from './resolvers/myAccount'
+import { myAccount } from './resolvers/myAccount'
 import { getAppSettings } from './resolvers/getAppSettings'
 import { saveAppSettings } from './resolvers/appSettings'
 import { getLists } from './resolvers/getLists'
@@ -11,8 +11,7 @@ import { getEgoiFields } from './resolvers/getEgoiFields'
 import { getVtexClientFields } from './resolvers/getVtexClientFields'
 import { goidiniSync } from './resolvers/goidiniSync'
 import { goidiniInstall } from './resolvers/goidiniInstall'
-
-
+import { CheckAdminAccess } from './directives/checkAdminAccess'
 import { Clients } from './clients'
 
 const TIMEOUT_MS = 800
@@ -39,6 +38,7 @@ const clients: ClientsConfig<Clients> = {
     },
   },
 }
+
 declare global {
   // We declare a global Context type just to avoid re-writing ServiceContext<Clients, State> in every handler and resolver
   type Context = ServiceContext<Clients, State>
@@ -54,20 +54,23 @@ export default new Service({
   clients,
   graphql: {
     resolvers: {
-      Query:{
+      Query: {
         myAccount,
         getAppSettings,
         getLists,
         hostName,
         getEgoiFields,
-        getVtexClientFields
+        getVtexClientFields,
       },
       Mutation: {
         saveAppSettings,
         createConnectedSites,
         goidiniSync,
-        goidiniInstall
-      }
+        goidiniInstall,
+      },
+    },
+    schemaDirectives: {
+      checkAdminAccess: CheckAdminAccess as any,
     },
   },
 })

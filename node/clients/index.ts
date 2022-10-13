@@ -8,6 +8,7 @@ import GetEgoiFields from './getEgoiFields'
 import getVtexClientFields from './getVtexClientFields'
 import GoidiniSync from './goidiniSync'
 import GoidiniInstall from './goidiniInstall'
+import Identity from '../utils/Identity'
 
 // Extend the default IOClients implementation with our own custom clients.
 export class Clients extends IOClients {
@@ -41,5 +42,9 @@ export class Clients extends IOClients {
 
   public get goidiniInstall() {
     return this.getOrSet('goidiniInstall', GoidiniInstall)
+  }
+
+  public get identity() {
+    return this.getOrSet('identity', Identity)
   }
 }

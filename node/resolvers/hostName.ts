@@ -15,9 +15,11 @@ export async function hostName(
     const response = await stores.getStores()
 
     const [store, ,] = response
+
     if (!response) {
-      throw new Error('boas')
+      throw new Error('Error')
     }
+
     const { hosts } = store
     const [host, ,] = hosts
 

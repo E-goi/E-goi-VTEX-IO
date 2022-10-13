@@ -64,7 +64,7 @@
       "name": "outbound-access",
       "attrs": {
         "host": "app.io.vtex.com",
-        "path": "*"
+        "path": "/api/dataentities/*"
       }
     },
     {

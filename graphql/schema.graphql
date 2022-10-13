@@ -1,5 +1,5 @@
 type Query {
-  getAppSettings: GetAppSettings
+  getAppSettings: GetAppSettings @checkAdminAccess @cacheControl(scope: PRIVATE)
   myAccount(apikey: String): MyAccount
   getLists(apikey: String): GetLists
   hostName: String
@@ -9,14 +9,16 @@ type Query {
 
 type Mutation {
   saveAppSettings(input: AppSettings): Boolean
+    @checkAdminAccess
+    @cacheControl(scope: PRIVATE)
   createConnectedSites: GoidiniResponse
   goidiniSync(input: GoidiniSync): GoidiniResponse
   goidiniInstall(input: GoidiniInstall): GoidiniResponse
 }
 
 input GoidiniInstall {
-  apikey: String 
-  appkey: String 
+  apikey: String
+  appkey: String
   apptoken: String
   domain: String
   listId: Int
@@ -39,5 +41,3 @@ input AppSettings {
   vtex: [String]
   egoi: [String]
 }
-
-
