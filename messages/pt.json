@@ -1,9 +1,10 @@
 {
   "admin-egoi.navigation.label": "E-goi",
-  "admin-egoi.navigation.account": "Account",
-  "admin-egoi.navigation.synccontacts": "Sync Contacts",
-  "admin-egoi.navigation.syncproducts": "Sync Products",
+  "admin-egoi.navigation.account": "Conta",
+  "admin-egoi.navigation.synccontacts": "Sincronização de Contactos",
+  "admin-egoi.navigation.syncproducts": "Sincronização de Produtos",
   "admin-egoi.navigation.connectedsites": "Connected Sites",
+  "admin-egoi.navigation.advancedsettings": "Configurações Avançadas",
   "admin/egoi-admin.syncFieldsText": "Escolha os campos da sua lista de contactos no E-goi que irão receber os contactos criados no Vtex.",
   "admin/egoi-admin.vtexFields": "Campos Vtex",
   "admin/egoi-admin.egoiFields": "Campos E-goi",
@@ -26,12 +27,24 @@
   "admin/egoi-admin.csText3": "Para saber mais da funcionalidade Connected Sites, confira  ",
   "admin/egoi-admin.csHere": "aqui",
   "admin/egoi-admin.configConnectedSites": "Configure o Connected Sites",
+  "admin/egoi-admin.configAdvancedSettings": "Configurações avançadas",
   "admin/egoi-admin.csSuccess": "Configurações salvas com sucesso!",
   "admin/egoi-admin.csErrorStore": "Erro ao salvar as configurações! Não há configuração de Loja!",
   "admin/egoi-admin.csError": "Erro ao salvar as configurações!",
   "admin/egoi-admin.csErrorCreate": "Erro a criar connected sites! ",
   "admin/egoi-admin.csErrorActivate": "Erro a ativar o connected sites. ",
 
+  "admin/egoi-admin.asText1": "Para configurações avançadas, clique no botão e faça o login no Goidini com os dados da sua conta E-goi.",
+  "admin/egoi-admin.asText2": "Após o login, você terá acesso às configurações avançadas da sua integração VTEX onde poderá:",
+  "admin/egoi-admin.asFeat1": "Sincronize os seus produtos com o E-goi",
+  "admin/egoi-admin.asFeat2": "Set up Abandoned Cart and Order Tracking",
+  "admin/egoi-admin.asFeat3": "Configurar carrinho abandonado e rastreamento de pedidos",
+  "admin/egoi-admin.asFeat4": "Configurar o envio de SMS de recuperação de boleto",
+  "admin/egoi-admin.asFeatHeader1": "Produtos",
+  "admin/egoi-admin.asFeatHeader2": "Tracking",
+  "admin/egoi-admin.asFeatHeader3": "SMS",
+  "admin/egoi-admin.asFeatHeader4": "Boleto",
+  "admin/egoi-admin.asButton": "Configurações Avançadas",
 
   "admin/egoi-admin.lists": "Lista E-goi ",
   "admin/egoi-admin.insertApikey": "Insere a Apikey do E-goi",
@@ -45,7 +58,6 @@
   "admin/egoi-admin.legacy1": "Atenção! Se tens a ",
   "admin/egoi-admin.legacy2": "integração legacy",
   "admin/egoi-admin.legacy3": " com a vtex, configurar esta integração irá substituir a existente.",
-
 
   "admin/egoi-admin.configNeed": "Necessita configurar a integração na tab Account!"
 }

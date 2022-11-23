@@ -18,5 +18,9 @@
   "admin.app.connectedsites": {
     "component": "connectedSitesTab",
     "path": "/admin/app/e-goi/connectedsites"
+  },
+  "admin.app.advancedsettings": {
+    "component": "advancedSettingsTab",
+    "path": "/admin/app/e-goi/advancedsettings"
   }
 }

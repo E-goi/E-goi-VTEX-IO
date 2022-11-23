@@ -4,6 +4,7 @@
   "admin-egoi.navigation.synccontacts": "Sync Contacts",
   "admin-egoi.navigation.syncproducts": "Sync Products",
   "admin-egoi.navigation.connectedsites": "Connected Sites",
+  "admin-egoi.navigation.advancedsettings": "Advanced Settings",
   "admin/egoi-admin.syncFieldsText": "Choose the fields from your contact list in E-goi that will receive the contacts created in Vtex.",
   "admin/egoi-admin.vtexFields": "Vtex Fields",
   "admin/egoi-admin.egoiFields": "Egoi Fields",
@@ -26,11 +27,24 @@
   "admin/egoi-admin.csText3": "To know more about the feature Connected Sites, check ",
   "admin/egoi-admin.csHere": "here",
   "admin/egoi-admin.configConnectedSites": "Configure Connected Sites",
+  "admin/egoi-admin.configAdvancedSettings": "Advanced Settings",
   "admin/egoi-admin.csSuccess": "Settings saved successfully!",
   "admin/egoi-admin.csErrorStore": "Error saving settings! There are no Store configuration!",
   "admin/egoi-admin.csError": "Error saving settings!",
   "admin/egoi-admin.csErrorCreate": "Error creating connected sites! ",
   "admin/egoi-admin.csErrorActivate": "Error activating connected sites. ",
+
+  "admin/egoi-admin.asText1": "For advanced settings, click on the button and log in to Goidini with your E-goi account details.",
+  "admin/egoi-admin.asText2": "After logging in, you will have access to the advanced settings of your VTEX integration where you can:",
+  "admin/egoi-admin.asFeat1": "Synchronize your products with E-goi",
+  "admin/egoi-admin.asFeat2": "Set up Abandoned Cart and Order Tracking",
+  "admin/egoi-admin.asFeat3": "Configure SMS sending by order status",
+  "admin/egoi-admin.asFeat4": "Configure the sending of Boleto recovery SMS",
+  "admin/egoi-admin.asFeatHeader1": "Products",
+  "admin/egoi-admin.asFeatHeader2": "Tracking",
+  "admin/egoi-admin.asFeatHeader3": "SMS",
+  "admin/egoi-admin.asFeatHeader4": "Boleto",
+  "admin/egoi-admin.asButton": "Advanced Settings",
 
   "admin/egoi-admin.lists": "E-goi List ",
   "admin/egoi-admin.insertApikey": "Insert E-goi Apikey",
@@ -44,7 +58,6 @@
   "admin/egoi-admin.legacy1": "Attention! If you have activated the ",
   "admin/egoi-admin.legacy2": "legacy integration",
   "admin/egoi-admin.legacy3": " with vtex, this integration will replace the existing one.",
-
 
   "admin/egoi-admin.configNeed": "Need to configure integration in Account tab!"
 }

@@ -1,4 +1,3 @@
-
 {
   "section": "other",
   "titleId": "admin-egoi.navigation.label",
@@ -15,6 +14,10 @@
     {
       "labelId": "admin-egoi.navigation.connectedsites",
       "path": "admin/e-goi/connectedsites"
+    },
+    {
+      "labelId": "admin-egoi.navigation.advancedsettings",
+      "path": "admin/e-goi/advancedsettings"
     }
   ]
 }
