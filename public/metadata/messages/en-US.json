@@ -1,8 +1,24 @@
 {
   "name": "E-goi",
-  "headline": "Save Time, Increase Traffic and Turn Business Opportunities (Leads) into Loyal Customers!",
-  "overview": "Sync contacts from Vtex to an E-goi list\\nTrack orders to E-goi",
-  "features": ["Sync Customers", "Connected Sites", "E-goi Track & Engage"],
+  "headline": "Marketing Automation with Artificial Intelligence. The technology that increases sales online and offline.",
+  "overview": "E-goi offers a technology ecosystem specifically designed to increase your E-commerce sales.\nTrack customers from the first contact, at every stage, across multiple channels and in an automated way.\nWith automations initiated by specific actions, achieve a hyper-personalized and omnichannel communication strategy.\nWe walk alongside major brands such as O Boticário, Mormaii, Banco do Brasil, Honda, Estadão, among others, with the goal of increasing sales and revolutionizing the way of communicating.\n• Omnichannel Marketing Automation\n• Phygital Experience\n• Customer Data Platform\n• Artificial Intelligence",
+  "features": [
+    "Omnichannel Communication - Email Marketing, SMS Marketing, Voice Messaging, Push Notifications (Web Push and Push Mobile) and Social Media Campaigns.",
+    "Abandoned Cart Recovery by SMS or Email.",
+    "Capturing Leads - Landing Pages, Pop-ups, Whatsapp Leads, Forms, Facebook Lead Ads and Facebook Audiences.",
+    "Automatic contact synchronization - easy management and segmentation.",
+    "Dynamic Retargeting campaigns in all channels.",
+    "Transactional Communication - unpaid bill, purchase status and shipment tracking.",
+    "NBO (Next Best Offer) - suggestion of the next purchase through Artificial Intelligence.",
+    "CDP (Customer Data Platform) and Marketing Automation - unique shopping experience in real time, both in the online and physical store, through historical data.",
+    "Upselling and Cross-selling through hyper-personalized automated recommendations with 1:1 messaging.",
+    "Out-of-the-box workflows - multichannel automation flows based on your customer's buying journey.",
+    "A/B testing and detailed reporting for results optimization.",
+    "Track & Engage - behavioral analysis and process automation based on consumer behavior in the store.",
+    "NPS (Net Promoter Score) and Loyalty Modules - satisfaction analysis and transformation of new customers into loyal ones through loyalty campaigns and gamification mechanics.",
+    "SMS Follow Price - functionality that allows consumers to follow the prices of their favorite products."
+  ],
+  "video": "https://www.youtube.com/watch?v=JwM5kvkKrzc&feature=youtu.be",
   "websiteURL": "https://www.e-goi.com",
   "support": {
     "url": "https://www.e-goi.com",

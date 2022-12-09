@@ -1,12 +1,24 @@
 {
   "name": "E-goi",
-  "headline": "¡Ahorre tiempo, aumente el tráfico y convierta las oportunidades comerciales (clientes potenciales) en clientes leales!",
-  "overview": "Sincronizar contactos de Vtex a una lista de E-goi\\nRastrear pedidos a E-goi",
+  "headline": "Automatización del marketing con inteligencia artificial. La tecnología que aumenta las ventas online y offline.",
+  "overview": "E-goi ofrece un ecosistema tecnológico específicamente diseñado para aumentar tus ventas en E-commerce.\nHaz un seguimiento de los clientes desde el primer contacto, en cada etapa, a través de múltiples canales y de forma automatizada.\nA través de automatizaciones iniciadas por acciones específicas, logra una estrategia de comunicación hiperpersonalizada y omnicanal.\nHoy en día, caminamos junto a grandes marcas como O Boticário, Mormaii, Banco do Brasil, Honda, Estadão, entre otras, con el objetivo de aumentar las ventas y revolucionar la forma de comunicar.\n• Automatización del marketing omnicanal\n• Plataforma de datos de clientes\n• Phygital Experience\n• Inteligencia Artificial",
   "features": [
-    "Sincronizar clientes",
-    "Sitios conectados",
-    "E-goi Track & Engage"
+    "Comunicación omnicanal: E-mail Marketing, marketing por SMS, mensajería de voz, notificaciones push (web push y push móvil) y campañas en redes sociales.",
+    "Recuperación del carrito abandonado por SMS o E-mail.",
+    "Captación de Leads: Landing Pages, Pop-ups, Whatsapp Leads, formularios, anuncios de Leads de Facebook y audiencias de Facebook.",
+    "Sincronización automática de contactos: gestión y segmentaciones sencillas",
+    "Campañas dinámicas de Retargeting en todos los canales.",
+    "Comunicación transaccional: factura que no se ha pagado, estado de la compra y seguimiento del envío.",
+    "NBO (Next Best Offer): sugerencia de la próxima compra a través de la Inteligencia Artificial.",
+    "CDP (Customer Data Platform) y Automatización del Marketing: experiencia de compra única en tiempo real, tanto en la tienda online como en la física, a través de datos históricos.",
+    "Up Selling y Cross selling mediante recomendaciones automatizadas hiperpersonalizadas con mensajes 1 a 1.",
+    "Flujos de trabajo listos para usar: flujos de automatización multicanal basados en el proceso de compra del cliente.",
+    "Pruebas A/B e informes detallados para la optimización de los resultados.",
+    "Track & Engage: análisis del comportamiento y automatización de procesos basados en el comportamiento del consumidor en la tienda.",
+    "NPS (Net Promoter Score) y Módulos de fidelización: análisis de la satisfacción y transformación de nuevos clientes mediante campañas de fidelización y mecánicas de gamificación.",
+    "SMS Follow Price: funcionalidad que permite a los consumidores seguir los precios de sus productos favoritos."
   ],
+  "video": "https://www.youtube.com/watch?v=JwM5kvkKrzc&feature=youtu.be",
   "websiteURL": "https://www.e-goi.com",
   "support": {
     "url": "https://www.e-goi.com",

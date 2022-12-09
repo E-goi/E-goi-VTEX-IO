@@ -1,12 +1,24 @@
 {
   "name": "E-goi",
-  "headline": "Economize tempo, aumente o tráfego e transforme oportunidades de negócios (leads) em clientes fiéis!",
-  "overview": "Sincronizar contactos do Vtex com uma lista E-goi\\nAcompanhar encomendas para o E-goi",
+  "headline": "Automação de Marketing com Inteligência Artificial. A tecnologia que aumenta vendas online e offline.",
+  "overview": "A E-goi oferece um ecossistema tecnológico, especificamente desenhado para aumentar as suas vendas em E-commerce.\nAcompanhe os clientes desde o primeiro contato, em cada etapa, em diversos canais e de forma automatizada.\nAtravés das automações iniciadas por ações específicas, alcance uma estratégia de comunicação hiper-personalizada e omnicanal.\nCaminhamos ao lado de grandes marcas como O Boticário, Mormaii, Banco do Brasil, Honda, Estadão, entre outras, com o objetivo de aumentar vendas e revolucionar a forma de comunicar.\n• Omnichannel Marketing Automation\n• Phygital Experience\n• Customer Data Platform\n• Inteligência Artificial",
   "features": [
-    "Sincronizar clientes",
-    "Connected Sites",
-    "E-goi Track & Engage"
+    "Comunicação Omnicanal - E-mail Marketing, SMS Marketing, Mensagens de Voz, Notificações Push (Web Push e Push Mobile) e Campanhas nas redes sociais;",
+    "Recuperação do Carrinho Abandonado por SMS ou Email;",
+    "Captação de Leads - Landing Pages, Pop-ups, Whatsapp Leads, Formulários, Facebook Lead Ads e Facebook Audiences;",
+    "Sincronização automática de contatos - fácil gestão e segmentação;",
+    "Campanhas de Retargeting Dinâmico em todos os canais;",
+    "Comunicação Transacional - boleto não pago e estado da compra;",
+    "NBO (Next Best Offer) - sugestão da próxima compra através de Inteligência Artificial;",
+    "CDP (Customer Data Platform) e Automação de Marketing - experiência de compra única em tempo real, tanto na loja online como na física, através do histórico de dados;",
+    "Up Selling e Cross selling através de recomendações automáticas hiper-personalizadas com mensagens 1:1;",
+    "Workflows prontos a usar - fluxos de automação multicanal baseados na jornada de compra do seu cliente;",
+    "Testes A/B e relatórios detalhados para otimização de resultados;",
+    "Track & Engage - análise comportamental e automatização de processos com base no comportamento do consumidor na loja.",
+    "NPS (Net Promoter Score) e Módulos de Loyalty - análise de satisfação e transformação de novos clientes em clientes fiéis através de campanhas de fidelização e mecânicas de gamification.",
+    "LGPD e First Party Data - Consentimento de coleta e tratamento de dados primários;"
   ],
+  "video": "https://www.youtube.com/watch?v=JwM5kvkKrzc&feature=youtu.be",
   "websiteURL": "https://www.e-goi.com",
   "support": {
     "url": "https://www.e-goi.com",
