@@ -75,7 +75,7 @@ const SettingsTab = () => {
 
   const mapListsDropdown = async () => {
     try {
-      if (getLists.getLists.total_items === 0) {
+      if (getLists === undefined || getLists.getLists.total_items === 0) {
         // exception
       } else {
         const lists = getLists.getLists.items.map(
