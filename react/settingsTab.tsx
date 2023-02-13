@@ -68,7 +68,7 @@ const SettingsTab = () => {
         setAppTokenValue(appSettings.getAppSettings.appToken)
         setAppKeyValue(appSettings.getAppSettings.appKey)
 
-        setDisableConfigs(true)
+        checkValidSettings()
       }
     },
   })
@@ -121,19 +121,27 @@ const SettingsTab = () => {
       }
     },
     onError: () => {
-      // console.log(e.message)
-      showError(intl.formatMessage({ id: 'admin/egoi-admin.errorApikey' }))
-      appSettings.getAppSettings.apikey
-        ? setApikeyValue(appSettings.getAppSettings.apikey)
-        : setApikeyValue('')
-      listsOptions ? setListsOptions(listsOptions) : setListsOptions([{}])
-      appSettings.getAppSettings.listId
-        ? setListSelected(appSettings.getAppSettings.listId)
-        : setListSelected(0)
+      if (apikeyValue === '' || apikeyValue === undefined) {
+        setAppTokenValue(appSettings.getAppSettings.appToken)
+        setAppKeyValue(appSettings.getAppSettings.appKey)
+      } else {
+        showError(intl.formatMessage({ id: 'admin/egoi-admin.errorApikey' }))
+        listsOptions ? setListsOptions(listsOptions) : setListsOptions([{}])
+        appSettings.getAppSettings.listId
+          ? setListSelected(appSettings.getAppSettings.listId)
+          : setListSelected(0)
+      }
+
+      setApikeyValue('')
+
       setSaveSettingsLoading(false)
       setDisableConfigs(false)
     },
   })
+
+  const checkValidSettings = () => {
+    myaccount({ variables: { apikey: appSettings.getAppSettings.apikey } })
+  }
 
   const [goidiniInstall] = useMutation(GOIDINI_INSTALL, {
     variables: {},
