@@ -5,7 +5,7 @@ import type { Clients } from '../clients'
 
 export async function getVtexClientFields(
   _: unknown,
-  __: unknown,
+  args: any,
   context: ServiceContext<Clients>
 ): Promise<VtexClient> {
   const {
@@ -24,7 +24,8 @@ export async function getVtexClientFields(
   }
 
   try {
-    return getVtexClientFields.getVtexClientFields(name)
+    let acronym = args.acronym ? args.acronym : 'CL'
+    return getVtexClientFields.getVtexClientFields(name, acronym)
   } catch (error) {
     throw new Error(error.message)
   }

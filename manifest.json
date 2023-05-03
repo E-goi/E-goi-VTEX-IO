@@ -21,7 +21,9 @@
   },
   "billingOptions": {
     "type": "free",
-    "availableCountries": ["*"],
+    "availableCountries": [
+      "*"
+    ],
     "support": {
       "url": "https://helpdesk.e-goi.com",
       "phone": "+351300404336"

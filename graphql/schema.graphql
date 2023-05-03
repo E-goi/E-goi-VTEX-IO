@@ -4,7 +4,8 @@ type Query {
   getLists(apikey: String): GetLists
   hostName: String
   getEgoiFields: [EgoiFields]
-  getVtexClientFields: VtexClient
+  getVtexClientFields(acronym: String): VtexClient
+  getDataEntities: [DataEntities]
 }
 
 type Mutation {

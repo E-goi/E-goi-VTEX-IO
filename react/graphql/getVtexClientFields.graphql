@@ -1,5 +1,5 @@
-query getVtexClientFields {
-	getVtexClientFields {
+query getVtexClientFields($acronym: String) {
+	getVtexClientFields(acronym: $acronym) {
     fields{
       name
       displayName

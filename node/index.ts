@@ -11,6 +11,7 @@ import { getEgoiFields } from './resolvers/getEgoiFields'
 import { getVtexClientFields } from './resolvers/getVtexClientFields'
 import { goidiniSync } from './resolvers/goidiniSync'
 import { goidiniInstall } from './resolvers/goidiniInstall'
+import { getDataEntities } from './resolvers/getDataEntities'
 import { CheckAdminAccess } from './directives/checkAdminAccess'
 import { Clients } from './clients'
 
@@ -61,6 +62,7 @@ export default new Service({
         hostName,
         getEgoiFields,
         getVtexClientFields,
+        getDataEntities,
       },
       Mutation: {
         saveAppSettings,
