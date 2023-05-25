@@ -19,13 +19,7 @@ const routes = {
         ...options,
         headers: {
             ...options?.headers,
-            ...{Accept: 'application/vnd.vtex.ds.v10+json', 'Content-Type': 'application/json'},
-            ...(context.adminUserAuthToken
-                ? { VtexIdclientAutCookie: context.adminUserAuthToken }
-                : null),
-              ...(context.storeUserAuthToken
-                ? { VtexIdclientAutCookie: context.storeUserAuthToken }
-                : null),
+            ...{Accept: 'application/vnd.vtex.ds.v10+json', 'Content-Type': 'application/json', VtexIdClientAutCookie: context.adminUserAuthToken ?? ''}
         },})
     }
 

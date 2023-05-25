@@ -5,3 +5,9 @@ export interface AppSettings {
   domain: string
   listId: number
 }
+
+export interface MasterDataObject {
+  entity: string
+  vtexField: string
+  egoiField: string
+}

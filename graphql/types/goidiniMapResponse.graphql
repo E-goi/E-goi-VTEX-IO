@@ -1,0 +1,14 @@
+
+
+type GoidiniMapResponse {
+  response: String
+  status: Int
+  message: [GoidiniMap]
+  error: String
+}
+
+type GoidiniMap {
+  vtexField: String
+  egoiField: String
+  entity: String
+}

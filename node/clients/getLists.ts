@@ -5,7 +5,7 @@ import type { GetLists } from '../typings/getLists'
 
 const routes = {
   getListsData: () =>
-    `https://api.egoiapp.com/lists`,
+    `https://dev-api.egoiapp.com/lists`,
 }
 
 class GetListsClient extends ExternalClient {

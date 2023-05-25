@@ -6,6 +6,11 @@
       _mtm.push({'mtm.startTime': (new Date().getTime()), 'event': 'mtm.Start'});
       var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
       g.async=true; g.src='https://egoi.site/'+"{{settings.clientId}}"+'_'+"{{settings.domain}}"+'.js';
+      s.parentNode.insertBefore(g,s); 
+
+
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.async=true; g.src='https://cdn-te.e-goi.com/tng/vtex-te-cc.min.js';
       s.parentNode.insertBefore(g,s);
     }
   })()

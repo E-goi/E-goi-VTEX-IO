@@ -4,7 +4,7 @@ import { ExternalClient } from '@vtex/api'
 import type { GoidiniSync } from '../typings/goidiniSync'
 
 const routes = {
-  getGoidiniSyncData: () => `https://goidini.e-goi.com/vtex-i-o/sync`, // CHANGE DEV TO PROD
+  getGoidiniSyncData: () => `https://dev-goidini.e-goi.com/vtex-i-o/sync`, // CHANGE DEV TO PROD
 }
 
 class GoidiniSyncClient extends ExternalClient {
@@ -17,7 +17,8 @@ class GoidiniSyncClient extends ExternalClient {
     appKey: string,
     appToken: string,
     vtex: string[],
-    egoi: string[]
+    egoi: string[],
+    masterData: any[]
   ): Promise<GoidiniSync> {
     const newOptions = { ...(this.options as InstanceOptions) }
 
@@ -30,7 +31,7 @@ class GoidiniSyncClient extends ExternalClient {
 
     return this.http.post(
       routes.getGoidiniSyncData(),
-      { vtex, egoi },
+      { vtex, egoi, masterData },
       newOptions
     )
   }

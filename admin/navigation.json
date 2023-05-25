@@ -5,19 +5,19 @@
   "subSectionItems": [
     {
       "labelId": "admin-egoi.navigation.account",
-      "path": "admin/e-goi/account"
+      "path": "/admin/e-goi/account"
     },
     {
       "labelId": "admin-egoi.navigation.synccontacts",
-      "path": "admin/e-goi/synccontacts"
+      "path": "/admin/e-goi/synccontacts"
     },
     {
       "labelId": "admin-egoi.navigation.connectedsites",
-      "path": "admin/e-goi/connectedsites"
+      "path": "/admin/e-goi/connectedsites"
     },
     {
       "labelId": "admin-egoi.navigation.advancedsettings",
-      "path": "admin/e-goi/advancedsettings"
+      "path": "/admin/e-goi/advancedsettings"
     }
   ]
 }

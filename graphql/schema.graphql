@@ -6,6 +6,7 @@ type Query {
   getEgoiFields: [EgoiFields]
   getVtexClientFields(acronym: String): VtexClient
   getDataEntities: [DataEntities]
+  getGoidiniMapFields: GoidiniMapResponse
 }
 
 type Mutation {
@@ -28,6 +29,13 @@ input GoidiniInstall {
 input GoidiniSync {
   vtex: [String]
   egoi: [String]
+  masterData: [MasterDataObject]
+}
+
+input MasterDataObject {
+  entity: String
+  vtexField: String
+  egoiField: String
 }
 
 input AppSettings {

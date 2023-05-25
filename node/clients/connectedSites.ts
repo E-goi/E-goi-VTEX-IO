@@ -5,7 +5,7 @@ import type { GoidiniResponse } from '../typings/goidiniResponse'
 
 const routes = {
   getConnectedSitesData: () =>
-    `https://goidini.e-goi.com/vtex-i-o/connected-sites`,
+    process.env.NODE_ENV === 'development' ? `https://dev-goidini.e-goi.com/vtex-i-o/connected-sites` : 'https://goidini.e-goi.com/vtex-i-o/connected-sites',
 }
 
 class ConnectedSitesClient extends ExternalClient {

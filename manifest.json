@@ -44,6 +44,27 @@
     {
       "name": "outbound-access",
       "attrs": {
+        "host": "dev-api.egoiapp.com",
+        "path": "/lists/*"
+      }
+    },
+    {
+      "name": "outbound-access",
+      "attrs": {
+        "host": "dev-api.egoiapp.com",
+        "path": "/my-account"
+      }
+    },
+    {
+      "name": "outbound-access",
+      "attrs": {
+        "host": "dev-goidini.e-goi.com",
+        "path": "/vtex-io/*"
+      }
+    },
+    {
+      "name": "outbound-access",
+      "attrs": {
         "host": "api.egoiapp.com",
         "path": "/lists/*"
       }
