@@ -5,7 +5,7 @@ import type { EgoiFields } from '../typings/egoiFields'
 
 const routes = {
   getEgoiFieldsData: (listId: Number) =>
-    `https://api.egoiapp.com/lists/` + listId + `/fields`,
+    `https://dev-api.egoiapp.com/lists/` + listId + `/fields`,
 }
 class GetEgoiFieldsClient extends ExternalClient {
   constructor(context: IOContext, options?: InstanceOptions) {

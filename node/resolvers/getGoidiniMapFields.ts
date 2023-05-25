@@ -1,18 +1,18 @@
-import type { GoidiniSync } from '../typings/goidiniSync'
+import type { GoidiniMapResponse } from '../typings/goidiniMapResponse'
 
 import type { Clients } from '../clients'
 import { ServiceContext } from "@vtex/api";
 import { AppSettings } from '../typings/appSettings';
 
-export async function goidiniSync(
+export async function getGoidiniMapFields(
   _: unknown,
-  args: any,
+  __: unknown,
   context: ServiceContext<Clients>
-): Promise<GoidiniSync> {
+): Promise<GoidiniMapResponse> {
 
   const {
     clients: {
-      goidiniSync,
+      getGoidiniMapFields,
       apps
     }
   } = context
@@ -28,7 +28,7 @@ export async function goidiniSync(
   )) ?? {}) as AppSettings
 
   try {
-    return goidiniSync.saveGoidiniSync(appSettings.apikey, appSettings.appKey, appSettings.appToken, args.input.vtex, args.input.egoi, args.input.masterData)
+    return getGoidiniMapFields.getGoidiniMapFields(appSettings.apikey, appSettings.appKey)
   } catch (error) {
     throw new Error(error.message)
   }

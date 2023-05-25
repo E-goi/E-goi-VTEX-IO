@@ -1,5 +1,5 @@
 // react/adminExample.tsx
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useQuery, useMutation, useLazyQuery } from 'react-apollo'
 import {
   Layout,
@@ -39,6 +39,10 @@ const SettingsTab = () => {
   const [showErrorAlert, setShowErrorAlert] = useState(false)
   const [showSuccessAlert, setShowSuccessAlert] = useState(false)
 
+  useEffect(() => {
+    // seu código aqui
+  }, [])
+  
   const showSuccess = (message: string) => {
     setSuccessMessage(message)
     setShowSuccessAlert(true)
@@ -121,7 +125,6 @@ const SettingsTab = () => {
       }
     },
     onError: () => {
-      // console.log(e.message)
       showError(intl.formatMessage({ id: 'admin/egoi-admin.errorApikey' }))
       appSettings.getAppSettings.apikey
         ? setApikeyValue(appSettings.getAppSettings.apikey)
@@ -297,7 +300,7 @@ const SettingsTab = () => {
               <div className="mt5 mb5">
                 <Dropdown
                   disabled={dropdown}
-                  label={<FormattedMessage id="admin/egoi-admin.lists" />}
+                  label={intl.formatMessage({id: 'admin/egoi-admin.lists'}) }
                   options={listsOptions}
                   value={listSelected}
                   onChange={(e: any) => {

@@ -1,0 +1,6 @@
+query getDataEntities {
+    getDataEntities {
+        acronym
+        name
+    }
+}

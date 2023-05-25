@@ -1,0 +1,12 @@
+query {
+  getGoidiniMapFields {
+    response
+    status
+    message {
+      vtexField
+      egoiField
+      entity
+    }
+    error
+  }
+}

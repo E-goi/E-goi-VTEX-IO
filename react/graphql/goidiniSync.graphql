@@ -1,8 +1,9 @@
 mutation goidiniSync(
   $vtex: [String]
   $egoi: [String]
+  $masterData: [MasterDataObject]
   ){
-    goidiniSync(input:{vtex: $vtex, egoi: $egoi}){
+    goidiniSync(input:{vtex: $vtex, egoi: $egoi, masterData: $masterData}){
       response
       status
       message

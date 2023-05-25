@@ -21,7 +21,9 @@
   },
   "billingOptions": {
     "type": "free",
-    "availableCountries": ["*"],
+    "availableCountries": [
+      "*"
+    ],
     "support": {
       "url": "https://helpdesk.e-goi.com",
       "phone": "+351300404336"
@@ -37,6 +39,27 @@
       "attrs": {
         "host": "httpstat.us",
         "path": "*"
+      }
+    },
+    {
+      "name": "outbound-access",
+      "attrs": {
+        "host": "dev-api.egoiapp.com",
+        "path": "/lists/*"
+      }
+    },
+    {
+      "name": "outbound-access",
+      "attrs": {
+        "host": "dev-api.egoiapp.com",
+        "path": "/my-account"
+      }
+    },
+    {
+      "name": "outbound-access",
+      "attrs": {
+        "host": "dev-goidini.e-goi.com",
+        "path": "/vtex-io/*"
       }
     },
     {

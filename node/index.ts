@@ -11,8 +11,10 @@ import { getEgoiFields } from './resolvers/getEgoiFields'
 import { getVtexClientFields } from './resolvers/getVtexClientFields'
 import { goidiniSync } from './resolvers/goidiniSync'
 import { goidiniInstall } from './resolvers/goidiniInstall'
+import { getDataEntities } from './resolvers/getDataEntities'
 import { CheckAdminAccess } from './directives/checkAdminAccess'
 import { Clients } from './clients'
+import { getGoidiniMapFields } from './resolvers/getGoidiniMapFields'
 
 const TIMEOUT_MS = 800
 
@@ -61,6 +63,8 @@ export default new Service({
         hostName,
         getEgoiFields,
         getVtexClientFields,
+        getDataEntities,
+        getGoidiniMapFields,
       },
       Mutation: {
         saveAppSettings,

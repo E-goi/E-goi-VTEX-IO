@@ -4,8 +4,8 @@ import { JanusClient } from '@vtex/api'
 import type { VtexClient } from '../typings/vtexClientFields'
 
 const routes = {
-  getVtexClientFieldsData: (name: string) =>
-    `https://api.vtex.com/${name}/dataentities/CL/`,
+  getVtexClientFieldsData: (name: string, acronym: string) =>
+    `https://api.vtex.com/${name}/dataentities/${acronym}/`,
 }
 
 class GetListsClient extends JanusClient {
@@ -19,8 +19,8 @@ class GetListsClient extends JanusClient {
     })
   }
 
-  public async getVtexClientFields(name: string): Promise<VtexClient> {
-    return this.http.get(routes.getVtexClientFieldsData(name), this.options)
+  public async getVtexClientFields(name: string, acronym: string): Promise<VtexClient> { 
+    return this.http.get(routes.getVtexClientFieldsData(name, acronym), this.options)
   }
 }
 
