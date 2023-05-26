@@ -10,7 +10,9 @@
 
 
       var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-      g.async=true; g.src='https://cdn-te.e-goi.com/tng/vtex-te-cc.min.js';
+      g.async=true; g.src='https://cdn-te.e-goi.com/tng/vtex-te.min.js';
+      g.setAttribute('client_id', "{{settings.clientId}}");
+      g.setAttribute('list_id', "{{settings.listId}}");
       s.parentNode.insertBefore(g,s);
     }
   })()
