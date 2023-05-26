@@ -4,7 +4,7 @@ import { ExternalClient } from '@vtex/api'
 import type { GoidiniMapResponse } from '../typings/goidiniMapResponse'
 
 const routes = {
-  getGoidiniMapFieldsData: () =>  `https://dev-goidini.e-goi.com/vtex-i-o/connected-sites`,
+  getGoidiniMapFieldsData: () => `https://dev-goidini.e-goi.com/vtex-i-o/map-fields`, // CHANGE DEV TO PROD
 }
 
 class GetGoidiniMapFieldsClient extends ExternalClient {
