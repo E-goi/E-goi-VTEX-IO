@@ -60,6 +60,9 @@ const SettingsTab = () => {
    * Save App Settings Mutation
    */
   const [saveAppSettings] = useMutation(SAVE_APP_SETTINGS, {
+    context:{
+      setTimeout: 10000
+    },
     variables: {},
     onError: () => {
       showError(intl.formatMessage({ id: 'admin/egoi-admin.errorApikey' }))
@@ -247,14 +250,40 @@ const SettingsTab = () => {
   const [goidiniInstall] = useMutation(GOIDINI_INSTALL, {
     variables: {},
     context:{
-      setTimeout: 5000
+      setTimeout: 10000
     },
     onError: (e) => {
-      showError(
-        `${intl.formatMessage({ id: 'admin/egoi-admin.settingsError' })}${
-          e.message
-        }`
-      )
+
+      if(e.message == 'GraphQL error: timeout of 800ms exceeded'){
+        let resp = saveAppSettings({
+          variables: {
+            appKey: appKeyValue,
+            appToken: appTokenValue,
+            apikey: apikeyValue,
+            clientId: myAccountData.myAccount.general_info.client_id
+              ? parseInt(myAccountData.myAccount.general_info.client_id, 10)
+              : 0,
+            domain: (hostName ? hostName.hostName : null),
+            listId: listSelected,
+            connectedSites: true
+          },
+        })
+
+        resp
+          ? showSuccess(
+              intl.formatMessage({ id: 'admin/egoi-admin.settingsSuccess' })
+            )
+          : showError(
+              intl.formatMessage({ id: 'admin/egoi-admin.settingsError' })
+            )
+      } else {
+        showError(
+          `${intl.formatMessage({ id: 'admin/egoi-admin.settingsError' })}${
+            e.message
+          }`
+        )
+      }
+
       setSaveSettingsLoading(false)
       setDisableConfigs(false)
     },
@@ -262,7 +291,7 @@ const SettingsTab = () => {
       if (e.goidiniInstall.status === 200 || e.goidiniInstall.status === 20) {
         const pixelActive = !e.goidiniInstall.message
 
-        const resp = saveAppSettings({
+        let resp = saveAppSettings({
           variables: {
             appKey: appKeyValue,
             appToken: appTokenValue,
