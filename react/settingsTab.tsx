@@ -1,5 +1,5 @@
 // react/adminExample.tsx
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useQuery, useMutation, useLazyQuery } from 'react-apollo'
 import {
   Layout,
@@ -15,6 +15,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 import GET_APP_SETTINGS from './graphql/appSettings.graphql'
 import GET_MY_ACCOUNT from './graphql/myAccount.graphql'
+import GOIDINI_SETTINGS from './graphql/goidiniSettings.graphql'
 import GET_LISTS from './graphql/getLists.graphql'
 import SAVE_APP_SETTINGS from './graphql/saveAppSettings.graphql'
 import GET_HOST from './graphql/hostName.graphql'
@@ -25,10 +26,14 @@ const SettingsTab = () => {
   const [appTokenValue, setAppTokenValue] = useState('')
   const [appKeyValue, setAppKeyValue] = useState('')
   const [apikeyValue, setApikeyValue] = useState('')
-  // const [apikeyIsLoading, setApikeyIsLoading] = useState(false)
+
   const [saveSettingsLoading, setSaveSettingsLoading] = useState(false)
   const [listsOptions, setListsOptions] = useState([{}])
   const [listSelected, setListSelected] = useState(0)
+
+  const [apikeyError, setApikeyError] = useState(false)
+  const [appKeyError, setAppKeyError] = useState(false)
+  const [appTokenError, setAppTokenError] = useState(false)
 
   const [dropdown, setDropdown] = useState(true)
   const [disableConfigs, setDisableConfigs] = useState(false)
@@ -39,9 +44,7 @@ const SettingsTab = () => {
   const [showErrorAlert, setShowErrorAlert] = useState(false)
   const [showSuccessAlert, setShowSuccessAlert] = useState(false)
 
-  useEffect(() => {
-    // seu código aqui
-  }, [])
+  const [skip, setSkip] = useState(false)
   
   const showSuccess = (message: string) => {
     setSuccessMessage(message)
@@ -53,6 +56,11 @@ const SettingsTab = () => {
     setShowErrorAlert(true)
   }
 
+
+
+  /**
+   * Save App Settings Mutation
+   */
   const [saveAppSettings] = useMutation(SAVE_APP_SETTINGS, {
     variables: {},
     onError: () => {
@@ -60,35 +68,83 @@ const SettingsTab = () => {
     },
   })
 
+  /**
+   * Get Host Name Query
+   */
   const { data: hostName } = useQuery(GET_HOST, { ssr: false })
 
+  /**
+   * Get App Settings Query
+   */
   const { data: appSettings } = useQuery(GET_APP_SETTINGS, {
     ssr: false,
+    skip: skip,
     onCompleted: () => {
-      setIsLoading(false)
-
-      console.log("TESTE")
-      console.log(appSettings.getAppSettings)
-
-
-      if (appSettings.getAppSettings.apikey) {
+      if (appSettings && appSettings.getAppSettings.apikey) {
         //validar se settings existem e se são válidos
-
-
-        setApikeyValue(appSettings.getAppSettings.apikey)
-        setAppTokenValue(appSettings.getAppSettings.appToken)
-        setAppKeyValue(appSettings.getAppSettings.appKey)
-
-        setDisableConfigs(true)
+        goidiniSettings()
       }
     },
+    onError: () => {
+      console.log('erro')
+    }
   })
 
+    /**
+   * Get My Account Query
+   */
+    const [goidiniSettings, { data: goidiniSettingsData }] = useLazyQuery(GOIDINI_SETTINGS, {
+      onCompleted: () => {
+        if(!skip){
+          if ( goidiniSettingsData && goidiniSettingsData.goidiniSettings.status === 200) {
+            setApikeyError(false)
+
+            myaccount({ variables: { apikey: appSettings.getAppSettings.apikey } })
+            setApikeyValue(appSettings.getAppSettings.apikey)
+            setAppKeyValue(goidiniSettingsData.goidiniSettings.message.vtexAppKey)
+            setAppTokenValue(goidiniSettingsData.goidiniSettings.message.vtexAppToken)
+            setListSelected(goidiniSettingsData.goidiniSettings.message.listId)
+
+            
+          
+             setDisableConfigs(false)
+          } else{
+            if(goidiniSettingsData.goidiniSettings.status === 403){
+              setApikeyValue('')
+            }
+            
+              setAppKeyValue('')
+              setAppTokenValue('')
+              setListSelected(0)
+          }
+
+
+          setIsLoading(false)
+          setSkip(true)
+        }
+      },
+      onError: () => {
+          setApikeyValue('')   
+          setAppKeyValue('')
+          setAppTokenValue('')
+          setListSelected(0)
+
+          setIsLoading(false)
+          setDisableConfigs(false)
+          setSkip(true)
+
+      },
+    })
+
+  /**
+   * Map Lists Dropdown
+   */
   const mapListsDropdown = async () => {
     try {
       if (getLists.getLists.total_items === 0) {
         // exception
       } else {
+        setDropdown(false)
         const lists = getLists.getLists.items.map(
           (obj: { list_id: any; public_name: any }) => ({
             value: obj.list_id,
@@ -97,9 +153,10 @@ const SettingsTab = () => {
         )
 
         setListsOptions(lists)
-        appSettings.getAppSettings.listId
-          ? setListSelected(parseInt(appSettings.getAppSettings.listId, 10))
-          : setListSelected(parseInt(lists[0].value, 10))
+
+        if(listSelected == 0){
+          setListSelected(parseInt(lists[0].value, 10))
+        }
       }
     } catch (e) {
       showError(
@@ -116,6 +173,9 @@ const SettingsTab = () => {
     }
   }
 
+  /**
+   * Get Lists Query
+   */
   const { data: getLists, refetch: refetchGetLists } = useQuery(GET_LISTS, {
     variables: {
       apikey: apikeyValue,
@@ -123,30 +183,38 @@ const SettingsTab = () => {
     onCompleted: mapListsDropdown,
   })
 
+  /**
+   * Get My Account Query
+   */
   const [myaccount, { data: myAccountData }] = useLazyQuery(GET_MY_ACCOUNT, {
     onCompleted: () => {
       if (myAccountData) {
         if (myAccountData.myAccount.general_info.client_id) {
+          setApikeyError(false)
           refetchGetLists()
         }
       }
     },
     onError: () => {
-      showError(intl.formatMessage({ id: 'admin/egoi-admin.errorApikey' }))
-      appSettings.getAppSettings.apikey
-        ? setApikeyValue(appSettings.getAppSettings.apikey)
-        : setApikeyValue('')
-      listsOptions ? setListsOptions(listsOptions) : setListsOptions([{}])
-      appSettings.getAppSettings.listId
-        ? setListSelected(appSettings.getAppSettings.listId)
-        : setListSelected(0)
+      setApikeyError(true)
       setSaveSettingsLoading(false)
       setDisableConfigs(false)
+
+      setListsOptions([{}])
+      setListSelected(0)
+      setDropdown(false)
+
     },
   })
 
+  /**
+   * Goidini Install Mutation
+   */
   const [goidiniInstall] = useMutation(GOIDINI_INSTALL, {
     variables: {},
+    context:{
+      setTimeout: 5000
+    },
     onError: (e) => {
       showError(
         `${intl.formatMessage({ id: 'admin/egoi-admin.settingsError' })}${
@@ -169,13 +237,9 @@ const SettingsTab = () => {
               ? parseInt(myAccountData.myAccount.general_info.client_id, 10)
               : 0,
             pixelActive,
-            domain:
-              appSettings.getAppSettings.domain ??
-              (hostName ? hostName.hostName : null),
+            domain: (hostName ? hostName.hostName : null),
             listId: listSelected,
-            connectedSites: pixelActive,
-            vtex: appSettings.getAppSettings.vtex ?? [],
-            egoi: appSettings.getAppSettings.egoi ?? [],
+            connectedSites: pixelActive
           },
         })
 
@@ -199,28 +263,53 @@ const SettingsTab = () => {
     },
   })
 
+  /**
+   * Handle apikey change
+   * @param e 
+   */
   const handleChangeApiKeyValue = async (e: any) => {
     setApikeyValue(e.target.value)
+    setApikeyError(false)
+    setDropdown(true)
 
     if (e.target.value.length === 40) {
       setSaveSettingsLoading(true)
-      setDisableConfigs(true)
+      setDisableConfigs(false)
       myaccount({ variables: { apikey: e.target.value } })
     }
   }
 
+  /**
+   * Function to validate settings to save
+   * @returns 
+   */
   const saveSettings = async () => {
     setDisableConfigs(true)
     setSaveSettingsLoading(true)
 
+    if (apikeyValue === '') {
+      setApikeyError(true)
+    }
+
+    if (appKeyValue === '') {
+      setAppKeyError(true)
+    }
+
+    if (appTokenValue === '') {
+      setAppTokenError(true)
+    }
+    
+
+    //checkar errors
     if (
-      apikeyValue === '' &&
-      appKeyValue === '' &&
-      appTokenValue === '' &&
+      apikeyValue === '' ||
+      appKeyValue === '' ||
+      appTokenValue === '' ||
       listSelected === 0
     ) {
       setShowErrorAlert(true)
       setSaveSettingsLoading(false)
+      setDisableConfigs(false)
 
       return
     }
@@ -230,9 +319,7 @@ const SettingsTab = () => {
         apikey: apikeyValue,
         appkey: appKeyValue,
         apptoken: appTokenValue,
-        domain:
-          appSettings.getAppSettings.domain ??
-          (hostName ? hostName.hostName : null),
+        domain: (hostName ? hostName.hostName : null),
         listId: listSelected,
       },
     })
@@ -240,20 +327,6 @@ const SettingsTab = () => {
 
   return (
     <>
-      {showErrorAlert ? (
-        <Alert type="error" onClose={() => setShowErrorAlert(false)}>
-          {errorMessage}
-        </Alert>
-      ) : (
-        <></>
-      )}
-      {showSuccessAlert ? (
-        <Alert type="success" onClose={() => setShowSuccessAlert(false)}>
-          {successMessage}
-        </Alert>
-      ) : (
-        <></>
-      )}
       <Layout pageHeader={<PageHeader title="E-goi" />}>
         <PageBlock
           subtitle={<FormattedMessage id="admin/egoi-admin.egoiSettings" />}
@@ -263,34 +336,7 @@ const SettingsTab = () => {
             <Spinner color="currentColor" size={20} />
           ) : (
             <div>
-              <div className="mb5">
-                <Input
-                  label={
-                    <FormattedMessage id="admin/egoi-admin.insertAppKey" />
-                  }
-                  size="regular"
-                  placeholder="AppKey"
-                  value={appKeyValue}
-                  onChange={(e: any) => {
-                    setAppKeyValue(e.target.value)
-                  }}
-                  disabled={disableConfigs}
-                />
-              </div>
-              <div className="mb5">
-                <Input
-                  label={
-                    <FormattedMessage id="admin/egoi-admin.insertAppToken" />
-                  }
-                  size="regular"
-                  placeholder="AppToken"
-                  value={appTokenValue}
-                  onChange={(e: any) => {
-                    setAppTokenValue(e.target.value)
-                  }}
-                  disabled={disableConfigs}
-                />
-              </div>
+
               <div className="mb5">
                 <Input
                   label={
@@ -301,34 +347,75 @@ const SettingsTab = () => {
                   value={apikeyValue}
                   onChange={(e: any) => handleChangeApiKeyValue(e)}
                   disabled={disableConfigs}
+                  maxLength={40}
+                  minLength={40}
+                  error={apikeyError}
+                  required={true}
                 />
               </div>
 
               <div className="mt5 mb5">
                 <Dropdown
-                  disabled={dropdown}
+                  disabled={dropdown || apikeyError}
                   label={intl.formatMessage({id: 'admin/egoi-admin.lists'}) }
                   options={listsOptions}
                   value={listSelected}
+                  required={true}
                   onChange={(e: any) => {
                     setListSelected(parseInt(e.target.value, 10))
                   }}
                 />
               </div>
+              
+              <div className="mb5" hidden={!apikeyValue || apikeyError|| dropdown } >
+                <Input
+                  label={
+                    <FormattedMessage id="admin/egoi-admin.insertAppKey" />
+                  }
+                  size="regular"
+                  placeholder="AppKey"
+                  value={appKeyValue}
+                  error={appKeyError}
+                  onChange={(e: any) => {
+                    setAppKeyValue(e.target.value)
+                  }}
+                  required={true}
+                  disabled={disableConfigs}
+                />
+              </div>
+              <div className="mb5" hidden={!apikeyValue || apikeyError || dropdown}>
+                <Input
+                  label={
+                    <FormattedMessage id="admin/egoi-admin.insertAppToken" />
+                  }
+                  size="regular"
+                  placeholder="AppToken"
+                  value={appTokenValue}
+                  required={true}
+                  error={appTokenError}
+                  onChange={(e: any) => {
+                    setAppTokenValue(e.target.value)
+                  }}
+                  disabled={disableConfigs}
+                />
+              </div>
 
-              <div
-                style={{
-                  padding: '20px',
-                  color: '#8a6d3b',
-                  background: '#fcf8e3',
-                }}
-              >
+              <div>
                 <p>
-                  <FormattedMessage id="admin/egoi-admin.legacy1" />
-                  <a target="_blank" href="https://www.e-goi.com/pt/vtex">
-                    <FormattedMessage id="admin/egoi-admin.legacy2" />
-                  </a>
-                  <FormattedMessage id="admin/egoi-admin.legacy3" />
+                  {showErrorAlert ? (
+                    <Alert type="error" focusOnOpen={true}  autoClose={2000}  onClose={() => setShowErrorAlert(false)}>
+                      {errorMessage}
+                    </Alert>
+                  ) : (
+                    <></>
+                  )}
+                  {showSuccessAlert ? (
+                    <Alert type="success" focusOnOpen={true}  autoClose={2000} onClose={() => setShowSuccessAlert(false)}>
+                      {successMessage}
+                    </Alert>
+                  ) : (
+                    <></>
+                  )}
                 </p>
               </div>
 
@@ -344,6 +431,7 @@ const SettingsTab = () => {
                   variation="secondary"
                   onClick={saveSettings}
                   isLoading={saveSettingsLoading}
+                  disabled={apikeyError}
                 >
                   <FormattedMessage id="admin/egoi-admin.save" />
                 </Button>

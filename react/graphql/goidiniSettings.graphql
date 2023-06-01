@@ -1,0 +1,12 @@
+query {
+  goidiniSettings {
+    response
+    status
+    error
+    message {
+      vtexAppKey
+      vtexAppToken
+      listId
+    }
+  }
+}
