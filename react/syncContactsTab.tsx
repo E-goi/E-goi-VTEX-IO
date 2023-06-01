@@ -18,6 +18,7 @@ import GET_VTEX_FIELDS from './graphql/getVtexClientFields.graphql'
 import GET_DATA_ENTITIES from './graphql/getDataEntities.graphql'
 import GOIDINI_SYNC from './graphql/goidiniSync.graphql'
 import GET_GOIDINI_MAP_FIELDS from './graphql/getGoidiniMapFields.graphql'
+import GET_APP_SETTINGS from './graphql/appSettings.graphql'
 
 import { FormattedMessage, useIntl } from 'react-intl'
 
@@ -164,6 +165,21 @@ const SyncContactsTab = () => {
     }
   }
 
+  /**
+   * Get App Settings Query
+   */
+  const { data: appSettings } = useQuery(GET_APP_SETTINGS, {
+    ssr: false,
+    onCompleted: () => {
+      if (!appSettings || appSettings.getAppSettings.apikey == '') {
+        setActive(false)
+      }
+    },
+    onError: () => {
+      setActive(false)
+    }
+  })
+  
   // query para obter os campos e-goi. Em caso de erro mostra o erro e faz disable ao select
   const { data: getEgoiFields} = useQuery(GET_EGOI_FIELDS, {
     onCompleted: () =>  mapEgoiFieldsDropdown(),
@@ -436,6 +452,8 @@ const SyncContactsTab = () => {
 
                   <div style={{ padding: '20px', color: '#8a6d3b', background: '#fcf8e3' }}>
                     <p><FormattedMessage id="admin/egoi-admin.syncDefaultFieldsText" /></p>
+                    <p><FormattedMessage id="admin/egoi-admin.syncDefaultFieldsText2" /></p>
+                    <p><FormattedMessage id="admin/egoi-admin.syncDefaultFieldsText3" /></p>
                   </div>
                 </div>
                 <div className="mt5">

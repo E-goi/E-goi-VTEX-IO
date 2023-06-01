@@ -56,8 +56,6 @@ const SettingsTab = () => {
     setShowErrorAlert(true)
   }
 
-
-
   /**
    * Save App Settings Mutation
    */
@@ -77,10 +75,10 @@ const SettingsTab = () => {
    * Get App Settings Query
    */
   const { data: appSettings } = useQuery(GET_APP_SETTINGS, {
-    ssr: false,
-    skip: skip,
     onCompleted: () => {
-      if (appSettings && appSettings.getAppSettings.apikey) {
+      if (appSettings && appSettings.getAppSettings.apikey != '') {
+        console.log('teste')
+        setApikeyValue(appSettings.getAppSettings.apikey)
         //validar se settings existem e se são válidos
         goidiniSettings()
       }
@@ -90,26 +88,62 @@ const SettingsTab = () => {
     }
   })
 
-    /**
-   * Get My Account Query
+  /**
+   * Get Goidini Settings Query
    */
     const [goidiniSettings, { data: goidiniSettingsData }] = useLazyQuery(GOIDINI_SETTINGS, {
+      fetchPolicy: 'network-only',
+      variables: {
+        apikey: apikeyValue ? apikeyValue : ''
+      },
       onCompleted: () => {
         if(!skip){
+          console.log('settttings')
           if ( goidiniSettingsData && goidiniSettingsData.goidiniSettings.status === 200) {
             setApikeyError(false)
 
-            myaccount({ variables: { apikey: appSettings.getAppSettings.apikey } })
-            setApikeyValue(appSettings.getAppSettings.apikey)
+            if(apikeyValue == '' && appSettings.getAppSettings.apikey != ''){
+              myaccount({ variables: { apikey: appSettings.getAppSettings.apikey } })
+              setApikeyValue(appSettings.getAppSettings.apikey)
+            } else {
+              setApikeyValue(apikeyValue)
+            }
+
+            setApikeyValue(apikeyValue)
             setAppKeyValue(goidiniSettingsData.goidiniSettings.message.vtexAppKey)
             setAppTokenValue(goidiniSettingsData.goidiniSettings.message.vtexAppToken)
             setListSelected(goidiniSettingsData.goidiniSettings.message.listId)
 
+
+            console.log('save')
+            console.log(goidiniSettingsData.goidiniSettings.message.vtexAppKey)
+            console.log(goidiniSettingsData.goidiniSettings.message.vtexAppToken)
+            console.log(goidiniSettingsData.goidiniSettings.message.listId)
+            console.log(apikeyValue)
+            console.log(myAccountData)
             
-          
+            if(goidiniSettingsData.goidiniSettings.message.vtexAppKey != '' && goidiniSettingsData.goidiniSettings.message.vtexAppToken != '' 
+            && goidiniSettingsData.goidiniSettings.message.listId != 0 && apikeyValue != '' && myAccountData ){
+              console.log('save2')
+              let resp = saveAppSettings({
+                variables: {
+                  appKey: goidiniSettingsData.goidiniSettings.message.vtexAppKey,
+                  appToken: goidiniSettingsData.goidiniSettings.message.vtexAppToken,
+                  apikey: apikeyValue,
+                  clientId: myAccountData.myAccount.general_info.client_id
+                    ? parseInt(myAccountData.myAccount.general_info.client_id, 10)
+                    : 0,
+                  domain: (hostName ? hostName.hostName : null),
+                  listId: goidiniSettingsData.goidiniSettings.message.listId
+                },
+              })
+
+              console.log(resp)
+            } 
+            
              setDisableConfigs(false)
           } else{
-            if(goidiniSettingsData.goidiniSettings.status === 403){
+            if(goidiniSettingsData && goidiniSettingsData.goidiniSettings.status === 403){
               setApikeyValue('')
             }
             
@@ -118,12 +152,13 @@ const SettingsTab = () => {
               setListSelected(0)
           }
 
-
-          setIsLoading(false)
           setSkip(true)
+          setIsLoading(false)
         }
+
       },
       onError: () => {
+        console.log('erro2')
           setApikeyValue('')   
           setAppKeyValue('')
           setAppTokenValue('')
@@ -157,8 +192,15 @@ const SettingsTab = () => {
         if(listSelected == 0){
           setListSelected(parseInt(lists[0].value, 10))
         }
+        console.log('skip')
+        setSkip(false)
+        setIsLoading(true)
+        goidiniSettings()
+        
+
       }
     } catch (e) {
+      setIsLoading(false)
       showError(
         `${intl.formatMessage({ id: 'admin/egoi-admin.errorApikey' })}${
           e.message
@@ -181,6 +223,9 @@ const SettingsTab = () => {
       apikey: apikeyValue,
     },
     onCompleted: mapListsDropdown,
+    onError: () => {
+        setIsLoading(false)
+    }
   })
 
   /**
@@ -196,6 +241,7 @@ const SettingsTab = () => {
       }
     },
     onError: () => {
+      setIsLoading(false)
       setApikeyError(true)
       setSaveSettingsLoading(false)
       setDisableConfigs(false)

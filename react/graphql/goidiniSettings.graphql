@@ -1,5 +1,5 @@
-query {
-  goidiniSettings {
+query goidiniSettings($apikey: String){
+  goidiniSettings(apikey: $apikey) {
     response
     status
     error

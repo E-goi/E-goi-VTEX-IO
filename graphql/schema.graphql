@@ -7,7 +7,7 @@ type Query {
   getVtexClientFields(acronym: String): VtexClient
   getDataEntities: [DataEntities]
   getGoidiniMapFields: GoidiniMapResponse
-  goidiniSettings: GoidiniSettingsResponse
+  goidiniSettings(apikey: String): GoidiniSettingsResponse
 }
 
 type Mutation {

@@ -6,7 +6,7 @@ import { AppSettings } from '../typings/appSettings';
 
 export async function goidiniSettings(
   _: unknown,
-  __: unknown,
+  args: any,
   context: ServiceContext<Clients>
 ): Promise<GoidiniSettingsResponse> {
 
@@ -34,8 +34,9 @@ export async function goidiniSettings(
     appId
   )) ?? {}) as AppSettings
 
+  let apikey = args.apikey ? args.apikey : appSettings.apikey
   try {
-    return goidiniSettings.goidiniSettings(appSettings.apikey, appSettings.appKey, appSettings.appToken, name)
+    return goidiniSettings.goidiniSettings(apikey, appSettings.appKey, appSettings.appToken, name)
   } catch (error) {
     throw new Error(error.message)
   }
