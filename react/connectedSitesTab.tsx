@@ -151,6 +151,15 @@ const ConnectedSitesTab = () => {
                   />
                 </div>
 
+                <div className="mt8" hidden={!connectedSites}>
+                  <h4 className="t-heading-5 mt0"> <FormattedMessage id="admin/egoi-admin.abandonedCart"/> </h4>
+                  <Input
+                    value={"var d=document,g=d.createElement(\"script\"),s=d.getElementsByTagName(\"script\")[0];g.async=!0,g.src=\"https://cdn-te.e-goi.com/tng/vtex-te.min.js\",g.setAttribute(\"client_id\",\"360410\"),g.setAttribute(\"list_id\",\"22\"),s.parentNode.insertBefore(g,s);"}
+                    readOnly={true}
+                    label={<FormattedMessage id="admin/egoi-admin.abandonedCartLabel"/>}
+                  />
+                </div>
+
                 <div className="mt5">
                   <span style={{ display: 'flex', justifyContent: 'flex-end', columnGap: '20px' }}>
                     <Button variation="secondary"
@@ -158,7 +167,7 @@ const ConnectedSitesTab = () => {
                       isLoading={isLoading}><FormattedMessage id="admin/egoi-admin.save"/></Button>
                   </span>
                 </div>
-              </div>
+              </div>       
                 :
                 <div>
                   <p><FormattedMessage id="admin/egoi-admin.configNeed" /></p>

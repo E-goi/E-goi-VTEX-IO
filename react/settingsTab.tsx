@@ -77,7 +77,7 @@ const SettingsTab = () => {
   const { data: appSettings } = useQuery(GET_APP_SETTINGS, {
     onCompleted: () => {
       if (appSettings && appSettings.getAppSettings.apikey != '') {
-        console.log('teste')
+
         setApikeyValue(appSettings.getAppSettings.apikey)
         //validar se settings existem e se são válidos
         goidiniSettings()
@@ -98,7 +98,7 @@ const SettingsTab = () => {
       },
       onCompleted: () => {
         if(!skip){
-          console.log('settttings')
+
           if ( goidiniSettingsData && goidiniSettingsData.goidiniSettings.status === 200) {
             setApikeyError(false)
 
@@ -113,19 +113,10 @@ const SettingsTab = () => {
             setAppKeyValue(goidiniSettingsData.goidiniSettings.message.vtexAppKey)
             setAppTokenValue(goidiniSettingsData.goidiniSettings.message.vtexAppToken)
             setListSelected(goidiniSettingsData.goidiniSettings.message.listId)
-
-
-            console.log('save')
-            console.log(goidiniSettingsData.goidiniSettings.message.vtexAppKey)
-            console.log(goidiniSettingsData.goidiniSettings.message.vtexAppToken)
-            console.log(goidiniSettingsData.goidiniSettings.message.listId)
-            console.log(apikeyValue)
-            console.log(myAccountData)
             
             if(goidiniSettingsData.goidiniSettings.message.vtexAppKey != '' && goidiniSettingsData.goidiniSettings.message.vtexAppToken != '' 
             && goidiniSettingsData.goidiniSettings.message.listId != 0 && apikeyValue != '' && myAccountData ){
-              console.log('save2')
-              let resp = saveAppSettings({
+              saveAppSettings({
                 variables: {
                   appKey: goidiniSettingsData.goidiniSettings.message.vtexAppKey,
                   appToken: goidiniSettingsData.goidiniSettings.message.vtexAppToken,
@@ -137,8 +128,6 @@ const SettingsTab = () => {
                   listId: goidiniSettingsData.goidiniSettings.message.listId
                 },
               })
-
-              console.log(resp)
             } 
             
              setDisableConfigs(false)
@@ -158,7 +147,6 @@ const SettingsTab = () => {
 
       },
       onError: () => {
-        console.log('erro2')
           setApikeyValue('')   
           setAppKeyValue('')
           setAppTokenValue('')
@@ -192,7 +180,7 @@ const SettingsTab = () => {
         if(listSelected == 0){
           setListSelected(parseInt(lists[0].value, 10))
         }
-        console.log('skip')
+        
         setSkip(false)
         setIsLoading(true)
         goidiniSettings()
