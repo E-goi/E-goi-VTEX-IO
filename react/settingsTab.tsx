@@ -67,7 +67,14 @@ const SettingsTab = () => {
     onCompleted: () => {
       setIsLoading(false)
 
+      console.log("TESTE")
+      console.log(appSettings.getAppSettings)
+
+
       if (appSettings.getAppSettings.apikey) {
+        //validar se settings existem e se são válidos
+
+
         setApikeyValue(appSettings.getAppSettings.apikey)
         setAppTokenValue(appSettings.getAppSettings.appToken)
         setAppKeyValue(appSettings.getAppSettings.appKey)

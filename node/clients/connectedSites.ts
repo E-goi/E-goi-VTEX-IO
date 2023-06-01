@@ -4,7 +4,7 @@ import { ExternalClient } from '@vtex/api'
 import type { GoidiniResponse } from '../typings/goidiniResponse'
 
 const routes = {
-  getConnectedSitesData: () => `https://goidini.e-goi.com/vtex-i-o/connected-sites`,
+  getConnectedSitesData: () => `https://dev-goidini.e-goi.com/vtex-i-o/connected-sites`,
 }
 
 class ConnectedSitesClient extends ExternalClient {
