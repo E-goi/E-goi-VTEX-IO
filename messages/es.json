@@ -48,6 +48,8 @@
   "admin/egoi-admin.asFeatHeader3": "SMS",
   "admin/egoi-admin.asFeatHeader4": "Boleto",
   "admin/egoi-admin.asButton": "Ajustes avanzados",
+  "admin/egoi-admin.abandonedCart": "Carrito Abandonado",
+  "admin/egoi-admin.abandonedCartLabel": "Para activar la función de carrito abandonado, debe inyectar este script en el archivo javascript de pago de su tienda.",
 
   "admin/egoi-admin.lists": "Lista E-goi ",
   "admin/egoi-admin.insertApikey": "Inserte el E-goi Apikey",

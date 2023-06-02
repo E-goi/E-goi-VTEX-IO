@@ -36,6 +36,8 @@
   "admin/egoi-admin.csError": "Erro ao salvar as configurações!",
   "admin/egoi-admin.csErrorCreate": "Erro a criar connected sites! ",
   "admin/egoi-admin.csErrorActivate": "Erro a ativar o connected sites. ",
+  "admin/egoi-admin.abandonedCart": "Carrinho abandonado",
+  "admin/egoi-admin.abandonedCartLabel": "Para ativar o recurso Carrinho Abandonado, você precisa injetar este script no arquivo javascript de checkout da sua loja.",
 
   "admin/egoi-admin.asText1": "Para configurações avançadas, clique no botão e faça o login no Goidini com os dados da sua conta E-goi.",
   "admin/egoi-admin.asText2": "Após o login, você terá acesso às configurações avançadas da sua integração VTEX onde poderá:",

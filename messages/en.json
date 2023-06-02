@@ -36,6 +36,8 @@
   "admin/egoi-admin.csError": "Error saving settings!",
   "admin/egoi-admin.csErrorCreate": "Error creating connected sites! ",
   "admin/egoi-admin.csErrorActivate": "Error activating connected sites. ",
+  "admin/egoi-admin.abandonedCart": "Abandoned Cart",
+  "admin/egoi-admin.abandonedCartLabel": "To activate the Abandoned Cart feature, you need to inject this script in your store's checkout javascript file.",
 
   "admin/egoi-admin.asText1": "For advanced settings, click on the button and log in to Goidini with your E-goi account details.",
   "admin/egoi-admin.asText2": "After logging in, you will have access to the advanced settings of your VTEX integration where you can:",

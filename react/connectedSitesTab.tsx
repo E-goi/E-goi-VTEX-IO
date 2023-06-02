@@ -13,6 +13,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 const ConnectedSitesTab = () => {
   const intl = useIntl()
   const [connectedSites, setConnectedSites] = useState(false)
+  
   const [active, setActive] = useState(true)
   
   const [errorMessage, setErrorMessage] = useState('Error')
@@ -44,7 +45,9 @@ const ConnectedSitesTab = () => {
       if(!appSettings.getAppSettings.apikey){
         setActive(false)
       }else{
-        setConnectedSites(appSettings.getAppSettings.connectedSites)
+        if(appSettings.getAppSettings.pixelActive){
+          setConnectedSites(appSettings.getAppSettings.connectedSites)
+        }
       }
     },
     onError: () => setActive(false)
@@ -102,7 +105,7 @@ const ConnectedSitesTab = () => {
     <>
       {
         showErrorAlert ?
-          <Alert type="error" onClose={() => setShowErrorAlert(false)}>
+          <Alert type="error"  autoClose={2000} onClose={() => setShowErrorAlert(false)}>
             {errorMessage}
           </Alert>
           :
@@ -110,7 +113,7 @@ const ConnectedSitesTab = () => {
       }
       {
         showSuccessAlert ?
-          <Alert type="success" onClose={() => setShowSuccessAlert(false)}>
+          <Alert type="success"  autoClose={2000} onClose={() => setShowSuccessAlert(false)}>
             {successMessage}
           </Alert>
           :
@@ -154,7 +157,7 @@ const ConnectedSitesTab = () => {
                 <div className="mt8" hidden={!connectedSites}>
                   <h4 className="t-heading-5 mt0"> <FormattedMessage id="admin/egoi-admin.abandonedCart"/> </h4>
                   <Input
-                    value={"var d=document,g=d.createElement(\"script\"),s=d.getElementsByTagName(\"script\")[0];g.async=!0,g.src=\"https://cdn-te.e-goi.com/tng/vtex-te.min.js\",g.setAttribute(\"client_id\",\"360410\"),g.setAttribute(\"list_id\",\"22\"),s.parentNode.insertBefore(g,s);"}
+                    value={"var d=document,g=d.createElement(\"script\"),s=d.getElementsByTagName(\"script\")[0];g.async=!0,g.src=\"https://cdn-te.e-goi.com/tng/vtex-te.min.js\",g.setAttribute(\"client_id\",\""+appSettings.getAppSettings.clientId+"\"),g.setAttribute(\"list_id\",\""+appSettings.getAppSettings.listId+"\"),s.parentNode.insertBefore(g,s);"}
                     readOnly={true}
                     label={<FormattedMessage id="admin/egoi-admin.abandonedCartLabel"/>}
                   />
