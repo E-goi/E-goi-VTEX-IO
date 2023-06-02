@@ -135,11 +135,13 @@ const SettingsTab = () => {
             
              setDisableConfigs(false)
           } else{
+            if(goidiniSettingsData && goidiniSettingsData.goidiniSettings.status != 404){
               setApikeyValue('')
               setAppKeyValue('')
               setAppTokenValue('')
               setListSelected(0)
               setDropdown(true)
+            }
           }
 
           setSkip(true)
