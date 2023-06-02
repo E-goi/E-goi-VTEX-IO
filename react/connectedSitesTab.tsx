@@ -48,8 +48,8 @@ const ConnectedSitesTab = () => {
       }else{
         if(appSettings.getAppSettings.pixelActive){
           setConnectedSites(appSettings.getAppSettings.connectedSites)
-          setLoading(false)
         }
+        setLoading(false)
       }
     },
     onError: () => setActive(false)
