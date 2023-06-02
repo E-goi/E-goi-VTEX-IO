@@ -384,12 +384,30 @@ const SettingsTab = () => {
     if (appKeyValue === '') {
       setAppKeyError(true)
     } else {
+      if(!appKeyValue.startsWith('vtexappkey')){
+        setAppKeyError(true)
+        setErrorMessage(intl.formatMessage({ id: 'admin/egoi-admin.errorAppKeyLength' }))
+        setShowErrorAlert(true)
+        setSaveSettingsLoading(false)
+        setDisableConfigs(false)
+  
+        return
+      }
       setAppKeyError(false)
     }
 
     if (appTokenValue === '') {
       setAppTokenError(true)
     } else {
+      if(appTokenValue.length < 35){
+        setAppTokenError(true)
+        setErrorMessage(intl.formatMessage({ id: 'admin/egoi-admin.errorAppTokenLength' }))
+        setShowErrorAlert(true)
+        setSaveSettingsLoading(false)
+        setDisableConfigs(false)
+  
+        return
+      }
       setAppTokenError(false)
     }
     

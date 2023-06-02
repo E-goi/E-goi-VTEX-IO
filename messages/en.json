@@ -22,6 +22,9 @@
   "admin/egoi-admin.syncSuccess": "Fields saved successfully!",
   "admin/egoi-admin.syncError": "Error saving fields!",
 
+  "admin/egoi-admin.errorAppKeyLength": "Error: AppKey is invalid!",
+  "admin/egoi-admin.errorAppTokenLength": "Error: AppToken is invalid!",
+
   "admin/egoi-admin.domain": "Domain",
   "admin/egoi-admin.domainLabel": "Domain that will be connected",
   "admin/egoi-admin.activateConnectedSites": "Activate Connected Sites",

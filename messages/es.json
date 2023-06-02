@@ -37,6 +37,9 @@
   "admin/egoi-admin.csErrorCreate": "¡Error al crear connected sites! ",
   "admin/egoi-admin.csErrorActivate": "¡Error al activar connected sites! ",
 
+  "admin/egoi-admin.errorAppKeyLength": "Error: AppKey es invalido!",
+  "admin/egoi-admin.errorAppTokenLength": "Error: AppToken es invalido!",
+
   "admin/egoi-admin.asText1": "Para la configuración avanzada, haz clic en el botón e inicia sesión en Goidini con los datos de tu cuenta E-goi.",
   "admin/egoi-admin.asText2": "Después de iniciar sesión, tendrá acceso a las configuraciones avanzadas de su integración VTEX donde podrá:",
   "admin/egoi-admin.asFeat1": "Sincroniza tus productos con E-goi",

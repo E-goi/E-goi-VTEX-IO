@@ -22,6 +22,9 @@
   "admin/egoi-admin.syncSuccess": "Campos guardados com sucesso!",
   "admin/egoi-admin.syncError": "Erro a guardar os campos!",
 
+  "admin/egoi-admin.errorAppKeyLength": "Error: AppKey é inválida!",
+  "admin/egoi-admin.errorAppTokenLength": "Error: AppToken é inválida!",
+
   "admin/egoi-admin.domain": "Domínio",
   "admin/egoi-admin.domainLabel": "Domínio que vai ser conectado",
   "admin/egoi-admin.activateConnectedSites": "Ativar Connected Sites",
