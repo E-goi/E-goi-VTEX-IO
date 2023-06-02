@@ -50,6 +50,7 @@
   "admin/egoi-admin.asButton": "Ajustes avanzados",
   "admin/egoi-admin.abandonedCart": "Carrito Abandonado",
   "admin/egoi-admin.abandonedCartLabel": "Para activar la función de carrito abandonado, debe inyectar este script en el archivo javascript de pago de su tienda.",
+  "admin/egoi-admin.saveRequiredFieldsError": "Erro: Rellene los campos que faltan.",  
 
   "admin/egoi-admin.lists": "Lista E-goi ",
   "admin/egoi-admin.insertApikey": "Inserte el E-goi Apikey",

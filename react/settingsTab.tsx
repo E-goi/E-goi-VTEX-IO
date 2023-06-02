@@ -27,6 +27,7 @@ const SettingsTab = () => {
   const [appKeyValue, setAppKeyValue] = useState('')
   const [apikeyValue, setApikeyValue] = useState('')
 
+  const [handledApikey, setHandledApikey] = useState(false)
   const [saveSettingsLoading, setSaveSettingsLoading] = useState(false)
   const [listsOptions, setListsOptions] = useState([{}])
   const [listSelected, setListSelected] = useState(0)
@@ -136,11 +137,36 @@ const SettingsTab = () => {
              setDisableConfigs(false)
           } else{
             if(goidiniSettingsData && goidiniSettingsData.goidiniSettings.status != 404){
+
               setApikeyValue('')
               setAppKeyValue('')
               setAppTokenValue('')
               setListSelected(0)
               setDropdown(true)
+            } else if(goidiniSettingsData && goidiniSettingsData.goidiniSettings.status == 404 && !handledApikey) {
+              setApikeyValue('')
+              setListSelected(0)
+              setDropdown(true)
+
+              // Retry because api da vtex tem falhas
+              try{
+                saveAppSettings({
+                  variables: {
+                    appKey: '',
+                    appToken: '',
+                    apikey: ''
+                  },
+                })
+              }catch(e){
+                saveAppSettings({
+                  variables: {
+                    appKey: '',
+                    appToken: '',
+                    apikey: ''
+                  },
+                })
+              }
+
             }
           }
 
@@ -336,6 +362,7 @@ const SettingsTab = () => {
     setDropdown(true)
 
     if (e.target.value.length === 40) {
+      setHandledApikey(true)
       setSaveSettingsLoading(true)
       setDisableConfigs(false)
       myaccount({ variables: { apikey: e.target.value } })
@@ -356,10 +383,14 @@ const SettingsTab = () => {
 
     if (appKeyValue === '') {
       setAppKeyError(true)
+    } else {
+      setAppKeyError(false)
     }
 
     if (appTokenValue === '') {
       setAppTokenError(true)
+    } else {
+      setAppTokenError(false)
     }
     
 
@@ -370,6 +401,7 @@ const SettingsTab = () => {
       appTokenValue === '' ||
       listSelected === 0
     ) {
+      setErrorMessage(intl.formatMessage({ id: 'admin/egoi-admin.saveRequiredFieldsError' }))
       setShowErrorAlert(true)
       setSaveSettingsLoading(false)
       setDisableConfigs(false)
@@ -466,14 +498,14 @@ const SettingsTab = () => {
               <div>
                 <p>
                   {showErrorAlert ? (
-                    <Alert type="error" focusOnOpen={true}  autoClose={2000}  onClose={() => setShowErrorAlert(false)}>
+                    <Alert type="error" focusOnOpen={true}  autoClose={10000}  onClose={() => setShowErrorAlert(false)}>
                       {errorMessage}
                     </Alert>
                   ) : (
                     <></>
                   )}
                   {showSuccessAlert ? (
-                    <Alert type="success" focusOnOpen={true}  autoClose={2000} onClose={() => setShowSuccessAlert(false)}>
+                    <Alert type="success" focusOnOpen={true}  autoClose={10000} onClose={() => setShowSuccessAlert(false)}>
                       {successMessage}
                     </Alert>
                   ) : (
