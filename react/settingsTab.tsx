@@ -135,13 +135,11 @@ const SettingsTab = () => {
             
              setDisableConfigs(false)
           } else{
-            if(goidiniSettingsData && goidiniSettingsData.goidiniSettings.status === 403){
               setApikeyValue('')
-            }
-            
               setAppKeyValue('')
               setAppTokenValue('')
               setListSelected(0)
+              setDropdown(true)
           }
 
           setSkip(true)
@@ -494,7 +492,7 @@ const SettingsTab = () => {
                   variation="secondary"
                   onClick={saveSettings}
                   isLoading={saveSettingsLoading}
-                  disabled={apikeyError}
+                  disabled={apikeyError || apikeyValue.length != 40  }
                 >
                   <FormattedMessage id="admin/egoi-admin.save" />
                 </Button>
