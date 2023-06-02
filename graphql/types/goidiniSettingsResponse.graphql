@@ -1,0 +1,13 @@
+
+type GoidiniSettingsResponse {
+  response: String
+  status: Int
+  message: GoidiniSettings
+  error: String
+}
+
+type GoidiniSettings {
+  vtexAppKey: String
+  vtexAppToken: String
+  listId: Int
+}

@@ -13,6 +13,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 const ConnectedSitesTab = () => {
   const intl = useIntl()
   const [connectedSites, setConnectedSites] = useState(false)
+  
   const [active, setActive] = useState(true)
   
   const [errorMessage, setErrorMessage] = useState('Error')
@@ -44,7 +45,9 @@ const ConnectedSitesTab = () => {
       if(!appSettings.getAppSettings.apikey){
         setActive(false)
       }else{
-        setConnectedSites(appSettings.getAppSettings.connectedSites)
+        if(appSettings.getAppSettings.pixelActive){
+          setConnectedSites(appSettings.getAppSettings.connectedSites)
+        }
       }
     },
     onError: () => setActive(false)
@@ -102,7 +105,7 @@ const ConnectedSitesTab = () => {
     <>
       {
         showErrorAlert ?
-          <Alert type="error" onClose={() => setShowErrorAlert(false)}>
+          <Alert type="error"  autoClose={2000} onClose={() => setShowErrorAlert(false)}>
             {errorMessage}
           </Alert>
           :
@@ -110,7 +113,7 @@ const ConnectedSitesTab = () => {
       }
       {
         showSuccessAlert ?
-          <Alert type="success" onClose={() => setShowSuccessAlert(false)}>
+          <Alert type="success"  autoClose={2000} onClose={() => setShowSuccessAlert(false)}>
             {successMessage}
           </Alert>
           :
@@ -151,6 +154,15 @@ const ConnectedSitesTab = () => {
                   />
                 </div>
 
+                <div className="mt8" hidden={!connectedSites}>
+                  <h4 className="t-heading-5 mt0"> <FormattedMessage id="admin/egoi-admin.abandonedCart"/> </h4>
+                  <Input
+                    value={"var d=document,g=d.createElement(\"script\"),s=d.getElementsByTagName(\"script\")[0];g.async=!0,g.src=\"https://cdn-te.e-goi.com/tng/vtex-te.min.js\",g.setAttribute(\"client_id\",\""+appSettings.getAppSettings.clientId+"\"),g.setAttribute(\"list_id\",\""+appSettings.getAppSettings.listId+"\"),s.parentNode.insertBefore(g,s);"}
+                    readOnly={true}
+                    label={<FormattedMessage id="admin/egoi-admin.abandonedCartLabel"/>}
+                  />
+                </div>
+
                 <div className="mt5">
                   <span style={{ display: 'flex', justifyContent: 'flex-end', columnGap: '20px' }}>
                     <Button variation="secondary"
@@ -158,7 +170,7 @@ const ConnectedSitesTab = () => {
                       isLoading={isLoading}><FormattedMessage id="admin/egoi-admin.save"/></Button>
                   </span>
                 </div>
-              </div>
+              </div>       
                 :
                 <div>
                   <p><FormattedMessage id="admin/egoi-admin.configNeed" /></p>

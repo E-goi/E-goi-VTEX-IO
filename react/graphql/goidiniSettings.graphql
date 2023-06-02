@@ -1,0 +1,12 @@
+query goidiniSettings($apikey: String){
+  goidiniSettings(apikey: $apikey) {
+    response
+    status
+    error
+    message {
+      vtexAppKey
+      vtexAppToken
+      listId
+    }
+  }
+}

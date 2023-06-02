@@ -5,7 +5,7 @@ import type { MyAccount } from '../typings/myAccount'
 
 const routes = {
   getMyAccountData: () =>
-    `https://api.egoiapp.com/my-account`,
+    `https://dev-api.egoiapp.com/my-account`,
 }
 class MyAccountClient extends ExternalClient {
   constructor(context: IOContext, options?: InstanceOptions) {
