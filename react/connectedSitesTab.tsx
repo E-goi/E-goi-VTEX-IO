@@ -1,7 +1,7 @@
 //react/adminExample.tsx
 import React, { useState } from 'react'
 import { useQuery, useMutation } from 'react-apollo';
-import { Layout, PageHeader, PageBlock, Toggle, Input, Button, Spinner, Alert } from 'vtex.styleguide'
+import { Layout, PageHeader, PageBlock, Toggle, Input, Spinner, Alert } from 'vtex.styleguide'
 
 import GET_APP_SETTINGS from './graphql/appSettings.graphql'
 import SAVE_APP_SETTINGS from './graphql/saveAppSettings.graphql'
@@ -15,12 +15,12 @@ const ConnectedSitesTab = () => {
   const [connectedSites, setConnectedSites] = useState(false)
   
   const [active, setActive] = useState(true)
-  
+  const [loading, setLoading] = useState(true)
+
   const [errorMessage, setErrorMessage] = useState('Error')
   const [successMessage, setSuccessMessage] = useState('Success')
   const [showErrorAlert, setShowErrorAlert] = useState(false)
   const [showSuccessAlert, setShowSuccessAlert] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
 
   const showSuccess = (message: string) => {
     setSuccessMessage(message)
@@ -40,13 +40,15 @@ const ConnectedSitesTab = () => {
       }
     })
 
-  const { data: appSettings, loading: appSettingsLoading } = useQuery(GET_APP_SETTINGS, {
+  const { data: appSettings} = useQuery(GET_APP_SETTINGS, {
     onCompleted: () => {
       if(!appSettings.getAppSettings.apikey){
         setActive(false)
+        setLoading(false)
       }else{
         if(appSettings.getAppSettings.pixelActive){
           setConnectedSites(appSettings.getAppSettings.connectedSites)
+          setLoading(false)
         }
       }
     },
@@ -78,24 +80,21 @@ const ConnectedSitesTab = () => {
     }
   })
 
-  const saveSettings = async () => {
-    setIsLoading(true)
+  const saveSettings = async ( active:boolean ) => {
     try {
       if (!appSettings.getAppSettings.connectedSites) {
         createConnectedSites()
       } else {
         saveAppSettings({
           variables: {
-            pixelActive: connectedSites,
+            pixelActive: active,
             connectedSites: appSettings.getAppSettings.connectedSites
           }
         });
     
         showSuccess(intl.formatMessage({id: 'admin/egoi-admin.csSuccess'}))
       }
-      setIsLoading(false)
     } catch (error) {
-      setIsLoading(false)
       showError(intl.formatMessage({id: 'admin/egoi-admin.csErrorActivate'}) + error)
     }
 
@@ -124,7 +123,7 @@ const ConnectedSitesTab = () => {
           subtitle={<FormattedMessage id="admin/egoi-admin.configConnectedSites"/>}
           variation="full">
           {
-            appSettingsLoading ? <Spinner color="currentColor" size={20} />
+            loading ? <Spinner color="currentColor" size={20} />
               :
               active ? 
               <div>
@@ -140,7 +139,9 @@ const ConnectedSitesTab = () => {
                     semantic
                     checked={connectedSites}
                     onChange={() => {
+                      saveSettings(!connectedSites)
                       setConnectedSites(!connectedSites)
+                      
                     }}
                   />
                 </div>
@@ -161,14 +162,6 @@ const ConnectedSitesTab = () => {
                     readOnly={true}
                     label={<FormattedMessage id="admin/egoi-admin.abandonedCartLabel"/>}
                   />
-                </div>
-
-                <div className="mt5">
-                  <span style={{ display: 'flex', justifyContent: 'flex-end', columnGap: '20px' }}>
-                    <Button variation="secondary"
-                      onClick={saveSettings}
-                      isLoading={isLoading}><FormattedMessage id="admin/egoi-admin.save"/></Button>
-                  </span>
                 </div>
               </div>       
                 :
