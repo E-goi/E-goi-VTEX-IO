@@ -4,7 +4,7 @@ import { ExternalClient } from '@vtex/api'
 import type { GoidiniInstall } from '../typings/goidiniInstall'
 
 const routes = {
-  getGoidiniInstallData: () => `https://dev-goidini.e-goi.com/vtex-i-o/install`,
+  getGoidiniInstallData: () => `https://goidini.e-goi.com/vtex-i-o/install`,
 }
 
 class GoidiniInstallClient extends ExternalClient {

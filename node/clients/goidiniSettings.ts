@@ -4,7 +4,7 @@ import { ExternalClient } from '@vtex/api'
 import type { GoidiniSettingsResponse } from '../typings/goidiniSettings'
 
 const routes = {
-  goidniSettingsData: () => `https://dev-goidini.e-goi.com/vtex-i-o/settings`, // CHANGE DEV TO PROD
+  goidniSettingsData: () => `https://goidini.e-goi.com/vtex-i-o/settings`, // CHANGE DEV TO PROD
 }
 
 class goidiniSettingsClient extends ExternalClient {
