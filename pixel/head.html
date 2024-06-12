@@ -13,11 +13,7 @@
       g.async=true; g.src='https://cdn-te.e-goi.com/tng/vtex-te.min.js';
       g.setAttribute('client_id', "{{settings.clientId}}");
       g.setAttribute('list_id', "{{settings.listId}}");
-      s.parentNode.insertBefore(g,s);
-
-      console.log('E-goi Pixel');
-      console.log("{{settings.domain}}")
-      
+      s.parentNode.insertBefore(g,s);     
 
       window.addEventListener('message', function(event) {
         if (event.data && event.data.eventName === 'vtex:productView') {
@@ -32,14 +28,8 @@
               categories , // (optional) Product category, or array of up to 5 categories
               price// (optional) Product Price as displayed on the page
           ]);
+          
           _egoiaq.push(['trackPageView']);
-          console.log('Product View');
-          console.log(['setEcommerceView',
-              productId, // (required) SKU: Product unique identifier
-              productName, // (optional) Product name
-              categories , // (optional) Product category, or array of up to 5 categories
-              price// (optional) Product Price as displayed on the page
-          ]);
         }
       });
     }
