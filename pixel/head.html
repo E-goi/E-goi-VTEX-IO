@@ -13,7 +13,25 @@
       g.async=true; g.src='https://cdn-te.e-goi.com/tng/vtex-te.min.js';
       g.setAttribute('client_id', "{{settings.clientId}}");
       g.setAttribute('list_id', "{{settings.listId}}");
-      s.parentNode.insertBefore(g,s);
+      s.parentNode.insertBefore(g,s);     
+
+      window.addEventListener('message', function(event) {
+        if (event.data && event.data.eventName === 'vtex:productView') {
+          var productId = event.data.product.productId;
+          var productName = event.data.product.productName;
+          var categories = event.data.product.categories || [];
+          var price = event.data.product.items[0].sellers[0].commertialOffer.Price || 0;
+
+          _egoiaq.push(['setEcommerceView',
+              productId, // (required) SKU: Product unique identifier
+              productName, // (optional) Product name
+              categories , // (optional) Product category, or array of up to 5 categories
+              price// (optional) Product Price as displayed on the page
+          ]);
+          
+          _egoiaq.push(['trackPageView']);
+        }
+      });
     }
   })()
 </script>
