@@ -17,7 +17,8 @@
 
       window.addEventListener('message', function(event) {
         if (event.data && event.data.eventName === 'vtex:productView') {
-          var productId = event.data.product.productId;
+
+          var productId = event.data.product.selectedSku.itemId;
           var productName = event.data.product.productName;
           var categories = event.data.product.categories || [];
           var price = event.data.product.items[0].sellers[0].commertialOffer.Price || 0;
