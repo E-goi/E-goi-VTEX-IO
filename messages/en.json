@@ -9,7 +9,7 @@
   "admin/egoi-admin.vtexFields": "Vtex Fields",
   "admin/egoi-admin.dataEntities": "Vtex Masterdata Data Entities",
   "admin/egoi-admin.egoiFields": "Egoi Fields",
-  "admin/egoi-admin.syncDefaultFieldsText": "The Name, Surname, Email and Mobile fields are already mapped for default entities like CL or CO.",
+  "admin/egoi-admin.syncDefaultFieldsText": "The Name, Surname, Email, Mobile and Date of Birth fields are already mapped for default entities like CL or CO.",
   "admin/egoi-admin.syncDefaultFieldsText2": "For new entities, you must map these fields manually, and the email or mobile phone field must always be present.",
   "admin/egoi-admin.syncDefaultFieldsText3": "You should also pay attention to the data type when mapping new fields.",
   "admin/egoi-admin.save": "Save",
