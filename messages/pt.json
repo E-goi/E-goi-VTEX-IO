@@ -9,7 +9,7 @@
   "admin/egoi-admin.dataEntities": "Entidades Vtex Masterdata",
   "admin/egoi-admin.vtexFields": "Campos Vtex",
   "admin/egoi-admin.egoiFields": "Campos E-goi",
-  "admin/egoi-admin.syncDefaultFieldsText": "Os campos Nome, Sobrenome, Email e Celular já estão mapeados para entidades padrão como CL ou CO.",
+  "admin/egoi-admin.syncDefaultFieldsText": "Os campos Nome, Sobrenome, Email, Celular e Data de Nascimento já estão mapeados para entidades padrão como CL ou CO.",
   "admin/egoi-admin.syncDefaultFieldsText2": "Para novas entidades, deve-se mapear estes campos manualmente, devendo sempre estar presente o campo email ou celular.",
   "admin/egoi-admin.syncDefaultFieldsText3": "Você também deve prestar atenção ao tipo de dados ao mapear novos campos.",
   "admin/egoi-admin.save": "Guardar",
