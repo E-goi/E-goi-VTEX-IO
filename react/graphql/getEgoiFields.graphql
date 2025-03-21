@@ -1,7 +1,8 @@
 query getEgoiFields {
-  getEgoiFields{
+  getEgoiFields {
     name
     field_id
     type
+    format
   }
 }
