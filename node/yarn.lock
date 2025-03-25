@@ -2345,9 +2345,9 @@ ee-first@1.1.1:
   resolved "https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
-"egoipartnerpt.egoi-admin@https://newdev--egoipartnerpt.myvtex.com/_v/private/typings/linked/v1/egoipartnerpt.egoi-admin@1.13.0+build1718181968/public/@types/egoipartnerpt.egoi-admin":
-  version "1.13.0"
-  resolved "https://newdev--egoipartnerpt.myvtex.com/_v/private/typings/linked/v1/egoipartnerpt.egoi-admin@1.13.0+build1718181968/public/@types/egoipartnerpt.egoi-admin#4fdc924176712f4345dbdfe89f29605033f3c81d"
+"egoipartnerpt.egoi-admin@https://newdev--egoipartnerpt.myvtex.com/_v/private/typings/linked/v1/egoipartnerpt.egoi-admin@1.18.0+build1718181968/public/@types/egoipartnerpt.egoi-admin":
+  version "1.18.0"
+  resolved "https://newdev--egoipartnerpt.myvtex.com/_v/private/typings/linked/v1/egoipartnerpt.egoi-admin@1.18.0+build1718181968/public/@types/egoipartnerpt.egoi-admin#92418aacad5a99ee3e5cb0ee9a6f5f2afb979d73"
 
 electron-to-chromium@^1.3.247:
   version "1.3.260"
@@ -5256,7 +5256,7 @@ static-extend@^0.1.1:
     define-property "^0.2.5"
     object-copy "^0.1.0"
 
-"stats-lite@github:vtex/node-stats-lite#dist":
+stats-lite@vtex/node-stats-lite#dist:
   version "2.2.0"
   resolved "https://codeload.github.com/vtex/node-stats-lite/tar.gz/1b0d39cc41ef7aaecfd541191f877887a2044797"
   dependencies:
