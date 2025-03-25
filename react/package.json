@@ -23,7 +23,7 @@
     "@vtex/tsconfig": "^0.4.4",
     "apollo-cache-inmemory": "^1.6.5",
     "apollo-client": "^2.4.7",
-    "egoipartnerpt.egoi-admin": "https://bb24588--egoipartnerpt.myvtex.com/_v/private/typings/linked/v1/egoipartnerpt.egoi-admin@1.11.0+build1718181968/public/@types/egoipartnerpt.egoi-admin",
+    "egoipartnerpt.egoi-admin": "https://newdev--egoipartnerpt.myvtex.com/_v/private/typings/linked/v1/egoipartnerpt.egoi-admin@1.16.0+build1718181968/public/@types/egoipartnerpt.egoi-admin",
     "graphql": "^14.6.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
