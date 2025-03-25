@@ -2682,9 +2682,9 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
-"egoipartnerpt.egoi-admin@https://bb24588--egoipartnerpt.myvtex.com/_v/private/typings/linked/v1/egoipartnerpt.egoi-admin@1.11.0+build1718181968/public/@types/egoipartnerpt.egoi-admin":
-  version "1.11.0"
-  resolved "https://bb24588--egoipartnerpt.myvtex.com/_v/private/typings/linked/v1/egoipartnerpt.egoi-admin@1.11.0+build1718181968/public/@types/egoipartnerpt.egoi-admin#3422420e4c51ae0fc9d465a3abbf4b56ce6bfecc"
+"egoipartnerpt.egoi-admin@https://newdev--egoipartnerpt.myvtex.com/_v/private/typings/linked/v1/egoipartnerpt.egoi-admin@1.13.0+build1718181968/public/@types/egoipartnerpt.egoi-admin":
+  version "1.13.0"
+  resolved "https://newdev--egoipartnerpt.myvtex.com/_v/private/typings/linked/v1/egoipartnerpt.egoi-admin@1.13.0+build1718181968/public/@types/egoipartnerpt.egoi-admin#4fdc924176712f4345dbdfe89f29605033f3c81d"
 
 electron-to-chromium@^1.4.76:
   version "1.4.82"
