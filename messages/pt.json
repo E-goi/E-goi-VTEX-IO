@@ -1,6 +1,7 @@
 {
   "admin-egoi.navigation.label": "E-goi",
   "admin-egoi.navigation.account": "Conta",
+  "admin-egoi.navigation.ecommerce": "Ecommerce",
   "admin-egoi.navigation.synccontacts": "Sincronização de Contactos",
   "admin-egoi.navigation.syncproducts": "Sincronização de Produtos",
   "admin-egoi.navigation.connectedsites": "Connected Sites",
@@ -21,6 +22,9 @@
   "admin/egoi-admin.errorMapping": "Erro a mapear os campos! ",
   "admin/egoi-admin.syncSuccess": "Campos guardados com sucesso!",
   "admin/egoi-admin.syncError": "Erro a guardar os campos!",
+  "admin/egoi-admin.marketplaceOrderTitle": "Mapeamento dos Estados de Encomendas do Tipo Marketplace",
+  "admin/egoi-admin.fullfilmentOrderTitle": "Mapeamento dos Estados de Encomendas do Tipo Fullfilment",
+  "admin/egoi-admin.selectEgoiStatus": "Selecione o estado E-goi",
 
   "admin/egoi-admin.errorAppKeyLength": "Error: AppKey é inválida!",
   "admin/egoi-admin.errorAppTokenLength": "Error: AppToken é inválida!",
@@ -46,7 +50,7 @@
   "admin/egoi-admin.asText1": "Para configurações avançadas, clique no botão e faça o login no Goidini com os dados da sua conta E-goi.",
   "admin/egoi-admin.asText2": "Após o login, você terá acesso às configurações avançadas da sua integração VTEX onde poderá:",
   "admin/egoi-admin.asFeat1": "Sincronize os seus produtos com o E-goi",
-  "admin/egoi-admin.asFeat2": "Set up Abandoned Cart and Order Tracking",
+  "admin/egoi-admin.asFeat2": "Set up Abandoned Cart",
   "admin/egoi-admin.asFeat3": "Configurar carrinho abandonado e rastreamento de pedidos",
   "admin/egoi-admin.asFeat4": "Configurar o envio de SMS de recuperação de boleto",
   "admin/egoi-admin.asFeatHeader1": "Produtos",

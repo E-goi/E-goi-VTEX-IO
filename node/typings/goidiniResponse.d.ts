@@ -1,5 +1,5 @@
 export interface GoidiniResponse {
-  reponse: String
+  response: String
   message: String
   status: Int
 }

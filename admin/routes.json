@@ -11,6 +11,10 @@
     "component": "syncContactsTab",
     "path": "/admin/app/e-goi/synccontacts"
   },
+  "admin.app.egoiecommerce": {
+    "component": "ecommerceTab",
+    "path": "/admin/app/e-goi/ecommerce"
+  },
   "admin.app.egoisyncproducts": {
     "component": "settingsTab",
     "path": "/admin/app/e-goi/syncproducts"

@@ -1,0 +1,9 @@
+type MappingField {
+  appStatus: String
+  egoiStatus: String
+}
+
+type GoidiniOrderMap {
+  order_type: String
+  mapping: [MappingField]
+}

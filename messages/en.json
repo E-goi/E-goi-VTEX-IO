@@ -1,6 +1,7 @@
 {
   "admin-egoi.navigation.label": "E-goi",
   "admin-egoi.navigation.account": "Account",
+  "admin-egoi.navigation.ecommerce": "Ecommerce",
   "admin-egoi.navigation.synccontacts": "Sync Contacts",
   "admin-egoi.navigation.syncproducts": "Sync Products",
   "admin-egoi.navigation.connectedsites": "Connected Sites",
@@ -21,6 +22,9 @@
   "admin/egoi-admin.errorMapping": "Error mapping fields! ",
   "admin/egoi-admin.syncSuccess": "Fields saved successfully!",
   "admin/egoi-admin.syncError": "Error saving fields!",
+  "admin/egoi-admin.marketplaceOrderTitle": "Mapping of Marketplace Order States",
+  "admin/egoi-admin.fullfilmentOrderTitle": "Mapping of Fulfilment Order States",
+  "admin/egoi-admin.selectEgoiStatus": "Select E-goi Status",
 
   "admin/egoi-admin.errorAppKeyLength": "Error: AppKey is invalid!",
   "admin/egoi-admin.errorAppTokenLength": "Error: AppToken is invalid!",
@@ -45,7 +49,7 @@
   "admin/egoi-admin.asText1": "For advanced settings, click on the button and log in to Goidini with your E-goi account details.",
   "admin/egoi-admin.asText2": "After logging in, you will have access to the advanced settings of your VTEX integration where you can:",
   "admin/egoi-admin.asFeat1": "Synchronize your products with E-goi",
-  "admin/egoi-admin.asFeat2": "Set up Abandoned Cart and Order Tracking",
+  "admin/egoi-admin.asFeat2": "Set up Abandoned Cart",
   "admin/egoi-admin.asFeat3": "Configure SMS sending by order status",
   "admin/egoi-admin.asFeat4": "Configure the sending of Boleto recovery SMS",
   "admin/egoi-admin.asFeatHeader1": "Products",

@@ -7,10 +7,14 @@ import CreateConnectedSites from './connectedSites'
 import GetEgoiFields from './getEgoiFields'
 import getVtexClientFields from './getVtexClientFields'
 import GoidiniSync from './goidiniSync'
+import GoidiniOrderMapSync from './goidiniOrderMapSync'
+import GoidiniOrderBulkSync from './goidiniOrderSyncBulk'
 import GoidiniInstall from './goidiniInstall'
 import GetDataEntities from './getDataEntities'
 import Identity from '../utils/Identity'
 import GetGoidiniMapFields from './getGoidiniMapFields'
+import GetGoidiniOrderMapFields from './getGoidiniOrderMapFields'
+import GetGoidiniEgoiOrderStatus from './getGoidiniEgoiOrderStatus'
 import GoidiniSettings from './goidiniSettings'
 
 // Extend the default IOClients implementation with our own custom clients.
@@ -43,6 +47,14 @@ export class Clients extends IOClients {
     return this.getOrSet('goidiniSync', GoidiniSync)
   }
 
+  public get goidiniOrderMapSync() {
+    return this.getOrSet('goidiniOrderMapSync', GoidiniOrderMapSync)
+  }
+
+  public get goidiniOrderBulkSync() {
+    return this.getOrSet('goidiniOrderBulkSync', GoidiniOrderBulkSync)
+  }
+
   public get goidiniInstall() {
     return this.getOrSet('goidiniInstall', GoidiniInstall)
   }
@@ -58,6 +70,15 @@ export class Clients extends IOClients {
   public get getGoidiniMapFields() {
     return this.getOrSet('getGoidiniMapFields', GetGoidiniMapFields)
   }
+
+  public get getGoidiniOrderMapFields() {
+    return this.getOrSet('getGoidiniOrderMapFields', GetGoidiniOrderMapFields)
+  }
+
+  public get getGoidiniEgoiOrderStatus() {
+    return this.getOrSet('getGoidiniEgoiOrderStatus', GetGoidiniEgoiOrderStatus)
+  }
+
 
   public get goidiniSettings() {
     return this.getOrSet('goidiniSettings', GoidiniSettings)
