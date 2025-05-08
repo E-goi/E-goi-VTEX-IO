@@ -1,6 +1,7 @@
 /* node/clients/GoidiniOrderMapSyncClient.ts */
 import type { InstanceOptions, IOContext } from '@vtex/api'
 import { ExternalClient } from '@vtex/api'
+
 // agora importa o Body, não o input do GraphQL
 import type {
   GoidiniOrderMapSyncBody,
@@ -8,8 +9,7 @@ import type {
 } from '../typings/goidiniOrderMapSync'
 
 const routes = {
-  orderMap: () =>
-    'https://dev-goidini.e-goi.com/vtex-i-o/order-map-sync',
+  orderMap: () => 'https://dev-goidini.e-goi.com/vtex-i-o/order-map-sync',
 }
 
 export default class GoidiniOrderMapSyncClient extends ExternalClient {
@@ -21,9 +21,10 @@ export default class GoidiniOrderMapSyncClient extends ExternalClient {
     apikey: string,
     appKey: string,
     appToken: string,
-    body: GoidiniOrderMapSyncBody,               // ✅ usa o Body
+    body: GoidiniOrderMapSyncBody
   ): Promise<GoidiniOrderMapSyncResponse> {
     const opts = { ...(this.options as InstanceOptions) }
+
     opts.headers = {
       'Content-Type': 'application/json',
       Apikey: apikey,
@@ -34,11 +35,7 @@ export default class GoidiniOrderMapSyncClient extends ExternalClient {
     try {
       return await this.http.post(routes.orderMap(), body, opts)
     } catch (err) {
-      console.error(
-        '✖ Falha E-goi',
-        err.response?.status,
-        err.response?.data
-      )
+      console.error(err.response?.status, err.response?.data)
       throw err
     }
   }

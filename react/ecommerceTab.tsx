@@ -7,7 +7,8 @@ import {
   Dropdown,
   Spinner,
   Input,
-  Button, Alert,
+  Button,
+  Alert,
 } from 'vtex.styleguide'
 import { FormattedMessage, useIntl } from 'react-intl'
 
@@ -41,11 +42,17 @@ const EcommerceTab: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState('Error')
   const [successMessage, setSuccessMessage] = useState('Success')
 
-  const { data: mapData, loading: loadingMap, error: errorMap } =
-    useQuery<OrderMapData>(GET_ORDER_MAP_FIELDS)
+  const {
+    data: mapData,
+    loading: loadingMap,
+    error: errorMap,
+  } = useQuery<OrderMapData>(GET_ORDER_MAP_FIELDS)
 
-  const { data: egoiData, loading: loadingEgoi, error: errorEgoi } =
-    useQuery<EgoiStatusData>(GET_EGOI_ORDER_FIELDS)
+  const {
+    data: egoiData,
+    loading: loadingEgoi,
+    error: errorEgoi,
+  } = useQuery<EgoiStatusData>(GET_EGOI_ORDER_FIELDS)
 
   const [marketplaceMap, setMarketplaceMap] = useState<Mapping[]>([])
   const [fulfillmentMap, setFulfillmentMap] = useState<Mapping[]>([])
@@ -63,37 +70,49 @@ const EcommerceTab: React.FC = () => {
     setShowErrorAlert(true)
 
     setTimeout(() => setShowErrorAlert(false), 5000)
-
   }
 
   const [goidiniSync] = useMutation(GOIDINI_ORDER_MAP_SYNC, {
     variables: {},
     onError: (e) => {
       setSaveLoading(false)
-      showError(intl.formatMessage({ id: 'admin/egoi-admin.errorMapping' }) + e.message)
+      showError(
+        intl.formatMessage({ id: 'admin/egoi-admin.errorMapping' }) + e.message
+      )
     },
     onCompleted: async () => {
       setSaveLoading(false)
       showSuccess(intl.formatMessage({ id: 'admin/egoi-admin.syncSuccess' }))
-    }
+    },
   })
 
   // Mutation: bulk sync orders
   const [syncOrders, { loading: syncLoading }] = useMutation(
     GOIDINI_ORDER_SYNC_ORDER_BULK,
     {
-      onError: e => {
+      onError: (e) => {
         showError(
-          intl.formatMessage({ id: 'admin/egoi-admin.syncOrdersError' }) +
-          ' ' +
-          e.message
+          `${intl.formatMessage({ id: 'admin/egoi-admin.syncOrdersError' })} ${
+            e.message
+          }`
         )
       },
-      onCompleted: () => {
+      onCompleted: (res) => {
+        const result = res?.goidiniOrderSyncBulk
+
+        if (!result || result.status !== 200) {
+          showError(
+            `${intl.formatMessage({
+              id: 'admin/egoi-admin.syncOrdersError',
+            })} ${result?.message}`
+          )
+
+          return
+        }
+
         showSuccess(
           intl.formatMessage({
             id: 'admin/egoi-admin.syncOrdersSuccess',
-            defaultMessage: 'Sincronização de encomendas iniciada!',
           })
         )
       },
@@ -103,30 +122,33 @@ const EcommerceTab: React.FC = () => {
   useEffect(() => {
     if (mapData) {
       const fields = mapData.getGoidiniOrderMapFields ?? []
+
       setMarketplaceMap(
-        fields.find(f => f.order_type === 'marketplace')?.mapping ?? []
+        fields.find((f) => f.order_type === 'marketplace')?.mapping ?? []
       )
       setFulfillmentMap(
-        fields.find(f => f.order_type === 'fulfillment')?.mapping ?? []
+        fields.find((f) => f.order_type === 'fulfillment')?.mapping ?? []
       )
     }
   }, [mapData])
 
   const egoiOptions = egoiData
-    ? egoiData.getGoidiniEgoiOrderStatus.map(s => ({
-      label: capitalize(s),
-      value: s,
-    }))
+    ? egoiData.getGoidiniEgoiOrderStatus.map((s) => ({
+        label: capitalize(s),
+        value: s,
+      }))
     : []
 
   const onChangeMarketplace = (idx: number, value: string) => {
     const updated = [...marketplaceMap]
+
     updated[idx] = { ...updated[idx], egoiStatus: value }
     setMarketplaceMap(updated)
   }
 
   const onChangeFulfillment = (idx: number, value: string) => {
     const updated = [...fulfillmentMap]
+
     updated[idx] = { ...updated[idx], egoiStatus: value }
     setFulfillmentMap(updated)
   }
@@ -135,7 +157,7 @@ const EcommerceTab: React.FC = () => {
     setSaveLoading(true)
 
     const toArray = (arr: Mapping[]) =>
-      arr.map(item => ({
+      arr.map((item) => ({
         appStatus: item.appStatus,
         egoiStatus: item.egoiStatus,
       }))
@@ -158,11 +180,11 @@ const EcommerceTab: React.FC = () => {
     syncOrders({ variables: { input: true } })
   }
 
-
-
-
   const isLoading =
-    loadingMap || loadingEgoi || marketplaceMap.length === 0 || fulfillmentMap.length === 0
+    loadingMap ||
+    loadingEgoi ||
+    marketplaceMap.length === 0 ||
+    fulfillmentMap.length === 0
 
   return (
     <>
@@ -195,7 +217,9 @@ const EcommerceTab: React.FC = () => {
         )}
 
         {isLoading ? (
-          <div style={{ display: 'flex', justifyContent: 'left', marginTop: 20 }}>
+          <div
+            style={{ display: 'flex', justifyContent: 'left', marginTop: 20 }}
+          >
             <Spinner color="currentColor" size={20} />
           </div>
         ) : (
@@ -293,15 +317,18 @@ const EcommerceTab: React.FC = () => {
 
               {/* === Botão Guardar === */}
               <div className="mt5">
-              <span style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <Button
-                  variation="secondary"
-                  onClick={saveOrderFields}
-                  isLoading={saveLoading}
-                >
-                  <FormattedMessage id="admin/egoi-admin.save" defaultMessage="Guardar" />
-                </Button>
-              </span>
+                <span style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  <Button
+                    variation="secondary"
+                    onClick={saveOrderFields}
+                    isLoading={saveLoading}
+                  >
+                    <FormattedMessage
+                      id="admin/egoi-admin.save"
+                      defaultMessage="Guardar"
+                    />
+                  </Button>
+                </span>
               </div>
             </PageBlock>
 
@@ -321,21 +348,15 @@ const EcommerceTab: React.FC = () => {
                   marginTop: '24px',
                 }}
               >
-              <span style={{ fontWeight: 500 }}>
-                <FormattedMessage
-                  id="admin/egoi-admin.syncNow"
-                  defaultMessage="Sincronizar agora"
-                />
-              </span>
+                <span style={{ fontWeight: 500 }}>
+                  <FormattedMessage id="admin/egoi-admin.syncNow" />
+                </span>
                 <Button
                   variation="secondary"
                   onClick={handleSyncOrders}
                   isLoading={syncLoading}
                 >
-                  <FormattedMessage
-                    id="admin/egoi-admin.sync"
-                    defaultMessage="Sincronizar encomendas"
-                  />
+                  <FormattedMessage id="admin/egoi-admin.sync" />
                 </Button>
               </div>
             </PageBlock>
