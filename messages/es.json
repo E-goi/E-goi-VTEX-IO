@@ -40,6 +40,9 @@
   "admin/egoi-admin.csError": "¡Error al guardar la configuración!",
   "admin/egoi-admin.csErrorCreate": "¡Error al crear connected sites! ",
   "admin/egoi-admin.csErrorActivate": "¡Error al activar connected sites! ",
+  "admin/egoi-admin.mappingDescription": "En esta sección puede asignar los estados de los pedidos de su tienda con los estados reconocidos por E-goi.",
+  "admin/egoi-admin.syncDescription": "En esta sección puede realizar el proceso completo de sincronización de órdenes. Este proceso se realizará en segundo plano.",
+  "admin/egoi-admin.sync": "Sincronizar",
 
   "admin/egoi-admin.errorAppKeyLength": "Error: AppKey es invalido!",
   "admin/egoi-admin.errorAppTokenLength": "Error: AppToken es invalido!",
@@ -57,7 +60,7 @@
   "admin/egoi-admin.asButton": "Ajustes avanzados",
   "admin/egoi-admin.abandonedCart": "Carrito Abandonado",
   "admin/egoi-admin.abandonedCartLabel": "Para activar la función de carrito abandonado, debe inyectar este script en el archivo javascript de pago de su tienda.",
-  "admin/egoi-admin.saveRequiredFieldsError": "Erro: Rellene los campos que faltan.",  
+  "admin/egoi-admin.saveRequiredFieldsError": "Erro: Rellene los campos que faltan.",
 
   "admin/egoi-admin.lists": "Lista E-goi ",
   "admin/egoi-admin.insertApikey": "Inserte el E-goi Apikey",

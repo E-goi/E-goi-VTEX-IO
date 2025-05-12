@@ -25,10 +25,10 @@
   "admin/egoi-admin.marketplaceOrderTitle": "Mapeamento dos Estados de Encomendas do Tipo Marketplace",
   "admin/egoi-admin.fullfilmentOrderTitle": "Mapeamento dos Estados de Encomendas do Tipo Fullfilment",
   "admin/egoi-admin.selectEgoiStatus": "Selecione o estado E-goi",
-
+  "admin/egoi-admin.mappingDescription": "Nesta secção pode mapear os estados das encomendas da sua loja com os estados reconhecidos pela E-goi.",
   "admin/egoi-admin.errorAppKeyLength": "Error: AppKey é inválida!",
   "admin/egoi-admin.errorAppTokenLength": "Error: AppToken é inválida!",
-
+  "admin/egoi-admin.syncDescription": "Nesta secção pode realizar o processo de sincronização total de encomendas. Este processo irá ser realizado em background.",
   "admin/egoi-admin.domain": "Domínio",
   "admin/egoi-admin.domainLabel": "Domínio que vai ser conectado",
   "admin/egoi-admin.activateConnectedSites": "Ativar Connected Sites",
@@ -45,7 +45,7 @@
   "admin/egoi-admin.csErrorActivate": "Erro a ativar o connected sites. ",
   "admin/egoi-admin.abandonedCart": "Carrinho abandonado",
   "admin/egoi-admin.abandonedCartLabel": "Para ativar o recurso Carrinho Abandonado, você precisa injetar este script no arquivo javascript de checkout da sua loja.",
-  "admin/egoi-admin.saveRequiredFieldsError": "Erro: Preencha os campos em falta.",  
+  "admin/egoi-admin.saveRequiredFieldsError": "Erro: Preencha os campos em falta.",
 
   "admin/egoi-admin.asText1": "Para configurações avançadas, clique no botão e faça o login no Goidini com os dados da sua conta E-goi.",
   "admin/egoi-admin.asText2": "Após o login, você terá acesso às configurações avançadas da sua integração VTEX onde poderá:",
@@ -58,7 +58,7 @@
   "admin/egoi-admin.asFeatHeader3": "SMS",
   "admin/egoi-admin.asFeatHeader4": "Boleto",
   "admin/egoi-admin.asButton": "Configurações Avançadas",
-
+  "admin/egoi-admin.sync": "Sincronizar",
   "admin/egoi-admin.lists": "Lista E-goi ",
   "admin/egoi-admin.insertApikey": "Insere a Apikey do E-goi",
   "admin/egoi-admin.insertAppToken": "Insere a appToken VTEX",

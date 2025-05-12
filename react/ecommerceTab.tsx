@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useMutation, useQuery } from 'react-apollo'
 import {
   Layout,
@@ -42,57 +42,94 @@ const EcommerceTab: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState('Error')
   const [successMessage, setSuccessMessage] = useState('Success')
 
-  const {
-    data: mapData,
-    loading: loadingMap,
-    error: errorMap,
-  } = useQuery<OrderMapData>(GET_ORDER_MAP_FIELDS)
-
-  const {
-    data: egoiData,
-    loading: loadingEgoi,
-    error: errorEgoi,
-  } = useQuery<EgoiStatusData>(GET_EGOI_ORDER_FIELDS)
-
   const [marketplaceMap, setMarketplaceMap] = useState<Mapping[]>([])
   const [fulfillmentMap, setFulfillmentMap] = useState<Mapping[]>([])
+  const [egoiOptions, setEgoiOptions] = useState<
+    Array<{ label: string; value: string }>
+  >([])
+
   const [saveLoading, setSaveLoading] = useState(false)
+  const [active, setActive] = useState(true)
+  const [loading, setLoading] = useState(true)
 
   const showSuccess = (message: string) => {
     setSuccessMessage(message)
     setShowSuccessAlert(true)
-
     setTimeout(() => setShowSuccessAlert(false), 5000)
   }
 
   const showError = (message: string) => {
     setErrorMessage(message)
     setShowErrorAlert(true)
-
     setTimeout(() => setShowErrorAlert(false), 5000)
   }
 
+  // Query de mapeamento: ignorar erros de GraphQL (ex: .map is not a function)
+  useQuery<OrderMapData>(GET_ORDER_MAP_FIELDS, {
+    errorPolicy: 'ignore',
+    onCompleted: (data) => {
+      if (data && Array.isArray(data.getGoidiniOrderMapFields)) {
+        const fields = data.getGoidiniOrderMapFields
+
+        const marketplace =
+          fields.find((f) => f.order_type === 'marketplace')?.mapping ?? []
+
+        const fulfillment =
+          fields.find((f) => f.order_type === 'fulfillment')?.mapping ?? []
+
+        setMarketplaceMap(marketplace)
+        setFulfillmentMap(fulfillment)
+        setActive(marketplace.length > 0 || fulfillment.length > 0)
+      } else {
+        setMarketplaceMap([])
+        setFulfillmentMap([])
+        setActive(false)
+      }
+
+      setLoading(false)
+    },
+    onError: () => {
+      // ao falhar, considera não configurado
+      setActive(false)
+      setLoading(false)
+    },
+  })
+
+  const { error: errorEgoi } = useQuery<EgoiStatusData>(GET_EGOI_ORDER_FIELDS, {
+    onCompleted: (data) => {
+      if (data && Array.isArray(data.getGoidiniEgoiOrderStatus)) {
+        setEgoiOptions(
+          data.getGoidiniEgoiOrderStatus.map((s) => ({
+            label: capitalize(s),
+            value: s,
+          }))
+        )
+      } else {
+        setEgoiOptions([])
+      }
+    },
+    onError: () => setEgoiOptions([]),
+  })
+
   const [goidiniSync] = useMutation(GOIDINI_ORDER_MAP_SYNC, {
-    variables: {},
     onError: (e) => {
       setSaveLoading(false)
       showError(
         intl.formatMessage({ id: 'admin/egoi-admin.errorMapping' }) + e.message
       )
     },
-    onCompleted: async () => {
+    onCompleted: () => {
       setSaveLoading(false)
       showSuccess(intl.formatMessage({ id: 'admin/egoi-admin.syncSuccess' }))
     },
   })
 
-  // Mutation: bulk sync orders
   const [syncOrders, { loading: syncLoading }] = useMutation(
     GOIDINI_ORDER_SYNC_ORDER_BULK,
     {
       onError: (e) => {
         showError(
-          `${intl.formatMessage({ id: 'admin/egoi-admin.syncOrdersError' })} ${
+          `${intl.formatMessage({ id: 'admin/egoi-admin.errorMapping' })} ${
             e.message
           }`
         )
@@ -102,42 +139,18 @@ const EcommerceTab: React.FC = () => {
 
         if (!result || result.status !== 200) {
           showError(
-            `${intl.formatMessage({
-              id: 'admin/egoi-admin.syncOrdersError',
-            })} ${result?.message}`
+            `${intl.formatMessage({ id: 'admin/egoi-admin.errorMapping' })} ${
+              result?.message
+            }`
           )
 
           return
         }
 
-        showSuccess(
-          intl.formatMessage({
-            id: 'admin/egoi-admin.syncOrdersSuccess',
-          })
-        )
+        showSuccess(intl.formatMessage({ id: 'admin/egoi-admin.syncSuccess' }))
       },
     }
   )
-
-  useEffect(() => {
-    if (mapData) {
-      const fields = mapData.getGoidiniOrderMapFields ?? []
-
-      setMarketplaceMap(
-        fields.find((f) => f.order_type === 'marketplace')?.mapping ?? []
-      )
-      setFulfillmentMap(
-        fields.find((f) => f.order_type === 'fulfillment')?.mapping ?? []
-      )
-    }
-  }, [mapData])
-
-  const egoiOptions = egoiData
-    ? egoiData.getGoidiniEgoiOrderStatus.map((s) => ({
-        label: capitalize(s),
-        value: s,
-      }))
-    : []
 
   const onChangeMarketplace = (idx: number, value: string) => {
     const updated = [...marketplaceMap]
@@ -155,7 +168,6 @@ const EcommerceTab: React.FC = () => {
 
   const saveOrderFields = () => {
     setSaveLoading(true)
-
     const toArray = (arr: Mapping[]) =>
       arr.map((item) => ({
         appStatus: item.appStatus,
@@ -167,24 +179,15 @@ const EcommerceTab: React.FC = () => {
       { order_type: 'fulfillment', mapping: toArray(fulfillmentMap) },
     ]
 
-    goidiniSync({
-      variables: {
-        input: {
-          payload, // <- Agora dentro de "input"
-        },
-      },
-    })
+    goidiniSync({ variables: { input: { payload } } })
   }
 
   const handleSyncOrders = () => {
     syncOrders({ variables: { input: true } })
   }
 
-  const isLoading =
-    loadingMap ||
-    loadingEgoi ||
-    marketplaceMap.length === 0 ||
-    fulfillmentMap.length === 0
+  // exibir erro apenas do E-goi
+  const combinedError = errorEgoi
 
   return (
     <>
@@ -193,7 +196,6 @@ const EcommerceTab: React.FC = () => {
           {errorMessage}
         </Alert>
       )}
-
       {showSuccessAlert && (
         <Alert type="success" onClose={() => setShowSuccessAlert(false)}>
           {successMessage}
@@ -210,36 +212,26 @@ const EcommerceTab: React.FC = () => {
           />
         }
       >
-        {(errorMap || errorEgoi) && (
+        {combinedError ? (
           <PageBlock>
-            <p>{(errorMap || errorEgoi)!.message}</p>
+            <p>{combinedError.message}</p>
           </PageBlock>
-        )}
-
-        {isLoading ? (
+        ) : loading ? (
           <div
             style={{ display: 'flex', justifyContent: 'left', marginTop: 20 }}
           >
             <Spinner color="currentColor" size={20} />
           </div>
-        ) : (
+        ) : active ? (
           <>
-            {/* === Mapping Orders Card === */}
             <PageBlock variation="full">
               <p style={{ marginBottom: '24px' }}>
-                <FormattedMessage
-                  id="admin/egoi-admin.mappingDescription"
-                  defaultMessage="Nesta secção pode mapear os estados das encomendas da sua loja com os estados reconhecidos pela E-goi."
-                />
+                <FormattedMessage id="admin/egoi-admin.mappingDescription" />
               </p>
 
-              {/* === Marketplace === */}
               <div style={{ marginBottom: '32px' }}>
                 <p style={{ fontWeight: 'bold', marginBottom: 12 }}>
-                  <FormattedMessage
-                    id="admin/egoi-admin.marketplaceOrderTitle"
-                    defaultMessage="Mapeamento dos Estados de Encomendas do Tipo Marketplace"
-                  />
+                  <FormattedMessage id="admin/egoi-admin.marketplaceOrderTitle" />
                 </p>
                 {marketplaceMap.map((m, idx) => (
                   <div
@@ -252,11 +244,25 @@ const EcommerceTab: React.FC = () => {
                     }}
                   >
                     <Input
+                      label={
+                        idx === 0
+                          ? intl.formatMessage({
+                              id: 'admin/egoi-admin.vtexFields',
+                            })
+                          : ''
+                      }
                       value={capitalize(m.appStatus)}
                       readOnly
                       style={{ width: '100%' }}
                     />
                     <Dropdown
+                      label={
+                        idx === 0
+                          ? intl.formatMessage({
+                              id: 'admin/egoi-admin.egoiFields',
+                            })
+                          : ''
+                      }
                       id={`egoi-status-mp-${idx}`}
                       options={egoiOptions}
                       value={m.egoiStatus}
@@ -265,7 +271,6 @@ const EcommerceTab: React.FC = () => {
                       }
                       placeholder={intl.formatMessage({
                         id: 'admin/egoi-admin.selectEgoiStatus',
-                        defaultMessage: 'Selecione o estado E-goi',
                       })}
                       disabled={egoiOptions.length === 0}
                       style={{ width: '100%' }}
@@ -274,13 +279,9 @@ const EcommerceTab: React.FC = () => {
                 ))}
               </div>
 
-              {/* === Fulfillment === */}
               <div>
                 <p style={{ fontWeight: 'bold', marginBottom: 12 }}>
-                  <FormattedMessage
-                    id="admin/egoi-admin.fullfilmentOrderTitle"
-                    defaultMessage="Mapeamento dos Estados de Encomendas do Tipo Fulfillment"
-                  />
+                  <FormattedMessage id="admin/egoi-admin.fullfilmentOrderTitle" />
                 </p>
                 {fulfillmentMap.map((m, idx) => (
                   <div
@@ -293,11 +294,25 @@ const EcommerceTab: React.FC = () => {
                     }}
                   >
                     <Input
+                      label={
+                        idx === 0
+                          ? intl.formatMessage({
+                              id: 'admin/egoi-admin.vtexFields',
+                            })
+                          : ''
+                      }
                       value={capitalize(m.appStatus)}
                       readOnly
                       style={{ width: '100%' }}
                     />
                     <Dropdown
+                      label={
+                        idx === 0
+                          ? intl.formatMessage({
+                              id: 'admin/egoi-admin.egoiFields',
+                            })
+                          : ''
+                      }
                       id={`egoi-status-fu-${idx}`}
                       options={egoiOptions}
                       value={m.egoiStatus}
@@ -306,7 +321,6 @@ const EcommerceTab: React.FC = () => {
                       }
                       placeholder={intl.formatMessage({
                         id: 'admin/egoi-admin.selectEgoiStatus',
-                        defaultMessage: 'Selecione o estado E-goi',
                       })}
                       disabled={egoiOptions.length === 0}
                       style={{ width: '100%' }}
@@ -315,7 +329,6 @@ const EcommerceTab: React.FC = () => {
                 ))}
               </div>
 
-              {/* === Botão Guardar === */}
               <div className="mt5">
                 <span style={{ display: 'flex', justifyContent: 'flex-end' }}>
                   <Button
@@ -323,22 +336,15 @@ const EcommerceTab: React.FC = () => {
                     onClick={saveOrderFields}
                     isLoading={saveLoading}
                   >
-                    <FormattedMessage
-                      id="admin/egoi-admin.save"
-                      defaultMessage="Guardar"
-                    />
+                    <FormattedMessage id="admin/egoi-admin.save" />
                   </Button>
                 </span>
               </div>
             </PageBlock>
 
-            {/* === Orders Sync === */}
             <PageBlock variation="full">
               <p style={{ marginBottom: '24px' }}>
-                <FormattedMessage
-                  id="admin/egoi-admin.syncDescription"
-                  defaultMessage="Nesta secção pode realizar o processo de sincronização total de encomendas. Este processo irá ser realizado em background."
-                />
+                <FormattedMessage id="admin/egoi-admin.syncDescription" />
               </p>
               <div
                 style={{
@@ -348,9 +354,6 @@ const EcommerceTab: React.FC = () => {
                   marginTop: '24px',
                 }}
               >
-                <span style={{ fontWeight: 500 }}>
-                  <FormattedMessage id="admin/egoi-admin.syncNow" />
-                </span>
                 <Button
                   variation="secondary"
                   onClick={handleSyncOrders}
@@ -361,6 +364,12 @@ const EcommerceTab: React.FC = () => {
               </div>
             </PageBlock>
           </>
+        ) : (
+          <PageBlock>
+            <p>
+              <FormattedMessage id="admin/egoi-admin.configNeed" />
+            </p>
+          </PageBlock>
         )}
       </Layout>
     </>

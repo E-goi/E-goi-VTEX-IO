@@ -25,6 +25,9 @@
   "admin/egoi-admin.marketplaceOrderTitle": "Mapping of Marketplace Order States",
   "admin/egoi-admin.fullfilmentOrderTitle": "Mapping of Fulfilment Order States",
   "admin/egoi-admin.selectEgoiStatus": "Select E-goi Status",
+  "admin/egoi-admin.mappingDescription": "In this section you can map the statuses of your store's orders with the statuses recognized by E-goi.",
+  "admin/egoi-admin.syncDescription": "In this section you can carry out the full order synchronization process. This process will be carried out in the background.",
+  "admin/egoi-admin.sync": "Synchronize",
 
   "admin/egoi-admin.errorAppKeyLength": "Error: AppKey is invalid!",
   "admin/egoi-admin.errorAppTokenLength": "Error: AppToken is invalid!",
