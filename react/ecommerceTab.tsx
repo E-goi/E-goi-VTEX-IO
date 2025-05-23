@@ -64,7 +64,6 @@ const EcommerceTab: React.FC = () => {
     setTimeout(() => setShowErrorAlert(false), 5000)
   }
 
-  // Query de mapeamento: ignorar erros de GraphQL (ex: .map is not a function)
   useQuery<OrderMapData>(GET_ORDER_MAP_FIELDS, {
     errorPolicy: 'ignore',
     onCompleted: (data) => {
@@ -89,7 +88,6 @@ const EcommerceTab: React.FC = () => {
       setLoading(false)
     },
     onError: () => {
-      // ao falhar, considera não configurado
       setActive(false)
       setLoading(false)
     },
@@ -188,7 +186,6 @@ const EcommerceTab: React.FC = () => {
     syncOrders({ variables: { input: true } })
   }
 
-  // exibir erro apenas do E-goi
   const combinedError = errorEgoi
 
   return (

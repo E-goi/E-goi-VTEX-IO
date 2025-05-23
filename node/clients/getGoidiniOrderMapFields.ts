@@ -30,7 +30,6 @@ class GetGoidiniOrderMapFieldsClient extends ExternalClient {
       newOptions
     )
 
-    // response: { response, status, message, error }
     return (response.message ?? []).map((item: any) => ({
       order_type: item.order_type,
       mapping: item.mapping ?? [], // normaliza o mapping

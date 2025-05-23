@@ -2,7 +2,6 @@
 import type { InstanceOptions, IOContext } from '@vtex/api'
 import { ExternalClient } from '@vtex/api'
 
-// agora importa o Body, não o input do GraphQL
 import type {
   GoidiniOrderMapSyncBody,
   GoidiniOrderMapSyncResponse,

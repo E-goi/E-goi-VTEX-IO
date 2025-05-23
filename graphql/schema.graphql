@@ -32,13 +32,13 @@ input GoidiniInstall {
 }
 
 input StatusPairInput {
-  appStatus: String!   # estado VTEX / app
-  egoiStatus: String!  # estado E-goi
+  appStatus: String!
+  egoiStatus: String!
 }
 
 input OrderMappingInput {
-  order_type: String!               # 'marketplace' | 'fulfillment'
-  mapping: [StatusPairInput!]!      # lista de pares de estados
+  order_type: String!
+  mapping: [StatusPairInput!]!
 }
 
 input GoidiniOrderMapSync {
