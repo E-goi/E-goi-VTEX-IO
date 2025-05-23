@@ -147,7 +147,9 @@ const EcommerceTab: React.FC = () => {
           return
         }
 
-        showSuccess(intl.formatMessage({ id: 'admin/egoi-admin.syncSuccess' }))
+        showSuccess(
+          intl.formatMessage({ id: 'admin/egoi-admin.syncOrderBulkSuccess' })
+        )
       },
     }
   )

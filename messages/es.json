@@ -21,6 +21,7 @@
   "admin/egoi-admin.configSync": "Configurar la sincronización de contactos",
   "admin/egoi-admin.errorMapping": "¡Campos de asignación de errores! ",
   "admin/egoi-admin.syncSuccess": "¡Campos guardados con éxito!",
+  "admin/egoi-admin.syncOrderBulkSuccess": "¡Sincronización de pedidos iniciada con éxito!",
   "admin/egoi-admin.syncError": "¡Error al guardar campos!",
   "admin/egoi-admin.marketplaceOrderTitle": "Mapeo de los Estados de Pedidos de Marketplace",
   "admin/egoi-admin.fullfilmentOrderTitle": "Mapeo de los Estados de Pedidos de Cumplimiento",

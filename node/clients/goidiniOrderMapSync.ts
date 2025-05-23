@@ -9,7 +9,7 @@ import type {
 } from '../typings/goidiniOrderMapSync'
 
 const routes = {
-  orderMap: () => 'https://dev-goidini.e-goi.com/vtex-i-o/order-map-sync',
+  orderMap: () => 'https://goidini.e-goi.com/vtex-i-o/order-map-sync',
 }
 
 export default class GoidiniOrderMapSyncClient extends ExternalClient {

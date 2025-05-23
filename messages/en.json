@@ -21,6 +21,7 @@
   "admin/egoi-admin.configSync": "Configure Sync Contacts",
   "admin/egoi-admin.errorMapping": "Error mapping fields! ",
   "admin/egoi-admin.syncSuccess": "Fields saved successfully!",
+  "admin/egoi-admin.syncOrderBulkSuccess": "Order synchronization started successfully!",
   "admin/egoi-admin.syncError": "Error saving fields!",
   "admin/egoi-admin.marketplaceOrderTitle": "Mapping of Marketplace Order States",
   "admin/egoi-admin.fullfilmentOrderTitle": "Mapping of Fulfilment Order States",

@@ -21,6 +21,7 @@
   "admin/egoi-admin.configSync": "Configure a Sincronização de Contactos",
   "admin/egoi-admin.errorMapping": "Erro a mapear os campos! ",
   "admin/egoi-admin.syncSuccess": "Campos guardados com sucesso!",
+  "admin/egoi-admin.syncOrderBulkSuccess": "Sincronização de encomendas iniciada com sucesso",
   "admin/egoi-admin.syncError": "Erro a guardar os campos!",
   "admin/egoi-admin.marketplaceOrderTitle": "Mapeamento dos Estados de Encomendas do Tipo Marketplace",
   "admin/egoi-admin.fullfilmentOrderTitle": "Mapeamento dos Estados de Encomendas do Tipo Fullfilment",

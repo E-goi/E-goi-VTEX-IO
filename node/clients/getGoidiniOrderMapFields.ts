@@ -5,7 +5,7 @@ import type { GoidiniOrderMap } from '../typings/goidiniOrderMapResponse'
 
 const routes = {
   getGoidiniOrderMapFieldsData: () =>
-    'https://dev-goidini.e-goi.com/vtex-i-o/map-order-status-fields',
+    'https://goidini.e-goi.com/vtex-i-o/map-order-status-fields',
 }
 
 class GetGoidiniOrderMapFieldsClient extends ExternalClient {
@@ -33,7 +33,7 @@ class GetGoidiniOrderMapFieldsClient extends ExternalClient {
     // response: { response, status, message, error }
     return (response.message ?? []).map((item: any) => ({
       order_type: item.order_type,
-      mapping: item.mapping ?? [],   // normaliza o mapping
+      mapping: item.mapping ?? [], // normaliza o mapping
     }))
   }
 }

@@ -3,7 +3,7 @@ import { ExternalClient } from '@vtex/api'
 
 const routes = {
   getGoidiniEgoiOrderStatusData: () =>
-    'https://dev-goidini.e-goi.com/vtex-i-o/egoi-order-status',
+    'https://goidini.e-goi.com/vtex-i-o/egoi-order-status',
 }
 
 class GetGoidiniEgoiOrderStatusClient extends ExternalClient {
@@ -28,9 +28,7 @@ class GetGoidiniEgoiOrderStatusClient extends ExternalClient {
       newOptions
     )
 
-    return Array.isArray(response.message)
-      ? (response.message as string[])
-      : []
+    return Array.isArray(response.message) ? (response.message as string[]) : []
   }
 }
 

@@ -4,12 +4,12 @@ import { ExternalClient } from '@vtex/api'
 import type { GoidiniResponse } from '../typings/goidiniResponse'
 
 const routes = {
-  orderBulkSync: () => 'https://dev-goidini.e-goi.com/vtex-i-o/order-bulk-sync',
+  orderBulkSync: () => 'https://goidini.e-goi.com/vtex-i-o/order-bulk-sync',
 }
 
 export default class GoidiniOrderBulkSyncClient extends ExternalClient {
   constructor(context: IOContext, options?: InstanceOptions) {
-    super('', context, options)
+    super('', context, { ...(options || {}), retries: 0 })
   }
 
   public async triggerBulk(
