@@ -1,7 +1,7 @@
 {
   "name": "egoi-admin",
   "vendor": "egoipartnerpt",
-  "version": "1.21.0",
+  "version": "1.22.0",
   "title": "E-goi",
   "description": "E-goi app for VTEX IO ",
   "categories": [],
@@ -21,9 +21,7 @@
   },
   "billingOptions": {
     "type": "free",
-    "availableCountries": [
-      "*"
-    ],
+    "availableCountries": ["*"],
     "support": {
       "url": "https://helpdesk.e-goi.com",
       "phone": "+351300404336"
