@@ -1,0 +1,9 @@
+query {
+  getGoidiniOrderMapFields {
+    order_type
+    mapping {
+      appStatus
+      egoiStatus
+    }
+  }
+}

@@ -12,6 +12,10 @@
       "path": "/admin/e-goi/synccontacts"
     },
     {
+      "labelId": "admin-egoi.navigation.ecommerce",
+      "path": "/admin/e-goi/ecommerce"
+    },
+    {
       "labelId": "admin-egoi.navigation.connectedsites",
       "path": "/admin/e-goi/connectedsites"
     },

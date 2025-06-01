@@ -1,0 +1,7 @@
+mutation goidiniOrderMapSync($input: GoidiniOrderMapSync!) {
+  goidiniOrderMapSync(input: $input) {
+    status
+    message
+    response
+  }
+}

@@ -1,0 +1,6 @@
+mutation GOIDINI_ORDER_SYNC_BULK($input: Boolean!) {
+  goidiniOrderSyncBulk(input: $input) {
+    status
+    message
+  }
+}

@@ -1,6 +1,7 @@
 {
   "admin-egoi.navigation.label": "E-goi",
   "admin-egoi.navigation.account": "Cuenta",
+  "admin-egoi.navigation.ecommerce": "Ecommerce",
   "admin-egoi.navigation.synccontacts": "Sincronizar contatos",
   "admin-egoi.navigation.syncproducts": "Sincronizar productos",
   "admin-egoi.navigation.connectedsites": "Connected Sites",
@@ -20,7 +21,11 @@
   "admin/egoi-admin.configSync": "Configurar la sincronización de contactos",
   "admin/egoi-admin.errorMapping": "¡Campos de asignación de errores! ",
   "admin/egoi-admin.syncSuccess": "¡Campos guardados con éxito!",
+  "admin/egoi-admin.syncOrderBulkSuccess": "¡Sincronización de pedidos iniciada con éxito!",
   "admin/egoi-admin.syncError": "¡Error al guardar campos!",
+  "admin/egoi-admin.marketplaceOrderTitle": "Mapeo de los Estados de Pedidos de Marketplace",
+  "admin/egoi-admin.fullfilmentOrderTitle": "Mapeo de los Estados de Pedidos de Cumplimiento",
+  "admin/egoi-admin.selectEgoiStatus": "Seleccione el estado de E-goi",
 
   "admin/egoi-admin.domain": "Dominio",
   "admin/egoi-admin.domainLabel": "Dominio que se conectará",
@@ -36,6 +41,9 @@
   "admin/egoi-admin.csError": "¡Error al guardar la configuración!",
   "admin/egoi-admin.csErrorCreate": "¡Error al crear connected sites! ",
   "admin/egoi-admin.csErrorActivate": "¡Error al activar connected sites! ",
+  "admin/egoi-admin.mappingDescription": "En esta sección puede asignar los estados de los pedidos de su tienda con los estados reconocidos por E-goi.",
+  "admin/egoi-admin.syncDescription": "En esta sección puede realizar el proceso completo de sincronización de órdenes. Este proceso se realizará en segundo plano.",
+  "admin/egoi-admin.sync": "Sincronizar",
 
   "admin/egoi-admin.errorAppKeyLength": "Error: AppKey es invalido!",
   "admin/egoi-admin.errorAppTokenLength": "Error: AppToken es invalido!",
@@ -43,7 +51,7 @@
   "admin/egoi-admin.asText1": "Para la configuración avanzada, haz clic en el botón e inicia sesión en Goidini con los datos de tu cuenta E-goi.",
   "admin/egoi-admin.asText2": "Después de iniciar sesión, tendrá acceso a las configuraciones avanzadas de su integración VTEX donde podrá:",
   "admin/egoi-admin.asFeat1": "Sincroniza tus productos con E-goi",
-  "admin/egoi-admin.asFeat2": "Set up Abandoned Cart and Order Tracking",
+  "admin/egoi-admin.asFeat2": "Set up Abandoned Cart",
   "admin/egoi-admin.asFeat3": "Configurar carrito abandonado y seguimiento de pedidos",
   "admin/egoi-admin.asFeat4": "Configurar el envío de SMS de recuperación de Boleto",
   "admin/egoi-admin.asFeatHeader1": "Productos",
@@ -53,7 +61,7 @@
   "admin/egoi-admin.asButton": "Ajustes avanzados",
   "admin/egoi-admin.abandonedCart": "Carrito Abandonado",
   "admin/egoi-admin.abandonedCartLabel": "Para activar la función de carrito abandonado, debe inyectar este script en el archivo javascript de pago de su tienda.",
-  "admin/egoi-admin.saveRequiredFieldsError": "Erro: Rellene los campos que faltan.",  
+  "admin/egoi-admin.saveRequiredFieldsError": "Erro: Rellene los campos que faltan.",
 
   "admin/egoi-admin.lists": "Lista E-goi ",
   "admin/egoi-admin.insertApikey": "Inserte el E-goi Apikey",

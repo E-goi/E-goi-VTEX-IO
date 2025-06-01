@@ -15,8 +15,11 @@ import { getDataEntities } from './resolvers/getDataEntities'
 import { CheckAdminAccess } from './directives/checkAdminAccess'
 import { Clients } from './clients'
 import { getGoidiniMapFields } from './resolvers/getGoidiniMapFields'
+import { getGoidiniOrderMapFields } from './resolvers/getGoidiniOrderMapFields'
+import { getGoidiniEgoiOrderStatus } from './resolvers/getGoidiniEgoiOrderStatus'
 import { goidiniSettings } from './resolvers/goidiniSettings'
-
+import { goidiniOrderMapSync } from './resolvers/goidiniOrderMapSync'
+import { goidiniOrderSyncBulk } from './resolvers/goidiniOrderSyncBulk'
 const TIMEOUT_MS = 800
 
 // Create a LRU memory cache for the Status client.
@@ -66,6 +69,8 @@ export default new Service({
         getVtexClientFields,
         getDataEntities,
         getGoidiniMapFields,
+        getGoidiniOrderMapFields,
+        getGoidiniEgoiOrderStatus,
         goidiniSettings
       },
       Mutation: {
@@ -73,6 +78,8 @@ export default new Service({
         createConnectedSites,
         goidiniSync,
         goidiniInstall,
+        goidiniOrderMapSync,
+        goidiniOrderSyncBulk
       },
     },
     schemaDirectives: {

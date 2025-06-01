@@ -1,0 +1,4 @@
+# react/graphql/getGoidiniEgoiOrderStatus.graphql
+query getGoidiniEgoiOrderStatus {
+  getGoidiniEgoiOrderStatus
+}
