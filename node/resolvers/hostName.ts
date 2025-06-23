@@ -1,12 +1,11 @@
 import type { ServiceContext } from '@vtex/api'
-
 import type { Clients } from '../clients'
 
 export async function hostName(
   _: unknown,
   __: unknown,
   context: ServiceContext<Clients>
-): Promise<string> {
+): Promise<{ hosts: string[] }> {
   const {
     clients: { stores },
   } = context
@@ -14,17 +13,16 @@ export async function hostName(
   try {
     const response = await stores.getStores()
 
-    const [store, ,] = response
-
-    if (!response) {
-      throw new Error('Error')
+    if (!response || !Array.isArray(response) || response.length === 0) {
+      throw new Error('No store information found')
     }
 
-    const { hosts } = store
-    const [host, ,] = hosts
+    const { hosts = [] } = response[0]
 
-    return host
+    return {
+      hosts,
+    }
   } catch (error) {
-    throw new Error(error.message)
+    throw new Error(`Failed to get hosts: ${error.message}`)
   }
 }

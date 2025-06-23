@@ -2,7 +2,7 @@ type Query {
   getAppSettings: GetAppSettings @checkAdminAccess @cacheControl(scope: PRIVATE)
   myAccount(apikey: String): MyAccount
   getLists(apikey: String): GetLists
-  hostName: String
+  hostName: HostResponse
   getEgoiFields: [EgoiFields]
   getVtexClientFields(acronym: String): VtexClient
   getDataEntities: [DataEntities]
@@ -21,6 +21,10 @@ type Mutation {
   goidiniOrderMapSync(input: GoidiniOrderMapSync): GoidiniResponse
   goidiniInstall(input: GoidiniInstall): GoidiniResponse
   goidiniOrderSyncBulk(input: Boolean!): GoidiniResponse
+}
+
+type HostResponse {
+  hosts: [String!]!
 }
 
 input GoidiniInstall {

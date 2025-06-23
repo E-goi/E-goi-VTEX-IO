@@ -31,7 +31,8 @@ export async function createConnectedSites(
       appSettings.apikey,
       name,
       appSettings.domain,
-      appSettings.listId
+      appSettings.listId,
+      appSettings.appKey,
     )
   } catch (error) {
     throw new Error(error.message)

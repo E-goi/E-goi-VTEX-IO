@@ -31,7 +31,7 @@
   "admin/egoi-admin.errorAppTokenLength": "Error: AppToken é inválida!",
   "admin/egoi-admin.syncDescription": "Nesta secção pode realizar o processo de sincronização total de encomendas. Este processo irá ser realizado em background.",
   "admin/egoi-admin.domain": "Domínio",
-  "admin/egoi-admin.domainLabel": "Domínio que vai ser conectado",
+  "admin/egoi-admin.domainLabel": "Selecione o domínio que vai ser conectado",
   "admin/egoi-admin.activateConnectedSites": "Ativar Connected Sites",
   "admin/egoi-admin.csText1": "Connected Sites é uma funcionalidade de gestão de conteúdos do E-goi, ligada à sua Loja Vtex, perfeita para ações de remarketing como utilizadores recorrentes, carrinho abandonado, formulários e muito mais!",
   "admin/egoi-admin.csText2": "Ative esta opção aqui e confirme se o Connected Sites também está ativo na Plataforma E-goi (Configurações da Conta -> Connected Sites).",

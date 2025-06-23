@@ -28,7 +28,7 @@
   "admin/egoi-admin.selectEgoiStatus": "Seleccione el estado de E-goi",
 
   "admin/egoi-admin.domain": "Dominio",
-  "admin/egoi-admin.domainLabel": "Dominio que se conectará",
+  "admin/egoi-admin.domainLabel": "Selecione o dominio que se conectará",
   "admin/egoi-admin.activateConnectedSites": "Activar Connected Sites",
   "admin/egoi-admin.csText1": "Connected Sites es una función de administrador de contenido de E-goi, conectada a su tienda Vtex, ¡perfecta para acciones de remarketing como usuarios que regresan, carrito abandonado, formularios y mucho más!",
   "admin/egoi-admin.csText2": "Active esta opción aquí y confirme si Connected Sites también está activo en la plataforma E-goi (Configuración de la cuenta -> Connected Sites).",

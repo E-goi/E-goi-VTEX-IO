@@ -4,7 +4,7 @@ import { ExternalClient } from '@vtex/api'
 import type { GoidiniResponse } from '../typings/goidiniResponse'
 
 const routes = {
-  getConnectedSitesData: () => `https://goidini.e-goi.com/vtex-i-o/connected-sites`,
+  getConnectedSitesData: () => `https://dev-goidini.e-goi.com/vtex-i-o/connected-sites`,
 }
 
 class ConnectedSitesClient extends ExternalClient {
@@ -16,7 +16,8 @@ class ConnectedSitesClient extends ExternalClient {
     apikey: string,
     appName: string,
     domain: string,
-    listId: number
+    listId: number,
+    appKey: string,
   ): Promise<GoidiniResponse> {
     const newOptions = { ...(this.options as InstanceOptions) }
 
@@ -25,6 +26,7 @@ class ConnectedSitesClient extends ExternalClient {
       'X-Vtex-Use-Https': 'true',
       Apikey: apikey,
       'vtex-appName': appName,
+      'x-vtex-api-appKey': appKey,
     }
 
     return this.http.post(
