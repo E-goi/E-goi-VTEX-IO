@@ -35,6 +35,7 @@ const ConnectedSitesTab = () => {
   const [successMessage, setSuccessMessage] = useState('Success')
   const [showErrorAlert, setShowErrorAlert] = useState(false)
   const [showSuccessAlert, setShowSuccessAlert] = useState(false)
+  const [updateConnectedSites] = useMutation(CREATE_CONNECTED_SITES)
 
   const showSuccess = (message: string) => {
     setSuccessMessage(message)
@@ -120,7 +121,7 @@ const ConnectedSitesTab = () => {
         },
       })
       showSuccess(intl.formatMessage({ id: 'admin/egoi-admin.csSuccess' }))
-      createConnectedSites()
+      updateConnectedSites()
     } catch (err) {
       showError(
         intl.formatMessage({ id: 'admin/egoi-admin.csError' }) + String(err)
