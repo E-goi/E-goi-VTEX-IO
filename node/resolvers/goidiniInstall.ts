@@ -13,13 +13,15 @@ export async function goidiniInstall(
     clients: {
       goidiniInstall,
       stores
-    }
+    },
+    vtex: { account },
+
   } = context
 
   const response = await stores.getStores()
 
-  const [store, ,] = response
-  const { name } = store
+  const [store] = response || []
+  const name = store?.name || `${account}`
 
   const appId = process.env.VTEX_APP_ID
 

@@ -10,14 +10,15 @@ export async function getDataEntities(
     ): Promise<DataEntities[]> {
     const {
         clients: { getDataEntities, stores },
+        vtex: { account }
     } = context
     
     const appId = process.env.VTEX_APP_ID
-    
+
     const response = await stores.getStores()
 
-    const [store, ,] = response
-    const { name } = store
+    const [store] = response || []
+    const name = store?.name || `${account}`
 
     if (!appId) {
         throw new Error('No appId defined')

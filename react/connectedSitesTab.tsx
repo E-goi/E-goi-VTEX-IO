@@ -226,14 +226,15 @@ const ConnectedSitesTab = () => {
                   <h4 className="t-heading-5 mt0">
                     <FormattedMessage id="admin/egoi-admin.domain" />
                   </h4>
-                  {domains.length === 1 ? (
-                    <Input
-                      label={<FormattedMessage id="admin/egoi-admin.domainLabel" />}
-                      readOnly
-                      value={domains[0].label}
-                    />
-                  ) : (
-                    <>
+
+                  <div>
+                    {domains.length === 1 ? (
+                      <Input
+                        label={<FormattedMessage id="admin/egoi-admin.domainLabel" />}
+                        readOnly
+                        value={domains[0].label}
+                      />
+                    ) : (
                       <Dropdown
                         label={intl.formatMessage({ id: 'admin/egoi-admin.domainLabel' })}
                         options={domains}
@@ -241,18 +242,19 @@ const ConnectedSitesTab = () => {
                         onChange={handleDomainChange}
                         placeholder={intl.formatMessage({ id: 'admin/egoi-admin.domainLabel' })}
                       />
-                      <div className="mt4 flex justify-end">
-                        <Button
-                          variation="secondary"
-                          onClick={saveSelectedDomain}
-                          isLoading={savingSettings}
-                          disabled={savingSettings}
-                        >
-                          <FormattedMessage id="admin/egoi-admin.save" />
-                        </Button>
-                      </div>
-                    </>
-                  )}
+                    )}
+
+                    <div className="mt4 flex justify-end">
+                      <Button
+                        variation="secondary"
+                        onClick={saveSelectedDomain}
+                        isLoading={savingSettings}
+                        disabled={savingSettings}
+                      >
+                        <FormattedMessage id="admin/egoi-admin.save" />
+                      </Button>
+                    </div>
+                  </div>
                 </section>
               )}
             </>

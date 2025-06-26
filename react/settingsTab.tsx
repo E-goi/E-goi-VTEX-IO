@@ -331,12 +331,6 @@ const SettingsTab = () => {
       if (e.goidiniInstall.status === 200 || e.goidiniInstall.status === 20) {
         const pixelActive = !e.goidiniInstall.message
 
-        console.log('[GOIDINI_INSTALL] vai usar domínio:', e)
-        console.log('[GOIDINI_INSTALL] vai domainValuedomainValue domínio:', domainValue)
-
-        console.log('myAccountData:', myAccountData)
-        console.log('client_id:', myAccountData?.myAccount?.general_info?.client_id)
-
         let resp = saveAppSettings({
           variables: {
             appKey: appKeyValue,
