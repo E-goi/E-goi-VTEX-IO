@@ -1,3 +1,5 @@
 query hostName {
-  hostName
+  hostName {
+    hosts
+  }
 }

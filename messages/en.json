@@ -34,7 +34,7 @@
   "admin/egoi-admin.errorAppTokenLength": "Error: AppToken is invalid!",
 
   "admin/egoi-admin.domain": "Domain",
-  "admin/egoi-admin.domainLabel": "Domain that will be connected",
+  "admin/egoi-admin.domainLabel": "Select the domain that will be connected",
   "admin/egoi-admin.activateConnectedSites": "Activate Connected Sites",
   "admin/egoi-admin.csText1": "Connected Sites is an E-goi content manager feature, connected to your Vtex Store, perfect for remarketing actions like returning users, abandoned cart, forms and much more!",
   "admin/egoi-admin.csText2": "Activate this option here, and confirm if Connected Sites is also active in E-goi Platform (Account Settings -> Connected Sites).",

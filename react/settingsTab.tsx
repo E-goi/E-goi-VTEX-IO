@@ -46,7 +46,8 @@ const SettingsTab = () => {
   const [showSuccessAlert, setShowSuccessAlert] = useState(false)
 
   const [skip, setSkip] = useState(false)
-  
+  const [domainValue, setDomainValue] = useState<string | null>(null)
+
   const showSuccess = (message: string) => {
     setSuccessMessage(message)
     setShowSuccessAlert(true)
@@ -73,13 +74,25 @@ const SettingsTab = () => {
   /**
    * Get Host Name Query
    */
-  const { data: hostName } = useQuery(GET_HOST, { ssr: false })
+  const { data: hostName } = useQuery(GET_HOST, {
+    ssr: false,
+    onCompleted: () => {
+      if (!domainValue && hostName?.hostName?.hosts?.length) {
+        setDomainValue(hostName.hostName.hosts[0])
+      }
+    },
+  })
 
   /**
    * Get App Settings Query
    */
   const { data: appSettings } = useQuery(GET_APP_SETTINGS, {
     onCompleted: () => {
+      const savedDomain = appSettings.getAppSettings.domain
+      if (savedDomain) {
+        setDomainValue(savedDomain)
+      }
+
       if (appSettings && appSettings.getAppSettings.apikey != '') {
 
         setApikeyValue(appSettings.getAppSettings.apikey)
@@ -117,23 +130,23 @@ const SettingsTab = () => {
             setAppKeyValue(goidiniSettingsData.goidiniSettings.message.vtexAppKey)
             setAppTokenValue(goidiniSettingsData.goidiniSettings.message.vtexAppToken)
             setListSelected(goidiniSettingsData.goidiniSettings.message.listId)
-            
-            if(goidiniSettingsData.goidiniSettings.message.vtexAppKey != '' && goidiniSettingsData.goidiniSettings.message.vtexAppToken != '' 
+
+            if(goidiniSettingsData.goidiniSettings.message.vtexAppKey != '' && goidiniSettingsData.goidiniSettings.message.vtexAppToken != ''
             && goidiniSettingsData.goidiniSettings.message.listId != 0 && apikeyValue != '' && myAccountData ){
               saveAppSettings({
                 variables: {
                   appKey: goidiniSettingsData.goidiniSettings.message.vtexAppKey,
                   appToken: goidiniSettingsData.goidiniSettings.message.vtexAppToken,
                   apikey: apikeyValue,
-                  clientId: myAccountData.myAccount.general_info.client_id
+                  clientId: myAccountData?.myAccount?.general_info?.client_id
                     ? parseInt(myAccountData.myAccount.general_info.client_id, 10)
                     : 0,
-                  domain: (hostName ? hostName.hostName : null),
+                  domain: domainValue,
                   listId: goidiniSettingsData.goidiniSettings.message.listId
                 },
               })
-            } 
-            
+            }
+
              setDisableConfigs(false)
           } else{
             if(goidiniSettingsData && goidiniSettingsData.goidiniSettings.status != 404){
@@ -176,7 +189,7 @@ const SettingsTab = () => {
 
       },
       onError: () => {
-          setApikeyValue('')   
+          setApikeyValue('')
           setAppKeyValue('')
           setAppTokenValue('')
           setListSelected(0)
@@ -209,11 +222,11 @@ const SettingsTab = () => {
         if(listSelected == 0){
           setListSelected(parseInt(lists[0].value, 10))
         }
-        
+
         setSkip(false)
         setIsLoading(true)
         goidiniSettings()
-        
+
 
       }
     } catch (e) {
@@ -250,6 +263,7 @@ const SettingsTab = () => {
    */
   const [myaccount, { data: myAccountData }] = useLazyQuery(GET_MY_ACCOUNT, {
     onCompleted: () => {
+      console.log(myAccountData)
       if (myAccountData) {
         if (myAccountData.myAccount.general_info.client_id) {
           setApikeyError(false)
@@ -286,10 +300,10 @@ const SettingsTab = () => {
             appKey: appKeyValue,
             appToken: appTokenValue,
             apikey: apikeyValue,
-            clientId: myAccountData.myAccount.general_info.client_id
+            clientId: myAccountData?.myAccount?.general_info?.client_id
               ? parseInt(myAccountData.myAccount.general_info.client_id, 10)
               : 0,
-            domain: (hostName ? hostName.hostName : null),
+            domain: domainValue,
             listId: listSelected,
             connectedSites: true
           },
@@ -322,11 +336,11 @@ const SettingsTab = () => {
             appKey: appKeyValue,
             appToken: appTokenValue,
             apikey: apikeyValue,
-            clientId: myAccountData.myAccount.general_info.client_id
+            clientId: myAccountData?.myAccount?.general_info?.client_id
               ? parseInt(myAccountData.myAccount.general_info.client_id, 10)
               : 0,
             pixelActive,
-            domain: (hostName ? hostName.hostName : null),
+            domain: domainValue,
             listId: listSelected,
             connectedSites: pixelActive
           },
@@ -354,7 +368,7 @@ const SettingsTab = () => {
 
   /**
    * Handle apikey change
-   * @param e 
+   * @param e
    */
   const handleChangeApiKeyValue = async (e: any) => {
     setApikeyValue(e.target.value)
@@ -371,7 +385,7 @@ const SettingsTab = () => {
 
   /**
    * Function to validate settings to save
-   * @returns 
+   * @returns
    */
   const saveSettings = async () => {
     setDisableConfigs(true)
@@ -390,7 +404,7 @@ const SettingsTab = () => {
         setShowErrorAlert(true)
         setSaveSettingsLoading(false)
         setDisableConfigs(false)
-  
+
         return
       }
       setAppKeyError(false)
@@ -405,12 +419,12 @@ const SettingsTab = () => {
         setShowErrorAlert(true)
         setSaveSettingsLoading(false)
         setDisableConfigs(false)
-  
+
         return
       }
       setAppTokenError(false)
     }
-    
+
 
     //checkar errors
     if (
@@ -432,7 +446,7 @@ const SettingsTab = () => {
         apikey: apikeyValue,
         appkey: appKeyValue,
         apptoken: appTokenValue,
-        domain: (hostName ? hostName.hostName : null),
+        domain: domainValue,
         listId: listSelected,
       },
     })
@@ -479,7 +493,7 @@ const SettingsTab = () => {
                   }}
                 />
               </div>
-              
+
               <div className="mb5" hidden={!apikeyValue || apikeyError|| dropdown } >
                 <Input
                   label={

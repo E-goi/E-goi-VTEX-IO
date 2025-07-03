@@ -11,14 +11,15 @@ export async function createConnectedSites(
 ): Promise<GoidiniResponse> {
   const {
     clients: { createConnectedSites, apps, stores },
+    vtex: { account },
   } = context
 
   const appId = process.env.VTEX_APP_ID
 
   const response = await stores.getStores()
 
-  const [store, ,] = response
-  const { name } = store
+  const [store] = response || []
+  const name = store?.name || `${account}`
 
   if (!appId) {
     throw new Error('No appId defined')
@@ -31,7 +32,8 @@ export async function createConnectedSites(
       appSettings.apikey,
       name,
       appSettings.domain,
-      appSettings.listId
+      appSettings.listId,
+      appSettings.appKey,
     )
   } catch (error) {
     throw new Error(error.message)
