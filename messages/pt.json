@@ -30,6 +30,7 @@
   "admin/egoi-admin.errorAppKeyLength": "Error: AppKey é inválida!",
   "admin/egoi-admin.errorAppTokenLength": "Error: AppToken é inválida!",
   "admin/egoi-admin.syncDescription": "Nesta secção pode realizar o processo de sincronização total de encomendas. Este processo irá ser realizado em background.",
+  "admin/egoi-admin.syncDescriptionOrderBulk": "Blah Blah",
   "admin/egoi-admin.domain": "Domínio",
   "admin/egoi-admin.domainLabel": "Selecione o domínio que vai ser conectado",
   "admin/egoi-admin.activateConnectedSites": "Ativar Connected Sites",

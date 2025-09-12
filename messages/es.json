@@ -43,6 +43,7 @@
   "admin/egoi-admin.csErrorActivate": "¡Error al activar connected sites! ",
   "admin/egoi-admin.mappingDescription": "En esta sección puede asignar los estados de los pedidos de su tienda con los estados reconocidos por E-goi.",
   "admin/egoi-admin.syncDescription": "En esta sección puede realizar el proceso completo de sincronización de órdenes. Este proceso se realizará en segundo plano.",
+  "admin/egoi-admin.syncDescriptionOrderBulk": "Blah Blah",
   "admin/egoi-admin.sync": "Sincronizar",
 
   "admin/egoi-admin.errorAppKeyLength": "Error: AppKey es invalido!",

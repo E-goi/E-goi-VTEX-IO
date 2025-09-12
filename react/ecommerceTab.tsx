@@ -345,6 +345,11 @@ const EcommerceTab: React.FC = () => {
               <p style={{ marginBottom: '24px' }}>
                 <FormattedMessage id="admin/egoi-admin.syncDescription" />
               </p>
+              <Alert type="info" style={{ marginBottom: '24px' }}>
+                <FormattedMessage id="admin/egoi-admin.syncDescriptionOrderBulk" />
+              </Alert>
+
+
               <div
                 style={{
                   display: 'flex',
