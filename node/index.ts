@@ -22,11 +22,9 @@ import { goidiniOrderMapSync } from './resolvers/goidiniOrderMapSync'
 import { goidiniOrderSyncBulk } from './resolvers/goidiniOrderSyncBulk'
 const TIMEOUT_MS = 800
 
-// Create a LRU memory cache for the Status client.
+// Create a LRU memory cache for the clients.
 // The @vtex/api HttpClient respects Cache-Control headers and uses the provided cache.
 const memoryCache = new LRUCache<string, any>({ max: 5000 })
-
-metrics.trackCache('status', memoryCache)
 
 // This is the configuration for clients available in `ctx.clients`.
 const clients: ClientsConfig<Clients> = {
@@ -37,10 +35,6 @@ const clients: ClientsConfig<Clients> = {
     default: {
       retries: 2,
       timeout: TIMEOUT_MS,
-    },
-    // This key will be merged with the default options and add this cache to our Status client.
-    status: {
-      memoryCache,
     },
   },
 }
