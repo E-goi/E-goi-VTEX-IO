@@ -1,7 +1,7 @@
 {
   "name": "egoi-admin",
   "vendor": "egoipartnerpt",
-  "version": "2.3.0",
+  "version": "4.1.0",
   "title": "E-goi",
   "description": "E-goi app for VTEX IO ",
   "categories": [],
@@ -15,7 +15,7 @@
     "admin": "0.x",
     "react": "3.x",
     "pixel": "0.x",
-    "graphql": "1.x",
+    "graphql": "2.x",
     "messages": "1.x",
     "store": "0.x"
   },

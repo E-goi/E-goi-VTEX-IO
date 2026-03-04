@@ -1,26 +1,27 @@
 type Query {
-  getAppSettings: GetAppSettings @checkAdminAccess @cacheControl(scope: PRIVATE)
-  myAccount(apikey: String): MyAccount
-  getLists(apikey: String): GetLists
-  hostName: HostResponse
-  getEgoiFields: [EgoiFields]
-  getVtexClientFields(acronym: String): VtexClient
-  getDataEntities: [DataEntities]
-  getGoidiniMapFields: GoidiniMapResponse
-  getGoidiniOrderMapFields: [GoidiniOrderMap]
-  getGoidiniEgoiOrderStatus: [String!]!
-  goidiniSettings(apikey: String): GoidiniSettingsResponse
+  getAppSettings: GetAppSettings @checkAdminAccess @cacheControl(scope: PRIVATE) @auth(scope: PUBLIC)
+  myAccount(apikey: String): MyAccount @checkAdminAccess @auth(scope: PUBLIC)
+  getLists(apikey: String): GetLists @checkAdminAccess @auth(scope: PUBLIC)
+  hostName: HostResponse @checkAdminAccess @auth(scope: PUBLIC)
+  getEgoiFields: [EgoiFields] @checkAdminAccess @auth(scope: PUBLIC)
+  getVtexClientFields(acronym: String): VtexClient @checkAdminAccess @auth(scope: PUBLIC)
+  getDataEntities: [DataEntities] @checkAdminAccess @auth(scope: PUBLIC)
+  getGoidiniMapFields: GoidiniMapResponse @checkAdminAccess @auth(scope: PUBLIC)
+  getGoidiniOrderMapFields: [GoidiniOrderMap] @checkAdminAccess @auth(scope: PUBLIC)
+  getGoidiniEgoiOrderStatus: [String!]! @checkAdminAccess @auth(scope: PUBLIC)
+  goidiniSettings(apikey: String): GoidiniSettingsResponse @checkAdminAccess @auth(scope: PUBLIC)
 }
 
 type Mutation {
   saveAppSettings(input: AppSettings): Boolean
     @checkAdminAccess
     @cacheControl(scope: PRIVATE)
-  createConnectedSites: GoidiniResponse
-  goidiniSync(input: GoidiniSync): GoidiniResponse
-  goidiniOrderMapSync(input: GoidiniOrderMapSync): GoidiniResponse
-  goidiniInstall(input: GoidiniInstall): GoidiniResponse
-  goidiniOrderSyncBulk(input: Boolean!): GoidiniResponse
+    @auth(scope: PUBLIC)
+  createConnectedSites: GoidiniResponse @checkAdminAccess @auth(scope: PUBLIC)
+  goidiniSync(input: GoidiniSync): GoidiniResponse @checkAdminAccess @auth(scope: PUBLIC)
+  goidiniOrderMapSync(input: GoidiniOrderMapSync): GoidiniResponse @checkAdminAccess @auth(scope: PUBLIC)
+  goidiniInstall(input: GoidiniInstall): GoidiniResponse @checkAdminAccess @auth(scope: PUBLIC)
+  goidiniOrderSyncBulk(input: Boolean!): GoidiniResponse @checkAdminAccess @auth(scope: PUBLIC)
 }
 
 type HostResponse {

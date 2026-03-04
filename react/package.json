@@ -22,15 +22,13 @@
     "@vtex/test-tools": "^3.3.2",
     "@vtex/tsconfig": "^0.4.4",
     "apollo-cache-inmemory": "^1.6.5",
-    "apollo-client": "^2.4.7",
-    "egoipartnerpt.egoi-admin": "https://newdev--egoipartnerpt.myvtex.com/_v/private/typings/linked/v1/egoipartnerpt.egoi-admin@1.18.0+build1718181968/public/@types/egoipartnerpt.egoi-admin",
-    "graphql": "^14.6.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-intl": "^2.7.2",
     "typescript": "3.9.7",
     "vtex.pixel-interfaces": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.pixel-interfaces@1.1.1/public/_types/react",
     "vtex.render-runtime": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.134.2/public/@types/vtex.render-runtime",
     "vtex.styleguide": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.146.9/public/@types/vtex.styleguide"
+  },
+  "resolutions": {
+    "expect": "27.5.1",
+    "pretty-format": "27.5.1"
   }
 }
