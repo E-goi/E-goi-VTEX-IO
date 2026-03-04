@@ -1,5 +1,5 @@
 import type { ClientsConfig, ServiceContext, RecorderState } from '@vtex/api'
-import { LRUCache, Service } from '@vtex/api'
+import { Service } from '@vtex/api'
 
 import { myAccount } from './resolvers/myAccount'
 import { getAppSettings } from './resolvers/getAppSettings'
@@ -21,10 +21,6 @@ import { goidiniSettings } from './resolvers/goidiniSettings'
 import { goidiniOrderMapSync } from './resolvers/goidiniOrderMapSync'
 import { goidiniOrderSyncBulk } from './resolvers/goidiniOrderSyncBulk'
 const TIMEOUT_MS = 800
-
-// Create a LRU memory cache for the clients.
-// The @vtex/api HttpClient respects Cache-Control headers and uses the provided cache.
-const memoryCache = new LRUCache<string, any>({ max: 5000 })
 
 // This is the configuration for clients available in `ctx.clients`.
 const clients: ClientsConfig<Clients> = {

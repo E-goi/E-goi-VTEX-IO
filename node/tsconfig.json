@@ -2,10 +2,12 @@
   "extends": "@vtex/tsconfig",
   "compilerOptions": {
     "noEmitOnError": false,
-    "lib": ["dom"],
-    "module": "esnext",
+    "lib": ["dom", "esnext"],
+    "module": "commonjs",
     "moduleResolution": "node",
-    "target": "es2019"
+    "target": "es2019",
+    "skipLibCheck": true
   },
+  "exclude": ["node_modules"],
   "include": ["./typings/*.d.ts", "./**/*.tsx", "./**/*.ts"]
 }
