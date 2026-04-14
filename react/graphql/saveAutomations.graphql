@@ -1,0 +1,7 @@
+mutation SAVE_AUTOMATIONS($input: AutomationInput!) {
+  saveAutomations(input: $input) @context(provider: "egoipartnerpt.egoi-admin") {
+    paused
+    type
+    domain
+  }
+}

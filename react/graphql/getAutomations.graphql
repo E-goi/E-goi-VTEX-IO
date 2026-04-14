@@ -1,0 +1,7 @@
+query GET_AUTOMATIONS {
+  getAutomations @context(provider: "egoipartnerpt.egoi-admin") {
+    paused
+    type
+    domain
+  }
+}

@@ -26,7 +26,6 @@
   "admin/egoi-admin.marketplaceOrderTitle": "Mapeo de los Estados de Pedidos de Marketplace",
   "admin/egoi-admin.fullfilmentOrderTitle": "Mapeo de los Estados de Pedidos de Cumplimiento",
   "admin/egoi-admin.selectEgoiStatus": "Seleccione el estado de E-goi",
-
   "admin/egoi-admin.domain": "Dominio",
   "admin/egoi-admin.domainLabel": "Selecione o dominio que se conectará",
   "admin/egoi-admin.activateConnectedSites": "Activar Connected Sites",
@@ -44,10 +43,8 @@
   "admin/egoi-admin.mappingDescription": "En esta sección puede asignar los estados de los pedidos de su tienda con los estados reconocidos por E-goi.",
   "admin/egoi-admin.syncDescription": "En esta sección puede realizar el proceso completo de sincronización de órdenes. Este proceso se realizará en segundo plano.",
   "admin/egoi-admin.sync": "Sincronizar",
-
   "admin/egoi-admin.errorAppKeyLength": "Error: AppKey es invalido!",
   "admin/egoi-admin.errorAppTokenLength": "Error: AppToken es invalido!",
-
   "admin/egoi-admin.asText1": "Para la configuración avanzada, haz clic en el botón e inicia sesión en Goidini con los datos de tu cuenta E-goi.",
   "admin/egoi-admin.asText2": "Después de iniciar sesión, tendrá acceso a las configuraciones avanzadas de su integración VTEX donde podrá:",
   "admin/egoi-admin.asFeat1": "Sincroniza tus productos con E-goi",
@@ -62,7 +59,6 @@
   "admin/egoi-admin.abandonedCart": "Carrito Abandonado",
   "admin/egoi-admin.abandonedCartLabel": "Para activar la función de carrito abandonado, debe inyectar este script en el archivo javascript de pago de su tienda.",
   "admin/egoi-admin.saveRequiredFieldsError": "Erro: Rellene los campos que faltan.",
-
   "admin/egoi-admin.lists": "Lista E-goi ",
   "admin/egoi-admin.insertApikey": "Inserte el E-goi Apikey",
   "admin/egoi-admin.insertAppToken": "Inserte el appToken VTEX",
@@ -75,6 +71,10 @@
   "admin/egoi-admin.legacy1": "¡Atención! Si tiene activa la ",
   "admin/egoi-admin.legacy2": "integración legacy",
   "admin/egoi-admin.legacy3": " con vtex, la configuración de esta integración reemplazará la existente.",
-
-  "admin/egoi-admin.configNeed": "¡Necesita configurar la integración en la pestaña Cuenta!"
+  "admin/egoi-admin.configNeed": "¡Necesita configurar la integração na tab Account!",
+  "admin/egoi-admin.automationActiveAnotherDomain": "Esta automatización ya está activa en otro dominio: {domain}",
+  "admin/egoi-admin.automationSuccess": "Estado de la automatización actualizado con éxito.",
+  "admin/egoi-admin.automationError": "Error al actualizar el estado de la automatización.",
+  "admin/egoi-admin.automateAbandonedCart": "Automatizar la comunicación del carrito abandonado",
+  "admin/egoi-admin.infoAbandonedCart": "En esta sección puedes activar tu flujo automatizado de carrito abandonado en E-goi."
 }

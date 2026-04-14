@@ -108,6 +108,20 @@
       }
     },
     {
+      "name": "outbound-access",
+      "attrs": {
+        "host": "dev-api.egoiapp.com",
+        "path": "/automations/*"
+      }
+    },
+    {
+      "name": "outbound-access",
+      "attrs": {
+        "host": "api.egoiapp.com",
+        "path": "/automations/*"
+      }
+    },
+    {
       "name": "update-app-settings"
     }
   ],

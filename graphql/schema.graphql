@@ -10,6 +10,7 @@ type Query {
   getGoidiniOrderMapFields: [GoidiniOrderMap] @checkAdminAccess @auth(scope: PUBLIC)
   getGoidiniEgoiOrderStatus: [String!]! @checkAdminAccess @auth(scope: PUBLIC)
   goidiniSettings(apikey: String): GoidiniSettingsResponse @checkAdminAccess @auth(scope: PUBLIC)
+  getAutomations: [AutomationSystem] @checkAdminAccess @auth(scope: PUBLIC)
 }
 
 type Mutation {
@@ -22,6 +23,7 @@ type Mutation {
   goidiniOrderMapSync(input: GoidiniOrderMapSync): GoidiniResponse @checkAdminAccess @auth(scope: PUBLIC)
   goidiniInstall(input: GoidiniInstall): GoidiniResponse @checkAdminAccess @auth(scope: PUBLIC)
   goidiniOrderSyncBulk(input: Boolean!): GoidiniResponse @checkAdminAccess @auth(scope: PUBLIC)
+  saveAutomations(input: AutomationInput): AutomationSystem @checkAdminAccess @auth(scope: PUBLIC)
 }
 
 type HostResponse {
@@ -73,4 +75,15 @@ input AppSettings {
   connectedSites: Boolean
   vtex: [String]
   egoi: [String]
+}
+
+type AutomationSystem {
+  paused: Boolean
+  type: String
+  domain: String
+}
+
+input AutomationInput {
+  paused: Boolean
+  domain: String
 }

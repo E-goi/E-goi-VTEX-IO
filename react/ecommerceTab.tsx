@@ -9,6 +9,7 @@ import {
   Input,
   Button,
   Alert,
+  Toggle
 } from 'vtex.styleguide'
 import { FormattedMessage, useIntl } from 'react-intl'
 
@@ -16,6 +17,9 @@ import GET_ORDER_MAP_FIELDS from './graphql/getGoidiniOrderMapFields.graphql'
 import GET_EGOI_ORDER_FIELDS from './graphql/getGoidiniEgoiOrderStatus.graphql'
 import GOIDINI_ORDER_MAP_SYNC from './graphql/goidiniOrderMapSync.graphql'
 import GOIDINI_ORDER_SYNC_ORDER_BULK from './graphql/goidiniOrderSyncBulk.graphql'
+import GET_AUTOMATIONS from './graphql/getAutomations.graphql'
+import SAVE_AUTOMATIONS from './graphql/saveAutomations.graphql'
+import GET_HOST from './graphql/hostName.graphql'
 
 interface Mapping {
   appStatus: string
@@ -30,6 +34,19 @@ interface OrderMapData {
 }
 interface EgoiStatusData {
   getGoidiniEgoiOrderStatus: string[]
+}
+interface Automation {
+  paused: boolean
+  type: string
+  domain: string
+}
+interface AutomationData {
+  getAutomations: Automation[]
+}
+interface HostData {
+  hostName: {
+    hosts: string[]
+  }
 }
 
 const capitalize = (str: string) =>
@@ -51,6 +68,12 @@ const EcommerceTab: React.FC = () => {
   const [saveLoading, setSaveLoading] = useState(false)
   const [active, setActive] = useState(true)
   const [loading, setLoading] = useState(true)
+
+  const [automationPaused, setAutomationPaused] = useState(true)
+  const [currentDomain, setCurrentDomain] = useState('')
+  const [automationDomain, setAutomationDomain] = useState('')
+  const [showAutomationToggle, setShowAutomationToggle] = useState(true)
+  const [automationLoading, setAutomationLoading] = useState(true)
 
   const showSuccess = (message: string) => {
     setSuccessMessage(message)
@@ -127,8 +150,7 @@ const EcommerceTab: React.FC = () => {
     {
       onError: (e) => {
         showError(
-          `${intl.formatMessage({ id: 'admin/egoi-admin.errorMapping' })} ${
-            e.message
+          `${intl.formatMessage({ id: 'admin/egoi-admin.errorMapping' })} ${e.message
           }`
         )
       },
@@ -137,8 +159,7 @@ const EcommerceTab: React.FC = () => {
 
         if (!result || result.status !== 200) {
           showError(
-            `${intl.formatMessage({ id: 'admin/egoi-admin.errorMapping' })} ${
-              result?.message
+            `${intl.formatMessage({ id: 'admin/egoi-admin.errorMapping' })} ${result?.message
             }`
           )
 
@@ -151,6 +172,72 @@ const EcommerceTab: React.FC = () => {
       },
     }
   )
+
+  useQuery<HostData>(GET_HOST, {
+    ssr: false,
+    onCompleted: (data) => {
+      if (data?.hostName?.hosts?.length) {
+        setCurrentDomain(data.hostName.hosts[0])
+      }
+    },
+  })
+
+  useQuery<AutomationData>(GET_AUTOMATIONS, {
+    fetchPolicy: 'network-only',
+    onCompleted: (data) => {
+      console.log(data)
+      const automation = data?.getAutomations?.find(
+        (a) => a.type === 'abandoned_cart'
+      )
+
+      if (automation) {
+        setAutomationPaused(automation.paused)
+        setAutomationDomain(automation.domain)
+
+        if (!automation.paused && automation.domain !== currentDomain && currentDomain !== '') {
+          setShowAutomationToggle(false)
+        } else {
+          setShowAutomationToggle(true)
+        }
+      } else {
+        setShowAutomationToggle(true)
+        setAutomationPaused(true)
+      }
+
+      setAutomationLoading(false)
+    },
+    onError: () => {
+      setAutomationLoading(false)
+    },
+  })
+
+  const [saveAutomationMutation, { loading: savingAutomation }] = useMutation(
+    SAVE_AUTOMATIONS,
+    {
+      onCompleted: () => {
+        showSuccess(intl.formatMessage({ id: 'admin/egoi-admin.automationSuccess' }))
+      },
+      onError: (e) => {
+        showError(
+          `${intl.formatMessage({ id: 'admin/egoi-admin.automationError' })} ${e.message}`
+        )
+      },
+    }
+  )
+
+  const handleToggleAutomation = (e: any) => {
+    const newVal = !e.target.checked // Toggle behavior might depend on component, usually checked is 'on'
+
+    setAutomationPaused(newVal)
+    saveAutomationMutation({
+      variables: {
+        input: {
+          paused: newVal,
+          domain: currentDomain,
+        },
+      },
+    })
+  }
 
   const onChangeMarketplace = (idx: number, value: string) => {
     const updated = [...marketplaceMap]
@@ -211,6 +298,37 @@ const EcommerceTab: React.FC = () => {
           />
         }
       >
+        <PageBlock variation="full">
+          <FormattedMessage id="admin/egoi-admin.infoAbandonedCart" />
+          <p style={{ fontWeight: 'bold', marginBottom: 12 }}>
+            <FormattedMessage id="admin/egoi-admin.automateAbandonedCart" />
+          </p>
+
+          {automationLoading ? (
+            <Spinner size={15} />
+          ) : !showAutomationToggle ? (
+            <Alert type="warning">
+              <FormattedMessage
+                id="admin/egoi-admin.automationActiveAnotherDomain"
+                values={{ domain: automationDomain }}
+              />
+            </Alert>
+          ) : (
+            <Toggle
+              label={
+                automationPaused ? (
+                  <FormattedMessage id="admin/egoi-admin.deactivated" />
+                ) : (
+                  <FormattedMessage id="admin/egoi-admin.activated" />
+                )
+              }
+              checked={!automationPaused}
+              onChange={handleToggleAutomation}
+              disabled={savingAutomation}
+            />
+          )}
+        </PageBlock>
+
         {combinedError ? (
           <PageBlock>
             <p>{combinedError.message}</p>
@@ -246,8 +364,8 @@ const EcommerceTab: React.FC = () => {
                       label={
                         idx === 0
                           ? intl.formatMessage({
-                              id: 'admin/egoi-admin.vtexFields',
-                            })
+                            id: 'admin/egoi-admin.vtexFields',
+                          })
                           : ''
                       }
                       value={capitalize(m.appStatus)}
@@ -258,8 +376,8 @@ const EcommerceTab: React.FC = () => {
                       label={
                         idx === 0
                           ? intl.formatMessage({
-                              id: 'admin/egoi-admin.egoiFields',
-                            })
+                            id: 'admin/egoi-admin.egoiFields',
+                          })
                           : ''
                       }
                       id={`egoi-status-mp-${idx}`}
@@ -296,8 +414,8 @@ const EcommerceTab: React.FC = () => {
                       label={
                         idx === 0
                           ? intl.formatMessage({
-                              id: 'admin/egoi-admin.vtexFields',
-                            })
+                            id: 'admin/egoi-admin.vtexFields',
+                          })
                           : ''
                       }
                       value={capitalize(m.appStatus)}
@@ -308,8 +426,8 @@ const EcommerceTab: React.FC = () => {
                       label={
                         idx === 0
                           ? intl.formatMessage({
-                              id: 'admin/egoi-admin.egoiFields',
-                            })
+                            id: 'admin/egoi-admin.egoiFields',
+                          })
                           : ''
                       }
                       id={`egoi-status-fu-${idx}`}

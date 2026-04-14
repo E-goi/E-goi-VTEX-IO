@@ -20,6 +20,8 @@ import { getGoidiniEgoiOrderStatus } from './resolvers/getGoidiniEgoiOrderStatus
 import { goidiniSettings } from './resolvers/goidiniSettings'
 import { goidiniOrderMapSync } from './resolvers/goidiniOrderMapSync'
 import { goidiniOrderSyncBulk } from './resolvers/goidiniOrderSyncBulk'
+import { getAutomations } from './resolvers/getAutomations'
+import { saveAutomations } from './resolvers/saveAutomations'
 const TIMEOUT_MS = 800
 
 // This is the configuration for clients available in `ctx.clients`.
@@ -61,7 +63,8 @@ export default new Service({
         getGoidiniMapFields,
         getGoidiniOrderMapFields,
         getGoidiniEgoiOrderStatus,
-        goidiniSettings
+        goidiniSettings,
+        getAutomations
       },
       Mutation: {
         saveAppSettings,
@@ -69,7 +72,8 @@ export default new Service({
         goidiniSync,
         goidiniInstall,
         goidiniOrderMapSync,
-        goidiniOrderSyncBulk
+        goidiniOrderSyncBulk,
+        saveAutomations
       },
     },
     schemaDirectives: {
