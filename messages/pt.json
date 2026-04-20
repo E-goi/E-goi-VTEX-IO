@@ -47,7 +47,6 @@
   "admin/egoi-admin.abandonedCart": "Carrinho abandonado",
   "admin/egoi-admin.abandonedCartLabel": "Para ativar o recurso Carrinho Abandonado, você precisa injetar este script no arquivo javascript de checkout da sua loja.",
   "admin/egoi-admin.saveRequiredFieldsError": "Erro: Preencha os campos em falta.",
-
   "admin/egoi-admin.asText1": "Para configurações avançadas, clique no botão e faça o login no Goidini com os dados da sua conta E-goi.",
   "admin/egoi-admin.asText2": "Após o login, você terá acesso às configurações avançadas da sua integração VTEX onde poderá:",
   "admin/egoi-admin.asFeat1": "Sincronize os seus produtos com o E-goi",
@@ -72,6 +71,10 @@
   "admin/egoi-admin.legacy1": "Atenção! Se tens a ",
   "admin/egoi-admin.legacy2": "integração legacy",
   "admin/egoi-admin.legacy3": " com a vtex, configurar esta integração irá substituir a existente.",
-
-  "admin/egoi-admin.configNeed": "Necessita configurar a integração na tab Account!"
+  "admin/egoi-admin.configNeed": "Necessita configurar a integração na tab Account!",
+  "admin/egoi-admin.automationActiveAnotherDomain": "Esta automação já se encontra ativa noutro domínio: {domain}",
+  "admin/egoi-admin.automationSuccess": "Estado da automação atualizado com sucesso.",
+  "admin/egoi-admin.automationError": "Erro ao atualizar o estado da automação.",
+  "admin/egoi-admin.automateAbandonedCart": "Automatizar a comunicação do carrinho abandonado",
+  "admin/egoi-admin.infoAbandonedCart": "Nesta secção pode ativar o seu fluxo automatizado de carrinho abandonado no E-goi."
 }

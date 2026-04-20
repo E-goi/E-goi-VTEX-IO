@@ -16,6 +16,7 @@ import GetGoidiniMapFields from './getGoidiniMapFields'
 import GetGoidiniOrderMapFields from './getGoidiniOrderMapFields'
 import GetGoidiniEgoiOrderStatus from './getGoidiniEgoiOrderStatus'
 import GoidiniSettings from './goidiniSettings'
+import Automations from './automations'
 
 // Extend the default IOClients implementation with our own custom clients.
 export class Clients extends IOClients {
@@ -82,6 +83,10 @@ export class Clients extends IOClients {
 
   public get goidiniSettings() {
     return this.getOrSet('goidiniSettings', GoidiniSettings)
+  }
+
+  public get automations() {
+    return this.getOrSet('automations', Automations)
   }
 
 }
