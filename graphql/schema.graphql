@@ -86,4 +86,5 @@ type AutomationSystem {
 input AutomationInput {
   paused: Boolean
   domain: String
+  type: String
 }

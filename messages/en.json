@@ -76,5 +76,9 @@
   "admin/egoi-admin.automationSuccess": "Automation status updated successfully.",
   "admin/egoi-admin.automationError": "Error updating automation status.",
   "admin/egoi-admin.automateAbandonedCart": "Automate abandoned cart communication",
-  "admin/egoi-admin.infoAbandonedCart": "In this section you can enable your automated abandoned cart flow in E-goi."
+  "admin/egoi-admin.infoAbandonedCart": "In this section you can enable your automated abandoned cart flow in E-goi.",
+  "admin/egoi-admin.automateWelcome": "Automate welcome communication",
+  "admin/egoi-admin.infoWelcome": "In this section you can enable your automated welcome flow in E-goi.",
+  "admin/egoi-admin.automateOrderConfirmation": "Automate order confirmation",
+  "admin/egoi-admin.infoOrderConfirmation": "In this section you can enable your automated order confirmation flow in E-goi."
 }
