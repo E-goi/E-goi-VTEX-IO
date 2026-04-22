@@ -78,5 +78,7 @@
   "admin/egoi-admin.automateAbandonedCart": "Automatizar la comunicación del carrito abandonado",
   "admin/egoi-admin.infoAbandonedCart": "En esta sección puedes activar tu flujo automatizado de carrito abandonado en E-goi.",
   "admin/egoi-admin.automateWelcome": "Automatizar la comunicación de bienvenida",
-  "admin/egoi-admin.infoWelcome": "En esta sección puedes activar tu flujo automatizado de bienvenida en E-goi."
+  "admin/egoi-admin.infoWelcome": "En esta sección puedes activar tu flujo automatizado de bienvenida en E-goi.",
+  "admin/egoi-admin.automateOrderConfirmation": "Automatizar la confirmación de pedido",
+  "admin/egoi-admin.infoOrderConfirmation": "En esta sección puedes activar tu flujo automatizado de confirmación de pedido en E-goi."
 }

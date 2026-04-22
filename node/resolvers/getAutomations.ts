@@ -30,7 +30,7 @@ export async function getAutomations(
       return []
     }
 
-    const allowedTypes = ['abandoned_cart', 'welcome']
+    const allowedTypes = ['abandoned_cart', 'welcome', 'order_status_updated']
 
     // Filter by allowed types and map to the expected format
     return response.items
