@@ -30,9 +30,9 @@ export async function getAutomations(
       return []
     }
 
-    // Filter by abandoned_cart type and map to the expected format
+    // Filter by abandoned_cart and welcome types and map to the expected format
     return response.items
-      .filter((a: any) => a.type === 'abandoned_cart')
+      .filter((a: any) => a.type === 'abandoned_cart' || a.type === 'welcome')
       .map((a: any) => ({
         paused: a.paused,
         type: a.type,

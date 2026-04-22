@@ -73,6 +73,11 @@ const EcommerceTab: React.FC = () => {
   const [currentDomain, setCurrentDomain] = useState('')
   const [automationDomain, setAutomationDomain] = useState('')
   const [showAutomationToggle, setShowAutomationToggle] = useState(true)
+
+  const [welcomePaused, setWelcomePaused] = useState(true)
+  const [welcomeDomain, setWelcomeDomain] = useState('')
+  const [showWelcomeToggle, setShowWelcomeToggle] = useState(true)
+
   const [automationLoading, setAutomationLoading] = useState(true)
 
   const showSuccess = (message: string) => {
@@ -189,6 +194,9 @@ const EcommerceTab: React.FC = () => {
       const automation = data?.getAutomations?.find(
         (a) => a.type === 'abandoned_cart'
       )
+      const welcome = data?.getAutomations?.find(
+        (a) => a.type === 'welcome'
+      )
 
       if (automation) {
         setAutomationPaused(automation.paused)
@@ -202,6 +210,20 @@ const EcommerceTab: React.FC = () => {
       } else {
         setShowAutomationToggle(true)
         setAutomationPaused(true)
+      }
+
+      if (welcome) {
+        setWelcomePaused(welcome.paused)
+        setWelcomeDomain(welcome.domain)
+
+        if (!welcome.paused && welcome.domain !== currentDomain && currentDomain !== '') {
+          setShowWelcomeToggle(false)
+        } else {
+          setShowWelcomeToggle(true)
+        }
+      } else {
+        setShowWelcomeToggle(true)
+        setWelcomePaused(true)
       }
 
       setAutomationLoading(false)
@@ -234,6 +256,22 @@ const EcommerceTab: React.FC = () => {
         input: {
           paused: newVal,
           domain: currentDomain,
+          type: 'abandoned_cart',
+        },
+      },
+    })
+  }
+
+  const handleToggleWelcome = (e: any) => {
+    const newVal = !e.target.checked // Toggle behavior might depend on component, usually checked is 'on'
+
+    setWelcomePaused(newVal)
+    saveAutomationMutation({
+      variables: {
+        input: {
+          paused: newVal,
+          domain: currentDomain,
+          type: 'welcome',
         },
       },
     })
@@ -327,6 +365,37 @@ const EcommerceTab: React.FC = () => {
               disabled={savingAutomation}
             />
           )}
+
+          <div style={{ marginTop: '24px' }}>
+            <FormattedMessage id="admin/egoi-admin.infoWelcome" />
+            <p style={{ fontWeight: 'bold', marginBottom: 12 }}>
+              <FormattedMessage id="admin/egoi-admin.automateWelcome" />
+            </p>
+
+            {automationLoading ? (
+              <Spinner size={15} />
+            ) : !showWelcomeToggle ? (
+              <Alert type="warning">
+                <FormattedMessage
+                  id="admin/egoi-admin.automationActiveAnotherDomain"
+                  values={{ domain: welcomeDomain }}
+                />
+              </Alert>
+            ) : (
+              <Toggle
+                label={
+                  welcomePaused ? (
+                    <FormattedMessage id="admin/egoi-admin.deactivated" />
+                  ) : (
+                    <FormattedMessage id="admin/egoi-admin.activated" />
+                  )
+                }
+                checked={!welcomePaused}
+                onChange={handleToggleWelcome}
+                disabled={savingAutomation}
+              />
+            )}
+          </div>
         </PageBlock>
 
         {combinedError ? (
