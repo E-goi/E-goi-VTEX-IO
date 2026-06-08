@@ -5,6 +5,7 @@ interface SaveAutomationsArgs {
   input: {
     paused: boolean
     domain: string
+    type: string
   }
 }
 
@@ -34,7 +35,7 @@ export async function saveAutomations(
     const payload = {
       paused: input.paused,
       domain: input.domain,
-      type: 'abandoned_cart',
+      type: input.type,
     }
 
     const response = await automations.saveAutomation(apikey, payload)

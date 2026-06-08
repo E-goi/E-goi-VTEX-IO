@@ -73,6 +73,11 @@ const EcommerceTab: React.FC = () => {
   const [currentDomain, setCurrentDomain] = useState('')
   const [automationDomain, setAutomationDomain] = useState('')
   const [showAutomationToggle, setShowAutomationToggle] = useState(true)
+
+  const [backInStockPaused, setBackInStockPaused] = useState(true)
+  const [backInStockDomain, setBackInStockDomain] = useState('')
+  const [showBackInStockToggle, setShowBackInStockToggle] = useState(true)
+
   const [automationLoading, setAutomationLoading] = useState(true)
 
   const showSuccess = (message: string) => {
@@ -190,6 +195,10 @@ const EcommerceTab: React.FC = () => {
         (a) => a.type === 'abandoned_cart'
       )
 
+      const backInStock = data?.getAutomations?.find(
+        (a) => a.type === 'back_in_stock'
+      )
+
       if (automation) {
         setAutomationPaused(automation.paused)
         setAutomationDomain(automation.domain)
@@ -202,6 +211,20 @@ const EcommerceTab: React.FC = () => {
       } else {
         setShowAutomationToggle(true)
         setAutomationPaused(true)
+      }
+
+      if (backInStock) {
+        setBackInStockPaused(backInStock.paused)
+        setBackInStockDomain(backInStock.domain)
+
+        if (!backInStock.paused && backInStock.domain !== currentDomain && currentDomain !== '') {
+          setShowBackInStockToggle(false)
+        } else {
+          setShowBackInStockToggle(true)
+        }
+      } else {
+        setShowBackInStockToggle(true)
+        setBackInStockPaused(true)
       }
 
       setAutomationLoading(false)
@@ -234,6 +257,21 @@ const EcommerceTab: React.FC = () => {
         input: {
           paused: newVal,
           domain: currentDomain,
+          type: 'abandoned_cart',
+        },
+      },
+    })
+  }
+
+  const handleToggleBackInStock = (e: any) => {
+    const newVal = !e.target.checked
+    setBackInStockPaused(newVal)
+    saveAutomationMutation({
+      variables: {
+        input: {
+          paused: newVal,
+          domain: currentDomain,
+          type: 'back_in_stock',
         },
       },
     })
@@ -327,6 +365,40 @@ const EcommerceTab: React.FC = () => {
               disabled={savingAutomation}
             />
           )}
+
+          <div style={{ marginTop: '24px' }}>
+            <FormattedMessage id="admin/egoi-admin.infoBackInStock" />
+            <p style={{ fontWeight: 'bold', marginBottom: 12 }}>
+              <FormattedMessage id="admin/egoi-admin.automateBackInStock" />
+            </p>
+
+            {automationLoading ? (
+              <Spinner size={15} />
+            ) : !showBackInStockToggle ? (
+              <Alert type="warning">
+                <FormattedMessage
+                  id="admin/egoi-admin.automationActiveAnotherDomain"
+                  values={{ domain: backInStockDomain }}
+                />
+              </Alert>
+            ) : (
+              <Toggle
+                label={
+                  backInStockPaused ? (
+                    <FormattedMessage id="admin/egoi-admin.deactivated" />
+                  ) : (
+                    <FormattedMessage id="admin/egoi-admin.activated" />
+                  )
+                }
+                checked={!backInStockPaused}
+                onChange={handleToggleBackInStock}
+                disabled={savingAutomation}
+              />
+            )}
+          </div>
+
+
+
         </PageBlock>
 
         {combinedError ? (

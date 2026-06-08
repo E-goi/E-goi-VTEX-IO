@@ -76,5 +76,7 @@
   "admin/egoi-admin.automationSuccess": "Estado de la automatización actualizado con éxito.",
   "admin/egoi-admin.automationError": "Error al actualizar el estado de la automatización.",
   "admin/egoi-admin.automateAbandonedCart": "Automatizar la comunicación del carrito abandonado",
-  "admin/egoi-admin.infoAbandonedCart": "En esta sección puedes activar tu flujo automatizado de carrito abandonado en E-goi."
+  "admin/egoi-admin.infoAbandonedCart": "En esta sección puedes activar tu flujo automatizado de carrito abandonado en E-goi.",
+  "admin/egoi-admin.automateBackInStock": "Automatizar la comunicación de productos agotados",
+  "admin/egoi-admin.infoBackInStock": "En esta sección puedes activar tu flujo automatizado de productos agotados en E-goi."
 }
