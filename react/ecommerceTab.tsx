@@ -78,6 +78,10 @@ const EcommerceTab: React.FC = () => {
   const [backInStockDomain, setBackInStockDomain] = useState('')
   const [showBackInStockToggle, setShowBackInStockToggle] = useState(true)
 
+  const [priceDropPaused, setPriceDropPaused] = useState(true)
+  const [priceDropDomain, setPriceDropDomain] = useState('')
+  const [showPriceDropToggle, setShowPriceDropToggle] = useState(true)
+
   const [automationLoading, setAutomationLoading] = useState(true)
 
   const showSuccess = (message: string) => {
@@ -199,6 +203,10 @@ const EcommerceTab: React.FC = () => {
         (a) => a.type === 'back_in_stock'
       )
 
+      const priceDrop = data?.getAutomations?.find(
+        (a) => a.type === 'price_drop'
+      )
+
       if (automation) {
         setAutomationPaused(automation.paused)
         setAutomationDomain(automation.domain)
@@ -225,6 +233,20 @@ const EcommerceTab: React.FC = () => {
       } else {
         setShowBackInStockToggle(true)
         setBackInStockPaused(true)
+      }
+
+      if (priceDrop) {
+        setPriceDropPaused(priceDrop.paused)
+        setPriceDropDomain(priceDrop.domain)
+
+        if (!priceDrop.paused && priceDrop.domain !== currentDomain && currentDomain !== '') {
+          setShowPriceDropToggle(false)
+        } else {
+          setShowPriceDropToggle(true)
+        }
+      } else {
+        setShowPriceDropToggle(true)
+        setPriceDropPaused(true)
       }
 
       setAutomationLoading(false)
@@ -272,6 +294,20 @@ const EcommerceTab: React.FC = () => {
           paused: newVal,
           domain: currentDomain,
           type: 'back_in_stock',
+        },
+      },
+    })
+  }
+
+  const handleTogglePriceDrop = (e: any) => {
+    const newVal = !e.target.checked
+    setPriceDropPaused(newVal)
+    saveAutomationMutation({
+      variables: {
+        input: {
+          paused: newVal,
+          domain: currentDomain,
+          type: 'price_drop',
         },
       },
     })
@@ -397,7 +433,36 @@ const EcommerceTab: React.FC = () => {
             )}
           </div>
 
+          <div style={{ marginTop: '24px' }}>
+            <FormattedMessage id="admin/egoi-admin.infoPriceDrop" />
+            <p style={{ fontWeight: 'bold', marginBottom: 12 }}>
+              <FormattedMessage id="admin/egoi-admin.automatePriceDrop" />
+            </p>
 
+            {automationLoading ? (
+              <Spinner size={15} />
+            ) : !showPriceDropToggle ? (
+              <Alert type="warning">
+                <FormattedMessage
+                  id="admin/egoi-admin.automationActiveAnotherDomain"
+                  values={{ domain: priceDropDomain }}
+                />
+              </Alert>
+            ) : (
+              <Toggle
+                label={
+                  priceDropPaused ? (
+                    <FormattedMessage id="admin/egoi-admin.deactivated" />
+                  ) : (
+                    <FormattedMessage id="admin/egoi-admin.activated" />
+                  )
+                }
+                checked={!priceDropPaused}
+                onChange={handleTogglePriceDrop}
+                disabled={savingAutomation}
+              />
+            )}
+          </div>
 
         </PageBlock>
 
