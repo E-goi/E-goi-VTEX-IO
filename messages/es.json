@@ -78,5 +78,7 @@
   "admin/egoi-admin.automateAbandonedCart": "Automatizar la comunicación del carrito abandonado",
   "admin/egoi-admin.infoAbandonedCart": "En esta sección puedes activar tu flujo automatizado de carrito abandonado en E-goi.",
   "admin/egoi-admin.automateBackInStock": "Automatizar la comunicación de productos agotados",
-  "admin/egoi-admin.infoBackInStock": "En esta sección puedes activar tu flujo automatizado de productos agotados en E-goi."
+  "admin/egoi-admin.infoBackInStock": "En esta sección puedes activar tu flujo automatizado de productos agotados en E-goi.",
+  "admin/egoi-admin.automatePriceDrop": "Automatizar la comunicación de productos con caída de precio",
+  "admin/egoi-admin.infoPriceDrop": "En esta sección puedes activar tu flujo automatizado de productos con caída de precio en E-goi."
 }
